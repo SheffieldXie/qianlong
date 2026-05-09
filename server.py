@@ -315,28 +315,48 @@ def api_backtest():
 def api_paper_run():
     """运行模拟盘回测 — 严格按策略信号执行"""
     global analysis_cache
-    
-    with analysis_lock:
-        if analysis_cache is None:
-            return jsonify({'error': '数据未加载, 请先刷新数据'}), 400
-        
-        df = analysis_cache.copy()
-    
+
     data = request.get_json() or {}
     initial_capital = data.get('initial_capital', 100000)
     contract_size = data.get('contract_size', 100)
-    
+    period = data.get('period', '30d')
+    start_date = data.get('start_date', None)
+    end_date = data.get('end_date', None)
+
+    # Fetch data for the specified period
+    if start_date and end_date:
+        df = fetch_xauusd_15m(period="60d", start_date=start_date, end_date=end_date)
+    else:
+        df = fetch_xauusd_15m(period)
+
+    if df is None or df.empty:
+        df = generate_mock_data(30)
+
+    # Analyze the data
+    df = analyze(df)
+
     engine = PaperTradingEngine(
         initial_capital=initial_capital,
         contract_size=contract_size,
     )
-    
+
     result = engine.run(df)
-    
+
+    # Add config info to result
+    result['config'] = {
+        'initial_capital': initial_capital,
+        'contract_size': contract_size,
+        'period': period,
+        'start_date': start_date,
+        'end_date': end_date,
+        'data_points': len(df),
+        'date_range': f"{df.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {df.iloc[-1]['date'].strftime('%Y-%m-%d')}" if not df.empty else '',
+    }
+
     # Cache for future API calls
     global paper_cache
     paper_cache = result
-    
+
     return jsonify(result)
 
 

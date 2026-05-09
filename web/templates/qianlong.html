@@ -228,18 +228,61 @@
     <div class="modal-overlay" id="paper-modal">
         <div class="modal-content paper-modal-content">
             <div class="modal-header">
-                <h2>&#9654; 模拟盘回测结果</h2>
+                <h2>&#9654; 模拟盘回测</h2>
                 <button class="modal-close" onclick="closePaperTrading()">✕</button>
             </div>
             <div class="modal-body">
-                <!-- Paper Trading Status -->
-                <div id="paper-status-section" style="text-align:center;padding:40px;color:var(--text-muted);">
-                    <p>点击 "开始回测" 运行模拟盘</p>
-                    <button class="btn-primary" onclick="executePaperRun()" id="paper-run-btn">开始回测</button>
+                <!-- Paper Trading Config (shown before run) -->
+                <div id="paper-config-section">
+                    <div class="paper-config-grid">
+                        <!-- Capital Section -->
+                        <div class="config-section">
+                            <h3>&#128176; 资金设置</h3>
+                            <div class="config-item">
+                                <label>初始资金 (USD)</label>
+                                <input type="number" id="bt-capital" min="1000" step="1000" value="100000">
+                            </div>
+                            <div class="config-item">
+                                <label>合约大小 (盎司/手)</label>
+                                <input type="number" id="bt-contract" min="1" step="10" value="100">
+                            </div>
+                        </div>
+                        <!-- Time Range Section -->
+                        <div class="config-section">
+                            <h3>&#128197; 时间范围</h3>
+                            <div class="config-item">
+                                <label>快速选择</label>
+                                <select id="bt-period-select" class="gold-select" style="width:100%">
+                                    <option value="7d">7天</option>
+                                    <option value="15d">15天</option>
+                                    <option value="30d" selected>30天</option>
+                                    <option value="60d">60天</option>
+                                    <option value="180d">180天</option>
+                                    <option value="custom">自定义日期</option>
+                                </select>
+                            </div>
+                            <div id="bt-custom-dates" style="display:none;">
+                                <div class="config-item">
+                                    <label>开始日期</label>
+                                    <input type="date" id="bt-start-date">
+                                </div>
+                                <div class="config-item">
+                                    <label>结束日期</label>
+                                    <input type="date" id="bt-end-date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin-top:20px;">
+                        <button class="btn-primary" onclick="executePaperRun()" id="paper-run-btn">&#9654; 开始回测</button>
+                    </div>
                 </div>
                 
                 <!-- Paper Trading Results (hidden initially) -->
                 <div id="paper-results" style="display:none;">
+                    <!-- Backtest Config Summary -->
+                    <div class="paper-config-summary" id="paper-config-summary"></div>
+                    
                     <!-- Metrics Row -->
                     <div class="paper-metrics" id="paper-metrics"></div>
                     
@@ -249,10 +292,27 @@
                         <canvas id="paper-equity-chart" style="height:300px !important;"></canvas>
                     </div>
                     
+                    <!-- Daily Returns Chart -->
+                    <div class="indicator-row" style="margin-top:16px;">
+                        <div class="chart-container small">
+                            <div class="chart-header">日收益率分布</div>
+                            <canvas id="paper-returns-chart" style="height:200px !important;"></canvas>
+                        </div>
+                        <div class="chart-container small">
+                            <div class="chart-header">回撤曲线</div>
+                            <canvas id="paper-drawdown-chart" style="height:200px !important;"></canvas>
+                        </div>
+                    </div>
+                    
                     <!-- Trade Log -->
                     <div style="margin-top:16px;">
                         <div class="chart-header" style="padding:12px 0;">交易记录</div>
                         <div class="paper-trades" id="paper-trades"></div>
+                    </div>
+                    
+                    <!-- Re-run button -->
+                    <div style="text-align:center;margin-top:20px;">
+                        <button class="btn-secondary" onclick="showPaperConfig()">&#8634; 重新设置参数</button>
                     </div>
                 </div>
             </div>

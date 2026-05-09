@@ -15,16 +15,22 @@ CACHE_DIR = os.path.join(os.path.dirname(__file__), "cache")
 os.makedirs(CACHE_DIR, exist_ok=True)
 
 
-def fetch_xauusd_15m(period="60d"):
+def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
     """
     获取XAU/USD 15分钟K线数据
     
     参数:
     - period: 时间跨度, 如 "7d", "30d", "60d", "180d"
+    - start_date: 自定义起始日期 (str: "YYYY-MM-DD"), 覆盖 period
+    - end_date: 自定义结束日期 (str: "YYYY-MM-DD")
     
     返回: DataFrame with columns [date, open, high, low, close, volume]
     """
-    cache_key = f"xauusd_15m_{period}"
+    # Build cache key
+    if start_date and end_date:
+        cache_key = f"xauusd_15m_{start_date}_{end_date}"
+    else:
+        cache_key = f"xauusd_15m_{period}"
     cache_path = os.path.join(CACHE_DIR, f"{cache_key}.pkl")
     cache_meta = os.path.join(CACHE_DIR, f"{cache_key}_meta.json")
     
@@ -43,7 +49,13 @@ def fetch_xauusd_15m(period="60d"):
         for ticker in ["GC=F", "XAUUSD=X"]:
             try:
                 gold = yf.Ticker(ticker)
-                df = gold.history(period=period, interval="15m")
+                
+                if start_date and end_date:
+                    # Custom date range
+                    df = gold.history(start=start_date, end=end_date, interval="15m")
+                else:
+                    # Preset period
+                    df = gold.history(period=period, interval="15m")
                 
                 if not df.empty and len(df) > 100:
                     df = df.reset_index()

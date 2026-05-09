@@ -682,39 +682,75 @@ document.addEventListener('click', (e) => {
 // ============================================================
 
 let paperEquityChart = null;
+let paperReturnsChart = null;
+let paperDrawdownChart = null;
 
 function runPaperTrading() {
     document.getElementById('paper-modal').classList.add('active');
     
-    // Check if we have cached results
-    fetch('/api/paper')
-        .then(r => r.json())
-        .then(data => {
-            if (data.status === 'complete') {
-                showPaperResults(data);
-            } else {
-                document.getElementById('paper-status-section').style.display = 'block';
-                document.getElementById('paper-results').style.display = 'none';
-            }
-        });
+    // Set default dates for custom selection
+    const today = new Date();
+    const endDate = today.toISOString().split('T')[0];
+    const startDate = new Date(today - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    document.getElementById('bt-end-date').value = endDate;
+    document.getElementById('bt-start-date').value = startDate;
+    
+    showPaperConfig();
+}
+
+function showPaperConfig() {
+    document.getElementById('paper-config-section').style.display = 'block';
+    document.getElementById('paper-results').style.display = 'none';
 }
 
 function closePaperTrading() {
     document.getElementById('paper-modal').classList.remove('active');
 }
 
+// Toggle custom date inputs
+document.addEventListener('DOMContentLoaded', () => {
+    const periodSelect = document.getElementById('bt-period-select');
+    if (periodSelect) {
+        periodSelect.addEventListener('change', () => {
+            const customDiv = document.getElementById('bt-custom-dates');
+            customDiv.style.display = periodSelect.value === 'custom' ? 'block' : 'none';
+        });
+    }
+});
+
 async function executePaperRun() {
     const btn = document.getElementById('paper-run-btn');
     btn.disabled = true;
     btn.textContent = '回测中...';
+    
+    // Gather parameters
+    const period = document.getElementById('bt-period-select').value;
+    const initialCapital = parseFloat(document.getElementById('bt-capital').value) || 100000;
+    const contractSize = parseFloat(document.getElementById('bt-contract').value) || 100;
+    
+    let startDate = null;
+    let endDate = null;
+    if (period === 'custom') {
+        startDate = document.getElementById('bt-start-date').value;
+        endDate = document.getElementById('bt-end-date').value;
+        if (!startDate || !endDate) {
+            alert('请选择开始和结束日期');
+            btn.disabled = false;
+            btn.textContent = '▶ 开始回测';
+            return;
+        }
+    }
     
     try {
         const res = await fetch('/api/paper/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                initial_capital: 100000,
-                contract_size: 100,
+                initial_capital: initialCapital,
+                contract_size: contractSize,
+                period: period !== 'custom' ? period : '60d',
+                start_date: startDate,
+                end_date: endDate,
             }),
         });
         
@@ -731,14 +767,28 @@ async function executePaperRun() {
     }
     
     btn.disabled = false;
-    btn.textContent = '开始回测';
+    btn.textContent = '▶ 开始回测';
 }
 
 function showPaperResults(data) {
-    document.getElementById('paper-status-section').style.display = 'none';
+    document.getElementById('paper-config-section').style.display = 'none';
     document.getElementById('paper-results').style.display = 'block';
     
     const m = data.metrics || {};
+    const cfg = data.config || {};
+    
+    // Config Summary
+    const summaryEl = document.getElementById('paper-config-summary');
+    if (summaryEl && cfg.date_range) {
+        summaryEl.innerHTML = `
+            <div class="config-summary-bar">
+                <span class="summary-item"><strong>资金:</strong> $${cfg.initial_capital?.toLocaleString() || '100,000'}</span>
+                <span class="summary-item"><strong>合约:</strong> ${cfg.contract_size || 100} oz</span>
+                <span class="summary-item"><strong>区间:</strong> ${cfg.date_range}</span>
+                <span class="summary-item"><strong>数据点:</strong> ${cfg.data_points || '—'}</span>
+            </div>
+        `;
+    }
     
     // Metrics
     document.getElementById('paper-metrics').innerHTML = `
@@ -766,10 +816,21 @@ function showPaperResults(data) {
             <div class="metric-value" style="color:var(--red)">${((m.max_drawdown || 0) * 100).toFixed(2)}%</div>
             <div class="metric-sub">胜率: ${((m.win_rate || 0) * 100).toFixed(1)}%</div>
         </div>
+        <div class="paper-metric">
+            <div class="metric-label">总交易次数</div>
+            <div class="metric-value">${m.total_trades || 0}</div>
+            <div class="metric-sub">盈亏比: ${m.profit_factor?.toFixed(2) || '—'}</div>
+        </div>
     `;
     
     // Equity Chart
     renderPaperEquityChart(data.equity_curve || []);
+    
+    // Returns Distribution Chart
+    renderPaperReturnsChart(data.daily_returns || [], data.equity_curve || []);
+    
+    // Drawdown Chart
+    renderPaperDrawdownChart(data.equity_curve || []);
     
     // Trade Log
     renderPaperTrades(data.trades || []);
@@ -861,4 +922,122 @@ function renderPaperTrades(trades) {
     }
     
     container.innerHTML = html;
+}
+
+function renderPaperReturnsChart(dailyReturns, equityData) {
+    if (paperReturnsChart) paperReturnsChart.destroy();
+    
+    if (!dailyReturns || dailyReturns.length === 0) {
+        return;
+    }
+    
+    // Create histogram bins
+    const min = Math.min(...dailyReturns);
+    const max = Math.max(...dailyReturns);
+    const binCount = 20;
+    const binWidth = (max - min) / binCount || 0.001;
+    const bins = new Array(binCount).fill(0);
+    const labels = [];
+    
+    for (let i = 0; i < binCount; i++) {
+        const lo = min + i * binWidth;
+        labels.push((lo * 100).toFixed(2) + '%');
+    }
+    
+    dailyReturns.forEach(r => {
+        let idx = Math.floor((r - min) / binWidth);
+        if (idx >= binCount) idx = binCount - 1;
+        if (idx < 0) idx = 0;
+        bins[idx]++;
+    });
+    
+    const bgColors = labels.map(l => {
+        const val = parseFloat(l);
+        return val >= 0 ? 'rgba(0, 200, 83, 0.6)' : 'rgba(196, 30, 58, 0.6)';
+    });
+    
+    const ctx = document.getElementById('paper-returns-chart').getContext('2d');
+    paperReturnsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Frequency',
+                data: bins,
+                backgroundColor: bgColors,
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#555544', maxTicksLimit: 8, maxRotation: 45, font: { size: 9 } },
+                    grid: { display: false },
+                    title: { display: true, text: '日收益率', color: '#888' },
+                },
+                y: {
+                    ticks: { color: '#555544' },
+                    grid: { color: 'rgba(42, 42, 42, 0.5)' },
+                },
+            },
+        },
+    });
+}
+
+function renderPaperDrawdownChart(equityData) {
+    if (paperDrawdownChart) paperDrawdownChart.destroy();
+    
+    if (!equityData || equityData.length === 0) {
+        return;
+    }
+    
+    const labels = equityData.map(d => d.date?.substring(0, 16) || '');
+    const drawdowns = [];
+    let peak = 0;
+    
+    equityData.forEach(d => {
+        const eq = d.equity || 0;
+        if (eq > peak) peak = eq;
+        const dd = peak > 0 ? (eq - peak) / peak * 100 : 0;
+        drawdowns.push(dd);
+    });
+    
+    const ctx = document.getElementById('paper-drawdown-chart').getContext('2d');
+    paperDrawdownChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Drawdown %',
+                data: drawdowns,
+                borderColor: '#C41E3A',
+                backgroundColor: 'rgba(196, 30, 58, 0.2)',
+                borderWidth: 1.5,
+                pointRadius: 0,
+                fill: true,
+                tension: 0.1,
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#555544', maxTicksLimit: 8, maxRotation: 0, font: { size: 9 } },
+                    grid: { color: 'rgba(42, 42, 42, 0.5)' },
+                },
+                y: {
+                    ticks: { color: '#555544', callback: v => v.toFixed(1) + '%' },
+                    grid: { color: 'rgba(42, 42, 42, 0.5)' },
+                },
+            },
+        },
+    });
 }
