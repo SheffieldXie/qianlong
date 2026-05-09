@@ -780,11 +780,13 @@ function showPaperResults(data) {
     // Config Summary
     const summaryEl = document.getElementById('paper-config-summary');
     if (summaryEl && cfg.date_range) {
+        const intervalLabel = cfg.interval === '1h' ? '1小时' : cfg.interval === '1d' ? '日线' : '15分钟';
         summaryEl.innerHTML = `
             <div class="config-summary-bar">
                 <span class="summary-item"><strong>资金:</strong> $${cfg.initial_capital?.toLocaleString() || '100,000'}</span>
                 <span class="summary-item"><strong>合约:</strong> ${cfg.contract_size || 100} oz</span>
                 <span class="summary-item"><strong>区间:</strong> ${cfg.date_range}</span>
+                <span class="summary-item"><strong>粒度:</strong> ${intervalLabel}</span>
                 <span class="summary-item"><strong>数据点:</strong> ${cfg.data_points || '—'}</span>
             </div>
         `;
@@ -839,7 +841,20 @@ function showPaperResults(data) {
 function renderPaperEquityChart(equityData) {
     if (paperEquityChart) paperEquityChart.destroy();
     
-    const labels = equityData.map(d => d.date?.substring(0, 16) || '');
+    if (!equityData || equityData.length === 0) {
+        return;
+    }
+    
+    // Dynamic tick count based on data points
+    const n = equityData.length;
+    const maxTicks = n <= 100 ? 12 : n <= 500 ? 10 : 8;
+    const labelFormat = n <= 500 ? 'date' : 'date-month';
+    
+    const labels = equityData.map(d => {
+        if (!d.date) return '';
+        if (labelFormat === 'date') return d.date.substring(5, 16); // MM-DD HH:MM
+        return d.date.substring(0, 10); // YYYY-MM-DD
+    });
     const equities = equityData.map(d => d.equity || 0);
     
     const ctx = document.getElementById('paper-equity-chart').getContext('2d');
@@ -867,7 +882,7 @@ function renderPaperEquityChart(equityData) {
             },
             scales: {
                 x: {
-                    ticks: { color: '#555544', maxTicksLimit: 12, maxRotation: 0 },
+                    ticks: { color: '#555544', maxTicksLimit: maxTicks, maxRotation: n > 300 ? 30 : 0, autoSkip: true, autoSkipPadding: 10 },
                     grid: { color: 'rgba(42, 42, 42, 0.5)' },
                 },
                 y: {
@@ -995,7 +1010,13 @@ function renderPaperDrawdownChart(equityData) {
         return;
     }
     
-    const labels = equityData.map(d => d.date?.substring(0, 16) || '');
+    const n = equityData.length;
+    const maxTicks = n <= 100 ? 12 : n <= 500 ? 10 : 8;
+    
+    const labels = equityData.map(d => {
+        if (!d.date) return '';
+        return n > 500 ? d.date.substring(0, 10) : d.date.substring(5, 16);
+    });
     const drawdowns = [];
     let peak = 0;
     
@@ -1030,7 +1051,7 @@ function renderPaperDrawdownChart(equityData) {
             },
             scales: {
                 x: {
-                    ticks: { color: '#555544', maxTicksLimit: 8, maxRotation: 0, font: { size: 9 } },
+                    ticks: { color: '#555544', maxTicksLimit: maxTicks, maxRotation: n > 300 ? 30 : 0, autoSkip: true, autoSkipPadding: 10, font: { size: 9 } },
                     grid: { color: 'rgba(42, 42, 42, 0.5)' },
                 },
                 y: {

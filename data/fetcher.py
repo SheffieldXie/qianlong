@@ -2,8 +2,14 @@
 数据获取模块
 
 XAU/USD (现货黄金) 数据源:
-- yfinance: Yahoo Finance, 支持15m历史数据
+- yfinance: Yahoo Finance
 - 本地缓存: 避免重复请求
+
+Yahoo Finance 限制:
+- 1m: 7天
+- 2m/5m/15m/30m: 60天
+- 1h: 730天
+- 1d: 无限制
 """
 
 import os
@@ -11,13 +17,45 @@ import json
 import datetime
 import pandas as pd
 
-CACHE_DIR = os.path.join(os.path.dirname(__file__), "cache")
+CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
 os.makedirs(CACHE_DIR, exist_ok=True)
 
 
-def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
+def _period_to_days(period):
+    """解析 period 字符串为天数"""
+    if period.endswith('d'):
+        return int(period[:-1])
+    elif period.endswith('m'):
+        return int(period[:-1]) // 60
+    elif period.endswith('y'):
+        return int(period[:-1]) * 365
+    return 60
+
+
+def _select_interval(period, start_date=None, end_date=None):
+    """根据时间跨度自动选择最优K线粒度"""
+    if start_date and end_date:
+        try:
+            delta = pd.to_datetime(end_date) - pd.to_datetime(start_date)
+            days = delta.days
+        except:
+            days = 60
+    else:
+        days = _period_to_days(period)
+    
+    if days <= 7:
+        return '15m', '15m'
+    elif days <= 60:
+        return '15m', '15m'
+    elif days <= 730:
+        return '1h', '1h'
+    else:
+        return '1d', '1d'
+
+
+def fetch_xauusd(period="60d", start_date=None, end_date=None):
     """
-    获取XAU/USD 15分钟K线数据
+    获取XAU/USD K线数据 (自动选择最优粒度)
     
     参数:
     - period: 时间跨度, 如 "7d", "30d", "60d", "180d"
@@ -25,22 +63,25 @@ def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
     - end_date: 自定义结束日期 (str: "YYYY-MM-DD")
     
     返回: DataFrame with columns [date, open, high, low, close, volume]
+    同时返回 (df, interval_used) 元组供调用方判断粒度
     """
+    interval, label = _select_interval(period, start_date, end_date)
+    
     # Build cache key
     if start_date and end_date:
-        cache_key = f"xauusd_15m_{start_date}_{end_date}"
+        cache_key = f"xauusd_{start_date}_{end_date}_{label}"
     else:
-        cache_key = f"xauusd_15m_{period}"
+        cache_key = f"xauusd_{period}_{label}"
     cache_path = os.path.join(CACHE_DIR, f"{cache_key}.pkl")
     cache_meta = os.path.join(CACHE_DIR, f"{cache_key}_meta.json")
     
-    # 检查缓存 (15m数据缓存30分钟)
+    # 检查缓存 (30分钟有效)
     if os.path.exists(cache_path) and os.path.exists(cache_meta):
         with open(cache_meta) as f:
             meta = json.load(f)
         age = datetime.datetime.now().timestamp() - meta.get('timestamp', 0)
-        if age < 1800:  # 30分钟
-            return pd.read_pickle(cache_path)
+        if age < 1800:
+            return pd.read_pickle(cache_path), label
     
     try:
         import yfinance as yf
@@ -51,20 +92,18 @@ def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
                 gold = yf.Ticker(ticker)
                 
                 if start_date and end_date:
-                    # Custom date range
-                    df = gold.history(start=start_date, end=end_date, interval="15m")
+                    df = gold.history(start=start_date, end=end_date, interval=interval)
                 else:
-                    # Preset period
-                    df = gold.history(period=period, interval="15m")
+                    df = gold.history(period=period, interval=interval)
                 
-                if not df.empty and len(df) > 100:
+                if not df.empty and len(df) > 50:
                     df = df.reset_index()
                     df.columns = [c.lower().replace(' ', '_') for c in df.columns]
                     
-                    if 'date' in df.columns:
-                        df = df.rename(columns={'date': 'date'})
-                    elif 'datetime' in df.columns:
+                    if 'datetime' in df.columns:
                         df = df.rename(columns={'datetime': 'date'})
+                    elif 'date' not in df.columns:
+                        df = df.rename(columns={df.columns[0]: 'date'})
                     
                     # 标准化列名
                     col_map = {}
@@ -85,23 +124,32 @@ def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
                     # 保存缓存
                     df.to_pickle(cache_path)
                     with open(cache_meta, 'w') as f:
-                        json.dump({'timestamp': datetime.datetime.now().timestamp(), 'ticker': ticker}, f)
+                        json.dump({'timestamp': datetime.datetime.now().timestamp(), 
+                                   'ticker': ticker, 'interval': label}, f)
                     
-                    print(f"[Data] 获取 {len(df)} 条15m K线 ({ticker})")
-                    return df
+                    print(f"[Data] 获取 {len(df)} 条{label} K线 ({ticker})")
+                    return df, label
             except Exception as e:
                 print(f"[Data] {ticker} 失败: {e}")
                 continue
         
         # 两个ticker都失败, 返回缓存
         if os.path.exists(cache_path):
-            return pd.read_pickle(cache_path)
+            return pd.read_pickle(cache_path), label
         
     except ImportError:
         print("[Data] yfinance未安装, 使用模拟数据")
     
-    # 返回模拟数据用于测试
-    return generate_mock_data()
+    # 返回模拟数据
+    days = _period_to_days(period) if not start_date else 30
+    return generate_mock_data(days), label
+
+
+# Backward compatibility alias
+def fetch_xauusd_15m(period="60d", start_date=None, end_date=None):
+    """兼容旧接口, 调用新函数"""
+    df, _ = fetch_xauusd(period, start_date, end_date)
+    return df
 
 
 def generate_mock_data(days=30):

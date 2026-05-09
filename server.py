@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, render_template, jsonify, request
 
 from engine.core import analyze, get_latest_state
-from data.fetcher import fetch_xauusd_15m, generate_mock_data
+from data.fetcher import fetch_xauusd, fetch_xauusd_15m, generate_mock_data
 from strategy.position import PositionManager
 from risk.manager import RiskManager
 from engine.paper_trading import PaperTradingEngine
@@ -323,14 +323,16 @@ def api_paper_run():
     start_date = data.get('start_date', None)
     end_date = data.get('end_date', None)
 
-    # Fetch data for the specified period
+    # Fetch data for the specified period (auto-selects interval)
     if start_date and end_date:
-        df = fetch_xauusd_15m(period="60d", start_date=start_date, end_date=end_date)
+        df, interval_label = fetch_xauusd(period="60d", start_date=start_date, end_date=end_date)
     else:
-        df = fetch_xauusd_15m(period)
+        df, interval_label = fetch_xauusd(period)
 
     if df is None or df.empty:
-        df = generate_mock_data(30)
+        days = int(period[:-1]) if period.endswith('d') else 30
+        df = generate_mock_data(days)
+        interval_label = '15m'
 
     # Analyze the data
     df = analyze(df)
@@ -349,6 +351,7 @@ def api_paper_run():
         'period': period,
         'start_date': start_date,
         'end_date': end_date,
+        'interval': interval_label,
         'data_points': len(df),
         'date_range': f"{df.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {df.iloc[-1]['date'].strftime('%Y-%m-%d')}" if not df.empty else '',
     }
