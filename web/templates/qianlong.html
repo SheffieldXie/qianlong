@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乾六爻交易系统 | Qian Liu Yao</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <link rel="stylesheet" href="/static/css/qianlong.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Dragon Watermark -->
+        <div class="dragon-watermark"></div>
+
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="logo-section">
+                <span class="hexagram-symbol">&#9776;</span>
+                <div class="logo-text">
+                    <h1>乾六爻交易系统</h1>
+                    <span class="subtitle">XAU/USD · 15m · 信号即道</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="system-status" id="system-status">
+                    <span class="status-dot loading"></span>
+                    <span id="status-text">系统启动中...</span>
+                </div>
+                <select id="period-select" class="gold-select" onchange="reloadData(this.value)">
+                    <option value="7d">7天</option>
+                    <option value="15d">15天</option>
+                    <option value="30d" selected>30天</option>
+                    <option value="60d">60天</option>
+                </select>
+                <button class="gold-btn" onclick="openIndicatorConfig()">&#9881; 指标配置</button>
+                <button class="gold-btn" onclick="runPaperTrading()">&#9654; 模拟盘回测</button>
+                <button class="gold-btn" onclick="reloadData(document.getElementById('period-select').value)">&#8635; 刷新数据</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Left Column: Charts -->
+            <div class="left-col">
+                <!-- Phase Indicator -->
+                <div class="phase-banner" id="phase-banner">
+                    <div class="phase-icon" id="phase-icon">&#9675;</div>
+                    <div class="phase-info">
+                        <div class="phase-name" id="phase-name">加载中...</div>
+                        <div class="phase-iching" id="phase-iching">—</div>
+                        <div class="phase-advice" id="phase-advice">—</div>
+                    </div>
+                    <div class="phase-badge" id="phase-badge">—</div>
+                </div>
+
+                <!-- Main Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <span>XAU/USD 15m K线图</span>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="legend-color ema144"></span> EMA144</span>
+                            <span class="legend-item"><span class="legend-color sar"></span> SAR</span>
+                        </div>
+                    </div>
+                    <canvas id="main-chart"></canvas>
+                </div>
+
+                <!-- Indicator Charts -->
+                <div class="indicator-row">
+                    <div class="chart-container small">
+                        <div class="chart-header">MACD (20,52,2) <span class="phase-indicator" id="macd-phase">—</span></div>
+                        <canvas id="macd-chart"></canvas>
+                    </div>
+                    <div class="chart-container small">
+                        <div class="chart-header">RSI (14)</div>
+                        <canvas id="rsi-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Signals & Position -->
+            <div class="right-col">
+                <!-- Signal Card -->
+                <div class="signal-card" id="signal-card">
+                    <div class="card-title">
+                        <span class="title-icon">&#9889;</span>
+                        当前信号
+                    </div>
+                    <div class="signal-body" id="signal-body">
+                        <div class="signal-type" id="signal-type">—</div>
+                        <div class="signal-desc" id="signal-desc">—</div>
+                        <div class="signal-confidence" id="signal-confidence">—</div>
+                    </div>
+                    <button class="execute-btn" id="execute-btn" onclick="executeSignal()">执行信号</button>
+                </div>
+
+                <!-- Position: The Citadel -->
+                <div class="position-card">
+                    <div class="card-title">
+                        <span class="title-icon">&#9670;</span>
+                        资金管理: The Citadel
+                    </div>
+                    <div class="citadel-bar" id="citadel-bar">
+                        <!-- 12 units -->
+                    </div>
+                    <div class="position-stats" id="position-stats">
+                        <div class="stat-row">
+                            <span>持仓份数</span><span id="stat-units">0/12</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>方向</span><span id="stat-direction">空仓</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>结构</span><span id="stat-breakdown">底仓0 加仓0 套利0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>浮盈/亏</span><span id="stat-pnl">—</span>
+                        </div>
+                    </div>
+                    <div class="unit-details" id="unit-details"></div>
+                </div>
+
+                <!-- Risk: Kill Switch -->
+                <div class="risk-card">
+                    <div class="card-title">
+                        <span class="title-icon">&#9888;</span>
+                        风控: The Kill Switch
+                    </div>
+                    <div class="risk-status" id="risk-status">
+                        <div class="risk-item">
+                            <span>日盈亏</span>
+                            <span id="risk-daily-pnl">—</span>
+                        </div>
+                        <div class="risk-item">
+                            <span>连续止损</span>
+                            <span id="risk-consecutive">0/3</span>
+                        </div>
+                        <div class="risk-item">
+                            <span>冷却状态</span>
+                            <span id="risk-cooling" class="safe">正常</span>
+                        </div>
+                    </div>
+                    <button class="killswitch-btn" onclick="activateKillSwitch()">&#9888; 手动停盘</button>
+                </div>
+
+                <!-- I Ching Hexagram -->
+                <div class="iching-card">
+                    <div class="card-title">
+                        <span class="title-icon">&#9776;</span>
+                        乾卦六爻状态
+                    </div>
+                    <div class="iching-lines" id="iching-lines">
+                        <!-- 6 lines -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Indicator Configuration Modal -->
+    <div class="modal-overlay" id="config-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>&#9881; 指标参数配置</h2>
+                <button class="modal-close" onclick="closeIndicatorConfig()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="config-grid">
+                    <!-- EMA -->
+                    <div class="config-section">
+                        <h3>EMA 趋势中枢</h3>
+                        <div class="config-item">
+                            <label>周期</label>
+                            <input type="number" id="cfg-ema-period" min="10" max="500" step="1" value="144">
+                        </div>
+                    </div>
+                    <!-- MACD -->
+                    <div class="config-section">
+                        <h3>MACD 势能核心</h3>
+                        <div class="config-item">
+                            <label>快线</label>
+                            <input type="number" id="cfg-macd-fast" min="5" max="100" step="1" value="20">
+                        </div>
+                        <div class="config-item">
+                            <label>慢线</label>
+                            <input type="number" id="cfg-macd-slow" min="10" max="200" step="1" value="52">
+                        </div>
+                        <div class="config-item">
+                            <label>信号线</label>
+                            <input type="number" id="cfg-macd-signal" min="1" max="20" step="1" value="2">
+                        </div>
+                        <div class="config-item">
+                            <label>能量阈值</label>
+                            <input type="number" id="cfg-macd-threshold" min="1" max="20" step="0.5" value="6.5">
+                        </div>
+                    </div>
+                    <!-- RSI -->
+                    <div class="config-section">
+                        <h3>RSI 动能节奏</h3>
+                        <div class="config-item">
+                            <label>周期</label>
+                            <input type="number" id="cfg-rsi-period" min="5" max="50" step="1" value="14">
+                        </div>
+                    </div>
+                    <!-- SAR -->
+                    <div class="config-section">
+                        <h3>SAR 陪伴反转</h3>
+                        <div class="config-item">
+                            <label>步长</label>
+                            <input type="number" id="cfg-sar-step" min="0.005" max="0.1" step="0.005" value="0.02">
+                        </div>
+                        <div class="config-item">
+                            <label>最大步长</label>
+                            <input type="number" id="cfg-sar-max" min="0.05" max="0.5" step="0.05" value="0.2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="resetConfig()">&#8634; 恢复默认 (PDF)</button>
+                <button class="btn-primary" onclick="applyConfig()">&#10003; 应用并重新计算</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paper Trading Modal -->
+    <div class="modal-overlay" id="paper-modal">
+        <div class="modal-content paper-modal-content">
+            <div class="modal-header">
+                <h2>&#9654; 模拟盘回测结果</h2>
+                <button class="modal-close" onclick="closePaperTrading()">✕</button>
+            </div>
+            <div class="modal-body">
+                <!-- Paper Trading Status -->
+                <div id="paper-status-section" style="text-align:center;padding:40px;color:var(--text-muted);">
+                    <p>点击 "开始回测" 运行模拟盘</p>
+                    <button class="btn-primary" onclick="executePaperRun()" id="paper-run-btn">开始回测</button>
+                </div>
+                
+                <!-- Paper Trading Results (hidden initially) -->
+                <div id="paper-results" style="display:none;">
+                    <!-- Metrics Row -->
+                    <div class="paper-metrics" id="paper-metrics"></div>
+                    
+                    <!-- Equity Curve Chart -->
+                    <div class="chart-container" style="margin-top:16px;">
+                        <div class="chart-header">权益曲线</div>
+                        <canvas id="paper-equity-chart" style="height:300px !important;"></canvas>
+                    </div>
+                    
+                    <!-- Trade Log -->
+                    <div style="margin-top:16px;">
+                        <div class="chart-header" style="padding:12px 0;">交易记录</div>
+                        <div class="paper-trades" id="paper-trades"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/qianlong.js"></script>
+</body>
+</html>
