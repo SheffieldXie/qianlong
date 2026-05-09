@@ -62,10 +62,11 @@ def fetch_xauusd(period="60d", start_date=None, end_date=None):
     - start_date: 自定义起始日期 (str: "YYYY-MM-DD"), 覆盖 period
     - end_date: 自定义结束日期 (str: "YYYY-MM-DD")
     
-    返回: DataFrame with columns [date, open, high, low, close, volume]
-    同时返回 (df, interval_used) 元组供调用方判断粒度
+    返回: (DataFrame, interval_label) 元组
+    DataFrame columns: [date, open, high, low, close, volume]
     """
     interval, label = _select_interval(period, start_date, end_date)
+    days = _period_to_days(period) if not start_date else None
     
     # Build cache key
     if start_date and end_date:
@@ -121,13 +122,18 @@ def fetch_xauusd(period="60d", start_date=None, end_date=None):
                     df['date'] = pd.to_datetime(df['date'])
                     df = df.sort_values('date').reset_index(drop=True)
                     
+                    # 精确裁剪到请求的天数 (Yahoo 可能返回多余数据)
+                    if days is not None:
+                        cutoff = df['date'].max() - pd.Timedelta(days=days)
+                        df = df[df['date'] >= cutoff].reset_index(drop=True)
+                    
                     # 保存缓存
                     df.to_pickle(cache_path)
                     with open(cache_meta, 'w') as f:
                         json.dump({'timestamp': datetime.datetime.now().timestamp(), 
                                    'ticker': ticker, 'interval': label}, f)
                     
-                    print(f"[Data] 获取 {len(df)} 条{label} K线 ({ticker})")
+                    print(f"[Data] 获取 {len(df)} 条{label} K线 ({ticker}), 区间={df.iloc[0]['date']} ~ {df.iloc[-1]['date']}")
                     return df, label
             except Exception as e:
                 print(f"[Data] {ticker} 失败: {e}")
@@ -141,8 +147,8 @@ def fetch_xauusd(period="60d", start_date=None, end_date=None):
         print("[Data] yfinance未安装, 使用模拟数据")
     
     # 返回模拟数据
-    days = _period_to_days(period) if not start_date else 30
-    return generate_mock_data(days), label
+    mock_days = days if days is not None else 30
+    return generate_mock_data(mock_days), label
 
 
 # Backward compatibility alias
