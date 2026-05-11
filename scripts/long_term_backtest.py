@@ -130,98 +130,90 @@ def run_backtest(df, label="full"):
     return df_analyzed, result
 
 
-def compute_yearly_results(df_full):
-    """按年度拆解回测 — 用30天预热期保证指标有效"""
-    df_full = df_full.copy()
-    if df_full['date'].dt.tz is not None:
-        df_full['date'] = df_full['date'].dt.tz_localize(None)
+def compute_yearly_results(df_full, result_full):
+    """按年度拆解 — 基于完整回测结果切割权益曲线和交易记录"""
+    df = df_full.copy()
+    if df['date'].dt.tz is not None:
+        df['date'] = df['date'].dt.tz_localize(None)
     
-    years = sorted(df_full['date'].dt.year.unique())
+    equity_curve = result_full.get('equity_curve', [])
+    all_trades = result_full.get('trades', [])
+    initial_capital = 100000
+    
+    # 按年分组 equity curve
+    eq_df = pd.DataFrame(equity_curve)
+    eq_df['date'] = pd.to_datetime(eq_df['date'])
+    eq_df['year'] = eq_df['date'].dt.year
+    
+    years = sorted(eq_df['year'].unique())
     yearly = {}
     
     for yr in years:
-        yr_start = pd.Timestamp(f"{yr}-01-01")
-        yr_end = pd.Timestamp(f"{yr}-12-31")
-        warmup_start = yr_start - pd.Timedelta(days=45)
-        
-        df_yr = df_full[
-            (df_full['date'] >= warmup_start) &
-            (df_full['date'] <= yr_end)
-        ].copy().reset_index(drop=True)
-        
-        if len(df_yr) < 30:
+        yr_eq = eq_df[eq_df['year'] == yr].sort_values('date')
+        if len(yr_eq) < 2:
             continue
         
-        df_yr_core = df_yr[df_yr['date'] >= yr_start].copy()
-        if df_yr_core.empty:
-            continue
+        # 该年交易
+        yr_trades = [t for t in all_trades if pd.to_datetime(t.get('date', '')).year == yr]
+        yr_closed = [t for t in yr_trades if 'pnl' in t]
         
-        price_start = float(df_yr_core.iloc[0]['close'])
-        price_end = float(df_yr_core.iloc[-1]['close'])
-        price_change = (price_end - price_start) / price_start * 100
+        # 年初权益（上一年末或初始）
+        start_equity = eq_df[eq_df['date'] < pd.Timestamp(f"{yr}-01-01")]['equity'].iloc[-1] if len(eq_df[eq_df['date'] < pd.Timestamp(f"{yr}-01-01")]) > 0 else initial_capital
+        end_equity = yr_eq.iloc[-1]['equity']
+        total_ret = (end_equity - start_equity) / start_equity
         
-        try:
-            df_yr_analyzed = analyze(df_yr)
-            eng = PaperTradingEngine(initial_capital=100000, contract_size=100)
-            res = eng.run(df_yr_analyzed)
-            
-            # 只取该年关闭的交易
-            yr_trades = res.get('trades', [])
-            yr_closed = [t for t in yr_trades if 'pnl' in t]
-            
-            # 用权益曲线算该年指标
-            eq_curve = res.get('equity_curve', [])
-            if len(eq_curve) > 1:
-                eq_df = pd.DataFrame(eq_curve)
-                initial = eq_df.iloc[0]['equity']
-                final = eq_df.iloc[-1]['equity']
-                total_ret = (final - initial) / initial
-                returns = eq_df['equity'].pct_change().dropna()
-                daily_vol = returns.std()
-                ann_vol = float(daily_vol * np.sqrt(252)) if daily_vol > 0 else 0
-                ann_ret = float((1 + total_ret) ** (252 / max(len(eq_df), 1)) - 1)
-                sharpe = float((ann_ret - 0.03) / ann_vol) if ann_vol > 0 else 0
-                cummax = eq_df['equity'].cummax()
-                drawdown = (eq_df['equity'] - cummax) / cummax
-                max_dd = float(drawdown.min())
-            else:
-                total_ret = 0; ann_ret = 0; sharpe = 0; max_dd = 0
-            
-            if yr_closed:
-                wins = sum(1 for t in yr_closed if t['pnl'] > 0)
-                win_rate = wins / len(yr_closed)
-                avg_win = float(np.mean([t['pnl'] for t in yr_closed if t['pnl'] > 0])) if wins > 0 else 0
-                avg_loss = float(abs(np.mean([t['pnl'] for t in yr_closed if t['pnl'] < 0]))) if len(yr_closed) - wins > 0 else 1.0
-                pf = float(avg_win / avg_loss) if avg_loss > 0 else 0
-                total_pnl = sum(t['pnl'] for t in yr_closed)
-            else:
-                win_rate = 0; avg_win = 0; avg_loss = 0; pf = 0; total_pnl = 0
-            
-            yearly[str(yr)] = {
-                "date_range": f"{df_yr_core.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {df_yr_core.iloc[-1]['date'].strftime('%Y-%m-%d')}",
-                "data_points": len(df_yr_core),
-                "price_start": round(price_start, 2),
-                "price_end": round(price_end, 2),
-                "price_change_pct": round(price_change, 2),
-                "metrics": {
-                    "total_return": round(total_ret, 4),
-                    "total_pnl": round(total_pnl, 2),
-                    "annual_return": round(ann_ret, 4),
-                    "sharpe_ratio": round(sharpe, 2),
-                    "max_drawdown": round(max_dd, 4),
-                    "win_rate": round(win_rate, 4),
-                    "profit_factor": round(pf, 2),
-                    "total_trades": len(yr_closed),
-                    "avg_win": round(avg_win, 2),
-                    "avg_loss": round(avg_loss, 2),
-                },
-                "trades": yr_closed[:50],
-            }
-        except Exception as e:
-            print(f"  年度 {yr} 回测失败: {e}")
-            import traceback
-            traceback.print_exc()
-            yearly[str(yr)] = {"error": str(e)}
+        # 年化
+        n_days = len(yr_eq)
+        years_frac = n_days / 252
+        ann_ret = float((1 + total_ret) ** (1 / max(years_frac, 0.01)) - 1) if years_frac > 0 else 0
+        
+        # 波动率
+        returns = yr_eq['equity'].pct_change().dropna()
+        daily_vol = returns.std()
+        ann_vol = float(daily_vol * np.sqrt(252)) if daily_vol > 0 else 0
+        sharpe = float((ann_ret - 0.03) / ann_vol) if ann_vol > 0 else 0
+        
+        # 最大回撤
+        cummax = yr_eq['equity'].cummax()
+        drawdown = (yr_eq['equity'] - cummax) / cummax
+        max_dd = float(drawdown.min())
+        
+        # 交易统计
+        if yr_closed:
+            wins = sum(1 for t in yr_closed if t['pnl'] > 0)
+            win_rate = wins / len(yr_closed)
+            avg_win = float(np.mean([t['pnl'] for t in yr_closed if t['pnl'] > 0])) if wins > 0 else 0
+            avg_loss = float(abs(np.mean([t['pnl'] for t in yr_closed if t['pnl'] < 0]))) if len(yr_closed) - wins > 0 else 1.0
+            pf = float(avg_win / avg_loss) if avg_loss > 0 else 0
+            total_pnl = sum(t['pnl'] for t in yr_closed)
+        else:
+            win_rate = 0; avg_win = 0; avg_loss = 0; pf = 0; total_pnl = 0
+        
+        df_yr = df[df['date'].dt.year == yr]
+        price_start = float(df_yr.iloc[0]['close']) if not df_yr.empty else 0
+        price_end = float(df_yr.iloc[-1]['close']) if not df_yr.empty else 0
+        price_change = (price_end - price_start) / price_start * 100 if price_start > 0 else 0
+        
+        yearly[str(yr)] = {
+            "date_range": f"{yr_eq.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {yr_eq.iloc[-1]['date'].strftime('%Y-%m-%d')}",
+            "data_points": len(yr_eq),
+            "price_start": round(price_start, 2),
+            "price_end": round(price_end, 2),
+            "price_change_pct": round(price_change, 2),
+            "metrics": {
+                "total_return": round(total_ret, 4),
+                "total_pnl": round(total_pnl, 2),
+                "annual_return": round(ann_ret, 4),
+                "sharpe_ratio": round(sharpe, 2),
+                "max_drawdown": round(max_dd, 4),
+                "win_rate": round(win_rate, 4),
+                "profit_factor": round(pf, 2),
+                "total_trades": len(yr_closed),
+                "avg_win": round(avg_win, 2),
+                "avg_loss": round(avg_loss, 2),
+            },
+            "trades": yr_closed[:50],
+        }
     
     return yearly
 
@@ -376,7 +368,7 @@ def main():
     
     # 2. 按年回测
     print("\n[2/4] 按年度拆解回测...")
-    yearly = compute_yearly_results(df_full)
+    yearly = compute_yearly_results(df_full, result_full)
     for yr, data in yearly.items():
         if 'error' in data:
             print(f"  {yr}: 失败 - {data['error']}")

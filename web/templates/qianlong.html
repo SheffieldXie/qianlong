@@ -155,46 +155,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Full-Width Long-Term Backtest Module -->
+            <div class="fullwidth-section">
+                <section class="longterm-section" id="longterm-section">
+                    <div class="longterm-header">
+                        <div class="longterm-title">
+                            <span class="title-icon">&#9202;</span>
+                            久期回测 (2024-2026)
+                        </div>
+                        <div class="longterm-controls">
+                            <button class="gold-btn" onclick="loadLongtermBacktest()">&#8635; 刷新回测数据</button>
+                        </div>
+                    </div>
+
+                    <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);">
+                        <p>加载久期回测数据中...</p>
+                    </div>
+
+                    <div id="longterm-results" style="display:none;">
+                        <div class="longterm-assessment" id="longterm-assessment"></div>
+                        <div class="longterm-years" id="longterm-years"></div>
+                        <div class="longterm-events-section">
+                            <div class="chart-header" style="padding:16px 0 12px 0;">&#9889; 重大事件时间线</div>
+                            <div class="longterm-events" id="longterm-events"></div>
+                        </div>
+                        <div class="chart-container" style="margin-top:16px;">
+                            <div class="chart-header">两年权益曲线对比 (按年)</div>
+                            <canvas id="longterm-equity-chart" style="height:350px !important;"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </main>
-
-        <!-- Long-Term Backtest Module -->
-        <section class="longterm-section" id="longterm-section">
-            <div class="longterm-header">
-                <div class="longterm-title">
-                    <span class="title-icon">&#9202;</span>
-                    久期回测 (2024-2026)
-                </div>
-                <div class="longterm-controls">
-                    <button class="gold-btn" onclick="loadLongtermBacktest()">&#8635; 刷新回测数据</button>
-                </div>
-            </div>
-
-            <!-- Loading State -->
-            <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);">
-                <p>加载久期回测数据中...</p>
-            </div>
-
-            <!-- Results Container -->
-            <div id="longterm-results" style="display:none;">
-                <!-- Overall Assessment -->
-                <div class="longterm-assessment" id="longterm-assessment"></div>
-
-                <!-- Year Cards -->
-                <div class="longterm-years" id="longterm-years"></div>
-
-                <!-- Event Timeline -->
-                <div class="longterm-events-section">
-                    <div class="chart-header" style="padding:16px 0 12px 0;">&#9889; 重大事件时间线</div>
-                    <div class="longterm-events" id="longterm-events"></div>
-                </div>
-
-                <!-- Equity Chart -->
-                <div class="chart-container" style="margin-top:16px;">
-                    <div class="chart-header">两年权益曲线对比 (按年)</div>
-                    <canvas id="longterm-equity-chart" style="height:350px !important;"></canvas>
-                </div>
-            </div>
-        </section>
     </div>
 
     <!-- Indicator Configuration Modal -->

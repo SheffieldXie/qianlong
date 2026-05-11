@@ -444,27 +444,19 @@ def api_killswitch():
     return jsonify({'status': 'activated', 'cooldown_until': str(risk_mgr.cooldown_until)})
 
 
-@app.route("/api/longterm")
-def api_longterm():
-    """久期回测结果 — 按年展示 + 事件标记 + 鲁棒性评估"""
-    longterm_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "longterm")
-    results_path = os.path.join(longterm_dir, "backtest_results.json")
+@app.route("/api/long_backtest")
+def api_long_backtest():
+    """获取久期回测结果"""
+    # Try static data first, then cache
+    for path in [
+        os.path.join(web_dir, "web", "static", "data", "backtest_2y_result.json"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cache", "backtest_2y_result.json"),
+    ]:
+        if os.path.exists(path):
+            with open(path, 'r', encoding='utf-8') as f:
+                return jsonify(json.load(f))
+    return jsonify({'error': '久期回测数据尚未生成，请先运行 scripts/long_term_backtest.py'})
 
-    if not os.path.exists(results_path):
-        return jsonify({
-            'status': 'not_run',
-            'message': '久期回测尚未运行, 请执行 scripts/longterm_backtest.py',
-        })
-
-    with open(results_path) as f:
-        data = json.load(f)
-
-    return jsonify({
-        'status': 'ready',
-        'results': data['results'],
-        'assessment': data['assessment'],
-        'events': data['all_events'],
-    })
 
 if __name__ == "__main__":
     print("\n" + "=" * 50)

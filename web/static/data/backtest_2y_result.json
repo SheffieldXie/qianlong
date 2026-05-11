@@ -3550,15 +3550,519 @@
       "price_end": 2629.2,
       "price_change_pct": 11.06,
       "metrics": {
-        "total_return": 0.0,
-        "total_pnl": 0,
-        "win_rate": 0,
-        "profit_factor": 0,
-        "total_trades": 0,
-        "avg_win": 0,
-        "avg_loss": 0
+        "total_return": -0.1069,
+        "total_pnl": -10739.97,
+        "annual_return": -0.1613,
+        "sharpe_ratio": -0.41,
+        "max_drawdown": -0.3842,
+        "win_rate": 0.5448,
+        "profit_factor": 0.77,
+        "total_trades": 134,
+        "avg_win": 1838.36,
+        "avg_loss": 2376.07
       },
-      "trades": []
+      "trades": [
+        {
+          "date": "2024-05-22 00:00:00",
+          "action": "CLOSE",
+          "price": 2389.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2421.699951171875,
+          "pnl": -3250.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-06-07 00:00:00",
+          "action": "CLOSE",
+          "price": 2305.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2389.199951171875,
+          "pnl": -8400.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-10 00:00:00",
+          "action": "CLOSE",
+          "price": 2307.699951171875,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2305.199951171875,
+          "pnl": -250.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-11 00:00:00",
+          "action": "CLOSE",
+          "price": 2307.5,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2307.699951171875,
+          "pnl": 20.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-12 00:00:00",
+          "action": "CLOSE",
+          "price": 2336.0,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2307.5,
+          "pnl": -2850.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-13 00:00:00",
+          "action": "CLOSE",
+          "price": 2300.199951171875,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2336.0,
+          "pnl": 3580.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-14 00:00:00",
+          "action": "CLOSE",
+          "price": 2331.39990234375,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2300.199951171875,
+          "pnl": -3120.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-17 00:00:00",
+          "action": "CLOSE",
+          "price": 2312.39990234375,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2331.39990234375,
+          "pnl": 1900.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-18 00:00:00",
+          "action": "CLOSE",
+          "price": 2330.39990234375,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2312.39990234375,
+          "pnl": -1800.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-20 00:00:00",
+          "action": "CLOSE",
+          "price": 2353.800048828125,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2330.39990234375,
+          "pnl": -2340.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-21 00:00:00",
+          "action": "CLOSE",
+          "price": 2316.39990234375,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2353.800048828125,
+          "pnl": 3740.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-24 00:00:00",
+          "action": "CLOSE",
+          "price": 2330.0,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2316.39990234375,
+          "pnl": -1360.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-25 00:00:00",
+          "action": "CLOSE",
+          "price": 2316.60009765625,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2330.0,
+          "pnl": 1339.99,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-26 00:00:00",
+          "action": "CLOSE",
+          "price": 2299.199951171875,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2316.60009765625,
+          "pnl": 1740.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-27 00:00:00",
+          "action": "CLOSE",
+          "price": 2324.5,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2299.199951171875,
+          "pnl": -2530.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-06-28 00:00:00",
+          "action": "CLOSE",
+          "price": 2327.699951171875,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2324.5,
+          "pnl": -320.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-01 00:00:00",
+          "action": "CLOSE",
+          "price": 2327.60009765625,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2327.699951171875,
+          "pnl": 9.99,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-02 00:00:00",
+          "action": "CLOSE",
+          "price": 2323.0,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2327.60009765625,
+          "pnl": 460.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-03 00:00:00",
+          "action": "CLOSE",
+          "price": 2359.800048828125,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2323.0,
+          "pnl": -3680.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-05 00:00:00",
+          "action": "CLOSE",
+          "price": 2388.5,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2359.800048828125,
+          "pnl": -2870.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-08 00:00:00",
+          "action": "CLOSE",
+          "price": 2355.199951171875,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2388.5,
+          "pnl": 3330.0,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-09 00:00:00",
+          "action": "CLOSE",
+          "price": 2360.10009765625,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2355.199951171875,
+          "pnl": -490.01,
+          "reason": "SIGNAL_ENTRY_SHORT"
+        },
+        {
+          "date": "2024-07-16 00:00:00",
+          "action": "CLOSE",
+          "price": 2462.39990234375,
+          "direction": -1,
+          "type": "base",
+          "entry_price": 2360.10009765625,
+          "pnl": -10229.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-17 00:00:00",
+          "action": "CLOSE",
+          "price": 2454.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2462.39990234375,
+          "pnl": -759.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-18 00:00:00",
+          "action": "CLOSE",
+          "price": 2451.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2454.800048828125,
+          "pnl": -300.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-19 00:00:00",
+          "action": "CLOSE",
+          "price": 2395.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2451.800048828125,
+          "pnl": -5630.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-22 00:00:00",
+          "action": "CLOSE",
+          "price": 2392.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2395.5,
+          "pnl": -350.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-23 00:00:00",
+          "action": "CLOSE",
+          "price": 2404.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2392.0,
+          "pnl": 1260.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-24 00:00:00",
+          "action": "CLOSE",
+          "price": 2413.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2404.60009765625,
+          "pnl": 870.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-25 00:00:00",
+          "action": "CLOSE",
+          "price": 2351.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2413.300048828125,
+          "pnl": -6140.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-26 00:00:00",
+          "action": "CLOSE",
+          "price": 2380.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2351.89990234375,
+          "pnl": 2810.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-29 00:00:00",
+          "action": "CLOSE",
+          "price": 2377.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2380.0,
+          "pnl": -270.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-30 00:00:00",
+          "action": "CLOSE",
+          "price": 2405.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2377.300048828125,
+          "pnl": 2770.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-07-31 00:00:00",
+          "action": "CLOSE",
+          "price": 2426.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2405.0,
+          "pnl": 2150.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-01 00:00:00",
+          "action": "CLOSE",
+          "price": 2435.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2426.5,
+          "pnl": 850.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-02 00:00:00",
+          "action": "CLOSE",
+          "price": 2425.699951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2435.0,
+          "pnl": -930.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-05 00:00:00",
+          "action": "CLOSE",
+          "price": 2401.699951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2425.699951171875,
+          "pnl": -2400.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-06 00:00:00",
+          "action": "CLOSE",
+          "price": 2389.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2401.699951171875,
+          "pnl": -1259.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-07 00:00:00",
+          "action": "CLOSE",
+          "price": 2390.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2389.10009765625,
+          "pnl": 139.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-08 00:00:00",
+          "action": "CLOSE",
+          "price": 2422.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2390.5,
+          "pnl": 3170.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-09 00:00:00",
+          "action": "CLOSE",
+          "price": 2432.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2422.199951171875,
+          "pnl": 990.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-12 00:00:00",
+          "action": "CLOSE",
+          "price": 2462.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2432.10009765625,
+          "pnl": 3029.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-13 00:00:00",
+          "action": "CLOSE",
+          "price": 2466.699951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2462.39990234375,
+          "pnl": 430.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-14 00:00:00",
+          "action": "CLOSE",
+          "price": 2439.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2466.699951171875,
+          "pnl": -2730.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-15 00:00:00",
+          "action": "CLOSE",
+          "price": 2453.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2439.39990234375,
+          "pnl": 1370.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-16 00:00:00",
+          "action": "CLOSE",
+          "price": 2498.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2453.10009765625,
+          "pnl": 4550.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-19 00:00:00",
+          "action": "CLOSE",
+          "price": 2501.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2498.60009765625,
+          "pnl": 320.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-20 00:00:00",
+          "action": "CLOSE",
+          "price": 2511.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2501.800048828125,
+          "pnl": 950.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-21 00:00:00",
+          "action": "CLOSE",
+          "price": 2508.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2511.300048828125,
+          "pnl": -290.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2024-08-22 00:00:00",
+          "action": "CLOSE",
+          "price": 2478.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2508.39990234375,
+          "pnl": -2950.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        }
+      ]
     },
     "2025": {
       "date_range": "2025-01-02 ~ 2025-12-31",
@@ -3567,15 +4071,519 @@
       "price_end": 4325.6,
       "price_change_pct": 62.68,
       "metrics": {
-        "total_return": 0.0,
-        "total_pnl": 0,
-        "win_rate": 0,
-        "profit_factor": 0,
-        "total_trades": 0,
-        "avg_win": 0,
-        "avg_loss": 0
+        "total_return": 1.8995,
+        "total_pnl": 169689.99,
+        "annual_return": 1.8995,
+        "sharpe_ratio": 4.5,
+        "max_drawdown": -0.1495,
+        "win_rate": 0.5976,
+        "profit_factor": 1.01,
+        "total_trades": 246,
+        "avg_win": 3440.95,
+        "avg_loss": 3395.25
       },
-      "trades": []
+      "trades": [
+        {
+          "date": "2025-01-10 00:00:00",
+          "action": "CLOSE",
+          "price": 2708.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2628.699951171875,
+          "pnl": 7980.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-13 00:00:00",
+          "action": "CLOSE",
+          "price": 2673.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2708.5,
+          "pnl": -3500.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-14 00:00:00",
+          "action": "CLOSE",
+          "price": 2677.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2673.5,
+          "pnl": 400.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-15 00:00:00",
+          "action": "CLOSE",
+          "price": 2712.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2677.5,
+          "pnl": 3500.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-16 00:00:00",
+          "action": "CLOSE",
+          "price": 2746.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2712.5,
+          "pnl": 3389.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-17 00:00:00",
+          "action": "CLOSE",
+          "price": 2744.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2746.39990234375,
+          "pnl": -209.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-21 00:00:00",
+          "action": "CLOSE",
+          "price": 2755.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2744.300048828125,
+          "pnl": 1070.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-22 00:00:00",
+          "action": "CLOSE",
+          "price": 2767.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2755.0,
+          "pnl": 1260.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-23 00:00:00",
+          "action": "CLOSE",
+          "price": 2763.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2767.60009765625,
+          "pnl": -450.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-24 00:00:00",
+          "action": "CLOSE",
+          "price": 2777.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2763.10009765625,
+          "pnl": 1420.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-27 00:00:00",
+          "action": "CLOSE",
+          "price": 2737.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2777.300048828125,
+          "pnl": -3980.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-28 00:00:00",
+          "action": "CLOSE",
+          "price": 2766.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2737.5,
+          "pnl": 2930.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-29 00:00:00",
+          "action": "CLOSE",
+          "price": 2769.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2766.800048828125,
+          "pnl": 230.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-30 00:00:00",
+          "action": "CLOSE",
+          "price": 2823.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2769.10009765625,
+          "pnl": 5389.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-01-31 00:00:00",
+          "action": "CLOSE",
+          "price": 2812.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2823.0,
+          "pnl": -1050.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-03 00:00:00",
+          "action": "CLOSE",
+          "price": 2833.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2812.5,
+          "pnl": 2139.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-04 00:00:00",
+          "action": "CLOSE",
+          "price": 2853.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2833.89990234375,
+          "pnl": 1940.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-05 00:00:00",
+          "action": "CLOSE",
+          "price": 2871.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2853.300048828125,
+          "pnl": 1830.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-06 00:00:00",
+          "action": "CLOSE",
+          "price": 2856.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2871.60009765625,
+          "pnl": -1560.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-07 00:00:00",
+          "action": "CLOSE",
+          "price": 2867.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2856.0,
+          "pnl": 1130.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-10 00:00:00",
+          "action": "CLOSE",
+          "price": 2914.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2867.300048828125,
+          "pnl": 4700.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-11 00:00:00",
+          "action": "CLOSE",
+          "price": 2912.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2914.300048828125,
+          "pnl": -180.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-12 00:00:00",
+          "action": "CLOSE",
+          "price": 2909.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2912.5,
+          "pnl": -350.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-13 00:00:00",
+          "action": "CLOSE",
+          "price": 2925.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2909.0,
+          "pnl": 1689.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-14 00:00:00",
+          "action": "CLOSE",
+          "price": 2883.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2925.89990234375,
+          "pnl": -4229.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-18 00:00:00",
+          "action": "CLOSE",
+          "price": 2931.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2883.60009765625,
+          "pnl": 4800.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-19 00:00:00",
+          "action": "CLOSE",
+          "price": 2919.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2931.60009765625,
+          "pnl": -1220.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-20 00:00:00",
+          "action": "CLOSE",
+          "price": 2940.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2919.39990234375,
+          "pnl": 2060.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-21 00:00:00",
+          "action": "CLOSE",
+          "price": 2937.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2940.0,
+          "pnl": -239.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-24 00:00:00",
+          "action": "CLOSE",
+          "price": 2947.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2937.60009765625,
+          "pnl": 1029.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-25 00:00:00",
+          "action": "CLOSE",
+          "price": 2904.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2947.89990234375,
+          "pnl": -4339.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-26 00:00:00",
+          "action": "CLOSE",
+          "price": 2916.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2904.5,
+          "pnl": 1230.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-27 00:00:00",
+          "action": "CLOSE",
+          "price": 2883.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2916.800048828125,
+          "pnl": -3360.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-02-28 00:00:00",
+          "action": "CLOSE",
+          "price": 2836.800048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2883.199951171875,
+          "pnl": -4639.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-03 00:00:00",
+          "action": "CLOSE",
+          "price": 2890.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2836.800048828125,
+          "pnl": 5339.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-04 00:00:00",
+          "action": "CLOSE",
+          "price": 2909.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2890.199951171875,
+          "pnl": 1940.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-05 00:00:00",
+          "action": "CLOSE",
+          "price": 2915.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2909.60009765625,
+          "pnl": 570.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-06 00:00:00",
+          "action": "CLOSE",
+          "price": 2916.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2915.300048828125,
+          "pnl": 130.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-07 00:00:00",
+          "action": "CLOSE",
+          "price": 2904.699951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2916.60009765625,
+          "pnl": -1190.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-10 00:00:00",
+          "action": "CLOSE",
+          "price": 2891.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2904.699951171875,
+          "pnl": -1370.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-11 00:00:00",
+          "action": "CLOSE",
+          "price": 2912.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2891.0,
+          "pnl": 2189.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-12 00:00:00",
+          "action": "CLOSE",
+          "price": 2939.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2912.89990234375,
+          "pnl": 2620.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-13 00:00:00",
+          "action": "CLOSE",
+          "price": 2984.300048828125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2939.10009765625,
+          "pnl": 4520.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-14 00:00:00",
+          "action": "CLOSE",
+          "price": 2994.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2984.300048828125,
+          "pnl": 1020.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-17 00:00:00",
+          "action": "CLOSE",
+          "price": 3000.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 2994.5,
+          "pnl": 550.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-18 00:00:00",
+          "action": "CLOSE",
+          "price": 3035.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 3000.0,
+          "pnl": 3510.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-19 00:00:00",
+          "action": "CLOSE",
+          "price": 3035.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 3035.10009765625,
+          "pnl": 79.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-20 00:00:00",
+          "action": "CLOSE",
+          "price": 3040.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 3035.89990234375,
+          "pnl": 410.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-21 00:00:00",
+          "action": "CLOSE",
+          "price": 3018.199951171875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 3040.0,
+          "pnl": -2180.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2025-03-24 00:00:00",
+          "action": "CLOSE",
+          "price": 3013.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 3018.199951171875,
+          "pnl": -509.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        }
+      ]
     },
     "2026": {
       "date_range": "2026-01-02 ~ 2026-05-10",
@@ -3584,15 +4592,519 @@
       "price_end": 4712.3,
       "price_change_pct": 9.22,
       "metrics": {
-        "total_return": 0.0,
-        "total_pnl": 0,
-        "win_rate": 0,
-        "profit_factor": 0,
-        "total_trades": 0,
-        "avg_win": 0,
-        "avg_loss": 0
+        "total_return": -0.0208,
+        "total_pnl": -5389.99,
+        "annual_return": -0.0578,
+        "sharpe_ratio": -0.15,
+        "max_drawdown": -0.3327,
+        "win_rate": 0.5,
+        "profit_factor": 0.98,
+        "total_trades": 88,
+        "avg_win": 7583.87,
+        "avg_loss": 7706.37
       },
-      "trades": []
+      "trades": [
+        {
+          "date": "2026-01-02 00:00:00",
+          "action": "CLOSE",
+          "price": 4314.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4325.60009765625,
+          "pnl": -1120.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-05 00:00:00",
+          "action": "CLOSE",
+          "price": 4436.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4314.39990234375,
+          "pnl": 12250.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-06 00:00:00",
+          "action": "CLOSE",
+          "price": 4482.2001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4436.89990234375,
+          "pnl": 4530.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-07 00:00:00",
+          "action": "CLOSE",
+          "price": 4449.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4482.2001953125,
+          "pnl": -3290.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-08 00:00:00",
+          "action": "CLOSE",
+          "price": 4449.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4449.2998046875,
+          "pnl": 40.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-09 00:00:00",
+          "action": "CLOSE",
+          "price": 4490.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4449.7001953125,
+          "pnl": 4059.96,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-12 00:00:00",
+          "action": "CLOSE",
+          "price": 4604.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4490.2998046875,
+          "pnl": 11400.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-13 00:00:00",
+          "action": "CLOSE",
+          "price": 4589.2001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4604.2998046875,
+          "pnl": -1509.96,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-14 00:00:00",
+          "action": "CLOSE",
+          "price": 4626.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4589.2001953125,
+          "pnl": 3709.96,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-15 00:00:00",
+          "action": "CLOSE",
+          "price": 4616.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4626.2998046875,
+          "pnl": -1000.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-16 00:00:00",
+          "action": "CLOSE",
+          "price": 4588.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4616.2998046875,
+          "pnl": -2789.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-20 00:00:00",
+          "action": "CLOSE",
+          "price": 4759.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4588.39990234375,
+          "pnl": 17120.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-21 00:00:00",
+          "action": "CLOSE",
+          "price": 4831.7998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4759.60009765625,
+          "pnl": 7219.97,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-22 00:00:00",
+          "action": "CLOSE",
+          "price": 4908.7998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4831.7998046875,
+          "pnl": 7700.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-23 00:00:00",
+          "action": "CLOSE",
+          "price": 4976.2001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4908.7998046875,
+          "pnl": 6740.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-26 00:00:00",
+          "action": "CLOSE",
+          "price": 5079.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4976.2001953125,
+          "pnl": 10350.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-27 00:00:00",
+          "action": "CLOSE",
+          "price": 5079.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5079.7001953125,
+          "pnl": 19.97,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-28 00:00:00",
+          "action": "CLOSE",
+          "price": 5301.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5079.89990234375,
+          "pnl": 22170.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-29 00:00:00",
+          "action": "CLOSE",
+          "price": 5318.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5301.60009765625,
+          "pnl": 1679.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-01-30 00:00:00",
+          "action": "CLOSE",
+          "price": 4713.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5318.39990234375,
+          "pnl": -60450.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-02 00:00:00",
+          "action": "CLOSE",
+          "price": 4622.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4713.89990234375,
+          "pnl": -9139.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-03 00:00:00",
+          "action": "CLOSE",
+          "price": 4903.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4622.5,
+          "pnl": 28120.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-04 00:00:00",
+          "action": "CLOSE",
+          "price": 4920.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4903.7001953125,
+          "pnl": 1669.97,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-05 00:00:00",
+          "action": "CLOSE",
+          "price": 4861.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4920.39990234375,
+          "pnl": -5900.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-06 00:00:00",
+          "action": "CLOSE",
+          "price": 4951.2001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4861.39990234375,
+          "pnl": 8980.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-09 00:00:00",
+          "action": "CLOSE",
+          "price": 5050.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4951.2001953125,
+          "pnl": 9969.97,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-10 00:00:00",
+          "action": "CLOSE",
+          "price": 5003.7998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5050.89990234375,
+          "pnl": -4710.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-11 00:00:00",
+          "action": "CLOSE",
+          "price": 5071.60009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5003.7998046875,
+          "pnl": 6780.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-12 00:00:00",
+          "action": "CLOSE",
+          "price": 4923.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5071.60009765625,
+          "pnl": -14789.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-13 00:00:00",
+          "action": "CLOSE",
+          "price": 5022.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4923.7001953125,
+          "pnl": 9829.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-17 00:00:00",
+          "action": "CLOSE",
+          "price": 4882.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5022.0,
+          "pnl": -13910.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-18 00:00:00",
+          "action": "CLOSE",
+          "price": 4986.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4882.89990234375,
+          "pnl": 10360.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-19 00:00:00",
+          "action": "CLOSE",
+          "price": 4975.89990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4986.5,
+          "pnl": -1060.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-20 00:00:00",
+          "action": "CLOSE",
+          "price": 5059.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 4975.89990234375,
+          "pnl": 8339.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-23 00:00:00",
+          "action": "CLOSE",
+          "price": 5204.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5059.2998046875,
+          "pnl": 14540.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-24 00:00:00",
+          "action": "CLOSE",
+          "price": 5155.7998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5204.7001953125,
+          "pnl": -4890.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-25 00:00:00",
+          "action": "CLOSE",
+          "price": 5206.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5155.7998046875,
+          "pnl": 5060.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-26 00:00:00",
+          "action": "CLOSE",
+          "price": 5176.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5206.39990234375,
+          "pnl": -2989.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-02-27 00:00:00",
+          "action": "CLOSE",
+          "price": 5230.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5176.5,
+          "pnl": 5400.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-02 00:00:00",
+          "action": "CLOSE",
+          "price": 5294.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5230.5,
+          "pnl": 6389.99,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-03 00:00:00",
+          "action": "CLOSE",
+          "price": 5107.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5294.39990234375,
+          "pnl": -18700.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-04 00:00:00",
+          "action": "CLOSE",
+          "price": 5120.2001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5107.39990234375,
+          "pnl": 1280.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-05 00:00:00",
+          "action": "CLOSE",
+          "price": 5065.2998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5120.2001953125,
+          "pnl": -5490.04,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-06 00:00:00",
+          "action": "CLOSE",
+          "price": 5146.10009765625,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5065.2998046875,
+          "pnl": 8080.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-09 00:00:00",
+          "action": "CLOSE",
+          "price": 5091.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5146.10009765625,
+          "pnl": -5460.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-10 00:00:00",
+          "action": "CLOSE",
+          "price": 5229.7001953125,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5091.5,
+          "pnl": 13820.02,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-11 00:00:00",
+          "action": "CLOSE",
+          "price": 5167.39990234375,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5229.7001953125,
+          "pnl": -6230.03,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-12 00:00:00",
+          "action": "CLOSE",
+          "price": 5115.7998046875,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5167.39990234375,
+          "pnl": -5160.01,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-13 00:00:00",
+          "action": "CLOSE",
+          "price": 5052.5,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5115.7998046875,
+          "pnl": -6329.98,
+          "reason": "SIGNAL_ENTRY_LONG"
+        },
+        {
+          "date": "2026-03-16 00:00:00",
+          "action": "CLOSE",
+          "price": 4994.0,
+          "direction": 1,
+          "type": "base",
+          "entry_price": 5052.5,
+          "pnl": -5850.0,
+          "reason": "SIGNAL_ENTRY_LONG"
+        }
+      ]
     }
   },
   "events_impact": [

@@ -938,10 +938,13 @@ body, html {
 /* ============================================================
    Long-Term Backtest Module
    ============================================================ */
+.fullwidth-section {
+    grid-column: 1 / -1;
+    margin-top: 16px;
+}
+
 .longterm-section {
-    padding: 16px 24px 32px 24px;
-    position: relative;
-    z-index: 1;
+    width: 100%;
 }
 
 .longterm-header {
@@ -1027,7 +1030,7 @@ body, html {
 /* Year Cards */
 .longterm-years {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 24px;
 }
@@ -1234,4 +1237,77 @@ body, html {
     .year-metrics { grid-template-columns: repeat(2, 1fr); }
     .assessment-grid { grid-template-columns: repeat(2, 1fr); }
     .longterm-events { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Long-Term Backtest Tables
+   ============================================================ */
+.longterm-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.longterm-card h3 {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.longterm-card h3 .subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-weight: 400;
+}
+
+.yearly-table-wrap, .events-table-wrap {
+    overflow-x: auto;
+}
+
+.yearly-table, .events-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.yearly-table th, .events-table th {
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.yearly-table td, .events-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+    white-space: nowrap;
+}
+
+.yearly-table tr:hover, .events-table tr:hover {
+    background: rgba(212, 160, 23, 0.05);
+}
+
+.positive { color: var(--green); }
+.negative { color: var(--red); }
+.safe { color: var(--green); }
+.warning { color: var(--gold); }
+.danger { color: var(--red); }
+
+@media (max-width: 900px) {
+    .longterm-section { padding: 16px 12px 24px 12px; }
+    .longterm-card { padding: 16px; }
+    .yearly-table, .events-table { font-size: 11px; }
 }
