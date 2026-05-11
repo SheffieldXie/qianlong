@@ -65,12 +65,12 @@ def _select_interval(period, start_date=None, end_date=None):
 def fetch_xauusd(period="60d", start_date=None, end_date=None):
     """
     获取XAU/USD K线数据 (自动选择最优粒度)
-    
+
     参数:
     - period: 时间跨度, 如 "7d", "30d", "60d", "180d"
     - start_date: 自定义起始日期 (str: "YYYY-MM-DD"), 覆盖 period
     - end_date: 自定义结束日期 (str: "YYYY-MM-DD")
-    
+
     返回: (DataFrame, interval_label) 元组
     """
     interval, label = _select_interval(period, start_date, end_date)
@@ -218,61 +218,6 @@ def fetch_xauusd(period="60d", start_date=None, end_date=None):
                         return df, '1h'
                 except Exception as e:
                     print(f"[Data] 1h 重试 {ticker} 失败: {e}")
-                    continue
-
-        # 如果1h也失败, 尝试日线
-        if interval in ('15m', '1h'):
-            print(f"[Data] {interval} 获取失败, 尝试 1d...")
-            interval = '1d'
-            label = '1d'
-            for ticker in ["GC=F", "XAUUSD=X"]:
-                try:
-                    gold = yf.Ticker(ticker)
-                    if start_date and end_date:
-                        df = gold.history(start=start_date, end=end_date, interval=interval)
-                    else:
-                        df = gold.history(period=period, interval=interval)
-
-                    if df is not None and not df.empty and len(df) > 50:
-                        df = df.reset_index()
-                        df.columns = [c.lower().replace(' ', '_') for c in df.columns]
-                        if 'datetime' in df.columns:
-                            df = df.rename(columns={'datetime': 'date'})
-                        elif 'date' not in df.columns:
-                            df = df.rename(columns={df.columns[0]: 'date'})
-
-                        col_map = {}
-                        for c in df.columns:
-                            cl = c.lower()
-                            if 'open' in cl: col_map[c] = 'open'
-                            elif 'high' in cl: col_map[c] = 'high'
-                            elif 'low' in cl: col_map[c] = 'low'
-                            elif 'close' in cl: col_map[c] = 'close'
-                            elif 'volume' in cl: col_map[c] = 'volume'
-                            elif 'date' in cl or 'time' in cl: col_map[c] = 'date'
-
-                        df = df.rename(columns=col_map)
-                        df = df[['date', 'open', 'high', 'low', 'close', 'volume']]
-                        df['date'] = pd.to_datetime(df['date'])
-                        df = df.sort_values('date').reset_index(drop=True)
-
-                        cutoff = df['date'].max() - pd.Timedelta(days=days)
-                        df = df[df['date'] >= cutoff].reset_index(drop=True)
-
-                        df.to_pickle(cache_path)
-                        with open(cache_meta, 'w') as f:
-                            json.dump({
-                                'timestamp': datetime.datetime.now().timestamp(),
-                                'ticker': ticker,
-                                'interval': '1d',
-                                'rows': len(df)
-                            }, f)
-
-                        print(f"[Data] 1d 重试成功 {len(df)} 条, "
-                              f"区间={df.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {df.iloc[-1]['date'].strftime('%Y-%m-%d')}")
-                        return df, '1d'
-                except Exception as e:
-                    print(f"[Data] 1d 重试 {ticker} 失败: {e}")
                     continue
 
         # 全部失败, 返回缓存

@@ -13,7 +13,7 @@ import json
 import datetime
 import numpy as np
 import pandas as pd
-from data.fetcher import fetch_xauusd, generate_mock_data
+import yfinance as yf
 
 from engine.core import analyze
 from engine.paper_trading import PaperTradingEngine
@@ -76,63 +76,70 @@ MAJOR_EVENTS = [
 
 
 def fetch_long_term_data():
-    """获取2年+ XAU/USD 历史数据"""
+    """获取2年+ XAU/USD 日线数据"""
     print("[LongTerm] 获取 XAU/USD 历史数据...")
 
-    # Try to load cached synthetic data first
-    cache_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "cache", "xauusd_2y_1d.pkl")
-    if os.path.exists(cache_path):
-        df = pd.read_pickle(cache_path)
-        print(f"[LongTerm] 使用缓存数据: {len(df)} 条日线")
-        print(f"[LongTerm] 时间范围: {df.iloc[0]['date']} ~ {df.iloc[-1]['date']}")
-        return df
+    gold = yf.Ticker('GC=F')
+    df = gold.history(start="2024-01-01", end="2026-12-31", interval="1d")
 
-    # Otherwise fetch fresh data
-    end_date = datetime.datetime.now().strftime('%Y-%m-%d')
-    start_date = (datetime.datetime.now() - datetime.timedelta(days=730)).strftime('%Y-%m-%d')
-    
-    df, label = fetch_xauusd(start_date=start_date, end_date=end_date)
+    if df.empty:
+        print("[LongTerm] GC=F 失败，尝试 XAUUSD=X")
+        gold = yf.Ticker('XAUUSD=X')
+        df = gold.history(start="2024-01-01", end="2026-12-31", interval="1d")
 
-    if df is None or df.empty:
-        print("[LongTerm] 无法获取历史数据，使用模拟数据")
-        df = generate_mock_data(730)
-        label = '1h'
+    if df.empty:
+        raise ValueError("无法获取 XAU/USD 数据")
 
-    print(f"[LongTerm] 获取 {len(df)} 条{label}数据")
-    print(f"[LongTerm] 时间范围: {df.iloc[0]['date']} ~ {df.iloc[-1]['date']}")
+    # 标准化格式
+    df = df.reset_index()
+    df.columns = [c.lower().replace(' ', '_') for c in df.columns]
+
+    if 'datetime' in df.columns:
+        df = df.rename(columns={'datetime': 'date'})
+
+    col_map = {}
+    for c in df.columns:
+        cl = c.lower()
+        if 'open' in cl: col_map[c] = 'open'
+        elif 'high' in cl: col_map[c] = 'high'
+        elif 'low' in cl: col_map[c] = 'low'
+        elif 'close' in cl: col_map[c] = 'close'
+        elif 'volume' in cl: col_map[c] = 'volume'
+        elif 'date' in cl or 'time' in cl: col_map[c] = 'date'
+
+    df = df.rename(columns=col_map)
+    df = df[['date', 'open', 'high', 'low', 'close', 'volume']]
+    df['date'] = pd.to_datetime(df['date'])
+    df = df.sort_values('date').reset_index(drop=True)
+
+    print(f"[LongTerm] 获取 {len(df)} 条日线数据")
+    print(f"[LongTerm] 时间范围: {df.iloc[0]['date'].strftime('%Y-%m-%d')} ~ {df.iloc[-1]['date'].strftime('%Y-%m-%d')}")
 
     return df
 
 
 def run_yearly_backtest(df, initial_capital=100000, contract_size=100):
     """按年切割数据，分别回测"""
-    # 先分析完整数据，确保指标计算正确（EMA等需要历史数据）
-    print("[LongTerm] 分析完整数据...")
-    analyzed_full = analyze(df)
-    
-    df_full = analyzed_full.copy()
-    df_full['year'] = df_full['date'].dt.year
-    
-    # 过滤掉没有信号数据的年份
-    years = sorted(df_full['year'].unique())
+    df['year'] = df['date'].dt.year
+
+    years = sorted(df['year'].unique())
     results = {}
 
     for year in years:
-        year_df = df_full[df_full['year'] == year].copy().reset_index(drop=True)
-        if len(year_df) < 50:  # 数据太少跳过
-            continue
+        year_df = df[df['year'] == year].copy().reset_index(drop=True)
         print(f"\n{'='*60}")
         print(f"[LongTerm] {year}年回测 ({len(year_df)} 个交易日)")
         print(f"{'='*60}")
 
-        # Run paper trading with enhanced risk controls
+        # Run analysis with daily-appropriate indicators
+        analyzed = analyze(year_df)
+
+        # Run paper trading
         engine = PaperTradingEngine(
             initial_capital=initial_capital,
             contract_size=contract_size,
-            max_daily_loss=0.02,    # 日亏损上限2%
-            max_weekly_loss=0.08,   # 周亏损上限8%
         )
-        report = engine.run(year_df)
+        report = engine.run(analyzed)
 
         # Find event dates within this year
         year_events = [e for e in MAJOR_EVENTS if e['date'].startswith(str(year))]

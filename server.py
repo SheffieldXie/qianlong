@@ -345,8 +345,6 @@ def api_paper_run():
     engine = PaperTradingEngine(
         initial_capital=initial_capital,
         contract_size=contract_size,
-        max_daily_loss=0.02,    # 降低日亏损上限到2%
-        max_weekly_loss=0.08,   # 周亏损上限8%
     )
 
     result = engine.run(df)
