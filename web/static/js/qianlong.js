@@ -1070,9 +1070,10 @@ function renderPaperDrawdownChart(equityData) {
 let longtermEquityChart = null;
 
 function initLongtermBacktest() {
-    // Try to load from localStorage immediately
+    console.log('[LongTerm] initLongtermBacktest called');
     const cached = localStorage.getItem('qianlong_backtest_v1');
     if (cached) {
+        console.log('[LongTerm] Found cached data, rendering immediately');
         try {
             const data = JSON.parse(cached);
             renderLongtermAssessment(data.assessment);
@@ -1081,11 +1082,13 @@ function initLongtermBacktest() {
             renderLongtermEquityChart(data.results);
             document.getElementById('longterm-loading').style.display = 'none';
             document.getElementById('longterm-results').style.display = 'block';
+            console.log('[LongTerm] Cached data rendered successfully');
         } catch (e) {
-            console.warn('Cache parse error, will fetch fresh:', e);
+            console.error('[LongTerm] Cache parse error:', e);
         }
+    } else {
+        console.log('[LongTerm] No cached data, fetching...');
     }
-    // Fetch fresh data in background
     loadLongtermBacktest();
 }
 
@@ -1093,35 +1096,44 @@ async function loadLongtermBacktest() {
     const loadingEl = document.getElementById('longterm-loading');
     const resultsEl = document.getElementById('longterm-results');
 
-    // If we already have cached data, don't show loading, just fetch in background
+    console.log('[LongTerm] loadLongtermBacktest called');
+    
     if (!localStorage.getItem('qianlong_backtest_v1')) {
         loadingEl.style.display = 'block';
         resultsEl.style.display = 'none';
     }
 
     try {
+        console.log('[LongTerm] Fetching /api/longterm...');
         const res = await fetch('/api/longterm');
+        console.log('[LongTerm] Response status:', res.status);
         const data = await res.json();
+        console.log('[LongTerm] Data received, status:', data.status);
 
         if (data.status === 'not_run') {
             loadingEl.innerHTML = '<p>' + data.message + '</p>';
             return;
         }
 
-        // Cache in localStorage
+        console.log('[LongTerm] Saving to localStorage...');
         localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
 
+        console.log('[LongTerm] Rendering assessment...');
         renderLongtermAssessment(data.assessment);
+        console.log('[LongTerm] Rendering years...');
         renderLongtermYears(data.results, data.events);
+        console.log('[LongTerm] Rendering events...');
         renderLongtermEvents(data.events, data.results);
+        console.log('[LongTerm] Rendering equity chart...');
         renderLongtermEquityChart(data.results);
 
+        console.log('[LongTerm] Showing results...');
         loadingEl.style.display = 'none';
         resultsEl.style.display = 'block';
+        console.log('[LongTerm] Done!');
 
     } catch (e) {
-        console.error('Longterm backtest load failed:', e);
-        // If no cache, show error
+        console.error('[LongTerm] Load failed:', e);
         if (!localStorage.getItem('qianlong_backtest_v1')) {
             loadingEl.innerHTML = '<p style="color:var(--red)">加载失败, 请检查服务器日志</p>';
         }
