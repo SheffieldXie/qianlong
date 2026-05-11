@@ -1,0 +1,3971 @@
+{
+  "full_period": {
+    "date_range": "2024-05-10 ~ 2026-05-10",
+    "data_points": 503,
+    "price_start": 2367.3,
+    "price_end": 4712.3,
+    "price_change_pct": 99.06,
+    "metrics": {
+      "initial_capital": 100000,
+      "final_equity": 253560.03,
+      "total_return": 1.5356,
+      "annual_return": 0.5938,
+      "annual_volatility": 0.4647,
+      "sharpe_ratio": 1.21,
+      "max_drawdown": -0.3842,
+      "win_rate": 0.5641,
+      "profit_factor": 0.92,
+      "total_trades": 468,
+      "n_days": 503
+    },
+    "equity_curve": [
+      {
+        "date": "2024-05-10 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-13 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-14 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-15 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-16 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-17 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-20 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 0
+      },
+      {
+        "date": "2024-05-21 00:00:00",
+        "equity": 100000.0,
+        "cash": 100000.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-22 00:00:00",
+        "equity": 96750.0,
+        "cash": 96750.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-23 00:00:00",
+        "equity": 91330.0,
+        "cash": 96750.0,
+        "position_value": -5420.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-24 00:00:00",
+        "equity": 91080.0,
+        "cash": 96750.0,
+        "position_value": -5670.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-28 00:00:00",
+        "equity": 93350.0,
+        "cash": 96750.0,
+        "position_value": -3400.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-29 00:00:00",
+        "equity": 91860.01,
+        "cash": 96750.0,
+        "position_value": -4889.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-30 00:00:00",
+        "equity": 92120.0,
+        "cash": 96750.0,
+        "position_value": -4630.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-05-31 00:00:00",
+        "equity": 90120.0,
+        "cash": 96750.0,
+        "position_value": -6630.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-03 00:00:00",
+        "equity": 92490.01,
+        "cash": 96750.0,
+        "position_value": -4259.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-04 00:00:00",
+        "equity": 90380.0,
+        "cash": 96750.0,
+        "position_value": -6370.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-05 00:00:00",
+        "equity": 93240.01,
+        "cash": 96750.0,
+        "position_value": -3509.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-06 00:00:00",
+        "equity": 94860.01,
+        "cash": 96750.0,
+        "position_value": -1889.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-07 00:00:00",
+        "equity": 88350.0,
+        "cash": 88350.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-10 00:00:00",
+        "equity": 88100.0,
+        "cash": 88100.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-11 00:00:00",
+        "equity": 88120.0,
+        "cash": 88120.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-12 00:00:00",
+        "equity": 85270.0,
+        "cash": 85270.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-13 00:00:00",
+        "equity": 88850.0,
+        "cash": 88850.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-14 00:00:00",
+        "equity": 85730.0,
+        "cash": 85730.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-17 00:00:00",
+        "equity": 87630.0,
+        "cash": 87630.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-18 00:00:00",
+        "equity": 85830.0,
+        "cash": 85830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-20 00:00:00",
+        "equity": 83489.99,
+        "cash": 83489.99,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-21 00:00:00",
+        "equity": 87230.0,
+        "cash": 87230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-24 00:00:00",
+        "equity": 85870.0,
+        "cash": 85870.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-25 00:00:00",
+        "equity": 87209.99,
+        "cash": 87209.99,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-26 00:00:00",
+        "equity": 88950.0,
+        "cash": 88950.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-27 00:00:00",
+        "equity": 86420.0,
+        "cash": 86420.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-06-28 00:00:00",
+        "equity": 86100.0,
+        "cash": 86100.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-01 00:00:00",
+        "equity": 86109.99,
+        "cash": 86109.99,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-02 00:00:00",
+        "equity": 86570.0,
+        "cash": 86570.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-03 00:00:00",
+        "equity": 82889.99,
+        "cash": 82889.99,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-05 00:00:00",
+        "equity": 80020.0,
+        "cash": 80020.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-08 00:00:00",
+        "equity": 83350.0,
+        "cash": 83350.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-09 00:00:00",
+        "equity": 82859.99,
+        "cash": 82859.99,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-10 00:00:00",
+        "equity": 81650.0,
+        "cash": 82859.99,
+        "position_value": -1209.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-11 00:00:00",
+        "equity": 77370.0,
+        "cash": 82859.99,
+        "position_value": -5489.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-12 00:00:00",
+        "equity": 77470.0,
+        "cash": 82859.99,
+        "position_value": -5389.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-15 00:00:00",
+        "equity": 76580.0,
+        "cash": 82859.99,
+        "position_value": -6279.98,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-16 00:00:00",
+        "equity": 72630.0,
+        "cash": 72630.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-17 00:00:00",
+        "equity": 71870.02,
+        "cash": 71870.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-18 00:00:00",
+        "equity": 71570.02,
+        "cash": 71570.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-19 00:00:00",
+        "equity": 65940.01,
+        "cash": 65940.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-22 00:00:00",
+        "equity": 65590.01,
+        "cash": 65590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-23 00:00:00",
+        "equity": 66850.02,
+        "cash": 66850.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-24 00:00:00",
+        "equity": 67720.02,
+        "cash": 67720.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-25 00:00:00",
+        "equity": 61580.0,
+        "cash": 61580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-26 00:00:00",
+        "equity": 64390.01,
+        "cash": 64390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-29 00:00:00",
+        "equity": 64120.02,
+        "cash": 64120.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-30 00:00:00",
+        "equity": 66890.01,
+        "cash": 66890.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-07-31 00:00:00",
+        "equity": 69040.01,
+        "cash": 69040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-01 00:00:00",
+        "equity": 69890.01,
+        "cash": 69890.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-02 00:00:00",
+        "equity": 68960.01,
+        "cash": 68960.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-05 00:00:00",
+        "equity": 66560.01,
+        "cash": 66560.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-06 00:00:00",
+        "equity": 65300.02,
+        "cash": 65300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-07 00:00:00",
+        "equity": 65440.01,
+        "cash": 65440.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-08 00:00:00",
+        "equity": 68610.01,
+        "cash": 68610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-09 00:00:00",
+        "equity": 69600.02,
+        "cash": 69600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-12 00:00:00",
+        "equity": 72630.0,
+        "cash": 72630.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-13 00:00:00",
+        "equity": 73060.01,
+        "cash": 73060.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-14 00:00:00",
+        "equity": 70330.0,
+        "cash": 70330.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-15 00:00:00",
+        "equity": 71700.02,
+        "cash": 71700.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-16 00:00:00",
+        "equity": 76250.02,
+        "cash": 76250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-19 00:00:00",
+        "equity": 76570.02,
+        "cash": 76570.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-20 00:00:00",
+        "equity": 77520.02,
+        "cash": 77520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-21 00:00:00",
+        "equity": 77230.0,
+        "cash": 77230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-22 00:00:00",
+        "equity": 74280.0,
+        "cash": 74280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-23 00:00:00",
+        "equity": 77230.0,
+        "cash": 77230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-26 00:00:00",
+        "equity": 78160.01,
+        "cash": 78160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-27 00:00:00",
+        "equity": 77990.01,
+        "cash": 77990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-28 00:00:00",
+        "equity": 76490.01,
+        "cash": 76490.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-29 00:00:00",
+        "equity": 78960.01,
+        "cash": 78960.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-08-30 00:00:00",
+        "equity": 75770.02,
+        "cash": 75770.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-03 00:00:00",
+        "equity": 75380.0,
+        "cash": 75380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-04 00:00:00",
+        "equity": 75730.0,
+        "cash": 75730.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-05 00:00:00",
+        "equity": 77530.0,
+        "cash": 77530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-06 00:00:00",
+        "equity": 75740.01,
+        "cash": 75740.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-09 00:00:00",
+        "equity": 76570.02,
+        "cash": 76570.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-10 00:00:00",
+        "equity": 77620.02,
+        "cash": 77620.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-11 00:00:00",
+        "equity": 77600.02,
+        "cash": 77600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-12 00:00:00",
+        "equity": 81510.01,
+        "cash": 81510.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-13 00:00:00",
+        "equity": 84520.02,
+        "cash": 84520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-16 00:00:00",
+        "equity": 84430.0,
+        "cash": 84430.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-17 00:00:00",
+        "equity": 82820.02,
+        "cash": 82820.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-18 00:00:00",
+        "equity": 83460.01,
+        "cash": 83460.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-19 00:00:00",
+        "equity": 85190.01,
+        "cash": 85190.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-20 00:00:00",
+        "equity": 88380.0,
+        "cash": 88380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-23 00:00:00",
+        "equity": 89040.01,
+        "cash": 89040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-24 00:00:00",
+        "equity": 91510.01,
+        "cash": 91510.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-25 00:00:00",
+        "equity": 92310.01,
+        "cash": 92310.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-26 00:00:00",
+        "equity": 93380.0,
+        "cash": 93380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-27 00:00:00",
+        "equity": 90820.02,
+        "cash": 90820.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-09-30 00:00:00",
+        "equity": 90000.02,
+        "cash": 90000.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-01 00:00:00",
+        "equity": 93120.02,
+        "cash": 93120.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-02 00:00:00",
+        "equity": 91100.02,
+        "cash": 91100.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-03 00:00:00",
+        "equity": 92100.02,
+        "cash": 92100.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-04 00:00:00",
+        "equity": 90970.02,
+        "cash": 90970.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-07 00:00:00",
+        "equity": 90870.02,
+        "cash": 90870.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-08 00:00:00",
+        "equity": 87890.01,
+        "cash": 87890.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-09 00:00:00",
+        "equity": 86990.01,
+        "cash": 86990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-10 00:00:00",
+        "equity": 88450.02,
+        "cash": 88450.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-11 00:00:00",
+        "equity": 92150.02,
+        "cash": 92150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-14 00:00:00",
+        "equity": 91170.02,
+        "cash": 91170.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-15 00:00:00",
+        "equity": 92530.0,
+        "cash": 92530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-16 00:00:00",
+        "equity": 93790.01,
+        "cash": 93790.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-17 00:00:00",
+        "equity": 95490.01,
+        "cash": 95490.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-18 00:00:00",
+        "equity": 97760.01,
+        "cash": 97760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-21 00:00:00",
+        "equity": 98700.02,
+        "cash": 98700.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-22 00:00:00",
+        "equity": 100810.01,
+        "cash": 100810.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-23 00:00:00",
+        "equity": 97830.0,
+        "cash": 97830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-24 00:00:00",
+        "equity": 99880.0,
+        "cash": 99880.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-25 00:00:00",
+        "equity": 100480.0,
+        "cash": 100480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-28 00:00:00",
+        "equity": 100680.0,
+        "cash": 100680.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-29 00:00:00",
+        "equity": 103230.0,
+        "cash": 103230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-30 00:00:00",
+        "equity": 105240.01,
+        "cash": 105240.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-10-31 00:00:00",
+        "equity": 100220.02,
+        "cash": 100220.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-01 00:00:00",
+        "equity": 100250.02,
+        "cash": 100250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-04 00:00:00",
+        "equity": 100000.02,
+        "cash": 100000.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-05 00:00:00",
+        "equity": 100420.02,
+        "cash": 100420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-06 00:00:00",
+        "equity": 93150.02,
+        "cash": 93150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-07 00:00:00",
+        "equity": 96230.0,
+        "cash": 96230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-08 00:00:00",
+        "equity": 95140.01,
+        "cash": 95140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-11 00:00:00",
+        "equity": 87510.01,
+        "cash": 87510.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-12 00:00:00",
+        "equity": 86390.01,
+        "cash": 86390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-13 00:00:00",
+        "equity": 84470.02,
+        "cash": 84470.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-14 00:00:00",
+        "equity": 83210.01,
+        "cash": 83210.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-15 00:00:00",
+        "equity": 82960.01,
+        "cash": 82960.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-18 00:00:00",
+        "equity": 87450.02,
+        "cash": 87450.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-19 00:00:00",
+        "equity": 89100.02,
+        "cash": 89100.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-20 00:00:00",
+        "equity": 91210.01,
+        "cash": 91210.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-21 00:00:00",
+        "equity": 93600.02,
+        "cash": 93600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-22 00:00:00",
+        "equity": 97380.0,
+        "cash": 97380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-25 00:00:00",
+        "equity": 88070.02,
+        "cash": 88070.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-26 00:00:00",
+        "equity": 88420.02,
+        "cash": 88420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-27 00:00:00",
+        "equity": 90380.0,
+        "cash": 90380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-11-29 00:00:00",
+        "equity": 92090.01,
+        "cash": 92090.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-02 00:00:00",
+        "equity": 89880.0,
+        "cash": 89880.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-03 00:00:00",
+        "equity": 90860.01,
+        "cash": 90860.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-04 00:00:00",
+        "equity": 91770.02,
+        "cash": 91770.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-05 00:00:00",
+        "equity": 89050.02,
+        "cash": 89050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-06 00:00:00",
+        "equity": 90250.02,
+        "cash": 90250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-09 00:00:00",
+        "equity": 92880.0,
+        "cash": 92880.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-10 00:00:00",
+        "equity": 96150.02,
+        "cash": 96150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-11 00:00:00",
+        "equity": 99770.02,
+        "cash": 99770.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-12 00:00:00",
+        "equity": 95140.01,
+        "cash": 95140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-13 00:00:00",
+        "equity": 91990.01,
+        "cash": 91990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-16 00:00:00",
+        "equity": 91530.0,
+        "cash": 91530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-17 00:00:00",
+        "equity": 90830.0,
+        "cash": 90830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-18 00:00:00",
+        "equity": 90040.01,
+        "cash": 90040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-19 00:00:00",
+        "equity": 85610.01,
+        "cash": 85610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-20 00:00:00",
+        "equity": 89260.01,
+        "cash": 89260.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-23 00:00:00",
+        "equity": 87620.02,
+        "cash": 89260.01,
+        "position_value": -1639.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-24 00:00:00",
+        "equity": 88390.01,
+        "cash": 89260.01,
+        "position_value": -870.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-26 00:00:00",
+        "equity": 90270.02,
+        "cash": 89260.01,
+        "position_value": 1010.01,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-27 00:00:00",
+        "equity": 88110.01,
+        "cash": 89260.01,
+        "position_value": -1150.0,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-30 00:00:00",
+        "equity": 87000.02,
+        "cash": 89260.01,
+        "position_value": -2259.99,
+        "total_units": 1
+      },
+      {
+        "date": "2024-12-31 00:00:00",
+        "equity": 89310.01,
+        "cash": 89260.01,
+        "position_value": 50.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-02 00:00:00",
+        "equity": 92280.0,
+        "cash": 89260.01,
+        "position_value": 3020.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-03 00:00:00",
+        "equity": 90890.01,
+        "cash": 89260.01,
+        "position_value": 1630.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-06 00:00:00",
+        "equity": 90230.0,
+        "cash": 89260.01,
+        "position_value": 970.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-07 00:00:00",
+        "equity": 92060.01,
+        "cash": 89260.01,
+        "position_value": 2800.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-08 00:00:00",
+        "equity": 92840.01,
+        "cash": 89260.01,
+        "position_value": 3580.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-09 00:00:00",
+        "equity": 94770.02,
+        "cash": 89260.01,
+        "position_value": 5510.01,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-10 00:00:00",
+        "equity": 97240.01,
+        "cash": 97240.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-13 00:00:00",
+        "equity": 93740.01,
+        "cash": 93740.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-14 00:00:00",
+        "equity": 94140.01,
+        "cash": 94140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-15 00:00:00",
+        "equity": 97640.01,
+        "cash": 97640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-16 00:00:00",
+        "equity": 101030.0,
+        "cash": 101030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-17 00:00:00",
+        "equity": 100820.02,
+        "cash": 100820.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-21 00:00:00",
+        "equity": 101890.01,
+        "cash": 101890.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-22 00:00:00",
+        "equity": 103150.02,
+        "cash": 103150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-23 00:00:00",
+        "equity": 102700.02,
+        "cash": 102700.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-24 00:00:00",
+        "equity": 104120.02,
+        "cash": 104120.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-27 00:00:00",
+        "equity": 100140.01,
+        "cash": 100140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-28 00:00:00",
+        "equity": 103070.02,
+        "cash": 103070.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-29 00:00:00",
+        "equity": 103300.02,
+        "cash": 103300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-30 00:00:00",
+        "equity": 108690.01,
+        "cash": 108690.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-01-31 00:00:00",
+        "equity": 107640.01,
+        "cash": 107640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-03 00:00:00",
+        "equity": 109780.0,
+        "cash": 109780.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-04 00:00:00",
+        "equity": 111720.02,
+        "cash": 111720.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-05 00:00:00",
+        "equity": 113550.02,
+        "cash": 113550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-06 00:00:00",
+        "equity": 111990.01,
+        "cash": 111990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-07 00:00:00",
+        "equity": 113120.02,
+        "cash": 113120.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-10 00:00:00",
+        "equity": 117820.02,
+        "cash": 117820.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-11 00:00:00",
+        "equity": 117640.01,
+        "cash": 117640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-12 00:00:00",
+        "equity": 117290.01,
+        "cash": 117290.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-13 00:00:00",
+        "equity": 118980.0,
+        "cash": 118980.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-14 00:00:00",
+        "equity": 114750.02,
+        "cash": 114750.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-18 00:00:00",
+        "equity": 119550.02,
+        "cash": 119550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-19 00:00:00",
+        "equity": 118330.0,
+        "cash": 118330.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-20 00:00:00",
+        "equity": 120390.01,
+        "cash": 120390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-21 00:00:00",
+        "equity": 120150.02,
+        "cash": 120150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-24 00:00:00",
+        "equity": 121180.0,
+        "cash": 121180.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-25 00:00:00",
+        "equity": 116840.01,
+        "cash": 116840.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-26 00:00:00",
+        "equity": 118070.02,
+        "cash": 118070.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-27 00:00:00",
+        "equity": 114710.01,
+        "cash": 114710.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-02-28 00:00:00",
+        "equity": 110070.02,
+        "cash": 110070.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-03 00:00:00",
+        "equity": 115410.01,
+        "cash": 115410.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-04 00:00:00",
+        "equity": 117350.02,
+        "cash": 117350.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-05 00:00:00",
+        "equity": 117920.02,
+        "cash": 117920.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-06 00:00:00",
+        "equity": 118050.02,
+        "cash": 118050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-07 00:00:00",
+        "equity": 116860.01,
+        "cash": 116860.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-10 00:00:00",
+        "equity": 115490.01,
+        "cash": 115490.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-11 00:00:00",
+        "equity": 117680.0,
+        "cash": 117680.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-12 00:00:00",
+        "equity": 120300.02,
+        "cash": 120300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-13 00:00:00",
+        "equity": 124820.02,
+        "cash": 124820.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-14 00:00:00",
+        "equity": 125840.01,
+        "cash": 125840.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-17 00:00:00",
+        "equity": 126390.01,
+        "cash": 126390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-18 00:00:00",
+        "equity": 129900.02,
+        "cash": 129900.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-19 00:00:00",
+        "equity": 129980.0,
+        "cash": 129980.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-20 00:00:00",
+        "equity": 130390.01,
+        "cash": 130390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-21 00:00:00",
+        "equity": 128210.01,
+        "cash": 128210.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-24 00:00:00",
+        "equity": 127700.02,
+        "cash": 127700.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-25 00:00:00",
+        "equity": 128760.01,
+        "cash": 128760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-26 00:00:00",
+        "equity": 128480.0,
+        "cash": 128480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-27 00:00:00",
+        "equity": 132410.01,
+        "cash": 132410.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-28 00:00:00",
+        "equity": 135040.01,
+        "cash": 135040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-03-31 00:00:00",
+        "equity": 138670.02,
+        "cash": 138670.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-01 00:00:00",
+        "equity": 138280.0,
+        "cash": 138280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-02 00:00:00",
+        "equity": 140380.0,
+        "cash": 140380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-03 00:00:00",
+        "equity": 136090.01,
+        "cash": 136090.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-04 00:00:00",
+        "equity": 127590.01,
+        "cash": 127590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-07 00:00:00",
+        "equity": 121520.02,
+        "cash": 121520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-08 00:00:00",
+        "equity": 123230.0,
+        "cash": 123230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-09 00:00:00",
+        "equity": 132040.01,
+        "cash": 132040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-10 00:00:00",
+        "equity": 141910.01,
+        "cash": 141910.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-11 00:00:00",
+        "equity": 148610.01,
+        "cash": 148610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-14 00:00:00",
+        "equity": 146870.02,
+        "cash": 146870.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-15 00:00:00",
+        "equity": 148260.01,
+        "cash": 148260.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-16 00:00:00",
+        "equity": 159050.02,
+        "cash": 159050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-17 00:00:00",
+        "equity": 157260.01,
+        "cash": 157260.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-21 00:00:00",
+        "equity": 167010.01,
+        "cash": 167010.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-22 00:00:00",
+        "equity": 166470.02,
+        "cash": 166470.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-23 00:00:00",
+        "equity": 154020.02,
+        "cash": 154020.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-24 00:00:00",
+        "equity": 159590.01,
+        "cash": 159590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-25 00:00:00",
+        "equity": 154630.0,
+        "cash": 154630.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-28 00:00:00",
+        "equity": 159640.01,
+        "cash": 159640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-29 00:00:00",
+        "equity": 158270.02,
+        "cash": 158270.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-04-30 00:00:00",
+        "equity": 156890.01,
+        "cash": 156890.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-01 00:00:00",
+        "equity": 147390.01,
+        "cash": 147390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-02 00:00:00",
+        "equity": 149580.0,
+        "cash": 149580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-05 00:00:00",
+        "equity": 157520.02,
+        "cash": 157520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-06 00:00:00",
+        "equity": 167530.0,
+        "cash": 167530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-07 00:00:00",
+        "equity": 164530.0,
+        "cash": 164530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-08 00:00:00",
+        "equity": 156050.02,
+        "cash": 156050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-09 00:00:00",
+        "equity": 159930.0,
+        "cash": 159930.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-12 00:00:00",
+        "equity": 148390.01,
+        "cash": 148390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-13 00:00:00",
+        "equity": 150420.02,
+        "cash": 150420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-14 00:00:00",
+        "equity": 144530.0,
+        "cash": 144530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-15 00:00:00",
+        "equity": 148460.01,
+        "cash": 148460.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-16 00:00:00",
+        "equity": 144590.01,
+        "cash": 144590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-19 00:00:00",
+        "equity": 149280.0,
+        "cash": 149280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-20 00:00:00",
+        "equity": 154420.02,
+        "cash": 154420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-21 00:00:00",
+        "equity": 157320.02,
+        "cash": 157320.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-22 00:00:00",
+        "equity": 155620.02,
+        "cash": 155620.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-23 00:00:00",
+        "equity": 162750.02,
+        "cash": 162750.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-27 00:00:00",
+        "equity": 156300.02,
+        "cash": 156300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-28 00:00:00",
+        "equity": 155750.02,
+        "cash": 155750.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-29 00:00:00",
+        "equity": 158100.02,
+        "cash": 158100.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-05-30 00:00:00",
+        "equity": 155280.0,
+        "cash": 155280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-02 00:00:00",
+        "equity": 163450.02,
+        "cash": 163450.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-03 00:00:00",
+        "equity": 161410.01,
+        "cash": 161410.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-04 00:00:00",
+        "equity": 163740.01,
+        "cash": 163740.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-05 00:00:00",
+        "equity": 161460.01,
+        "cash": 161460.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-06 00:00:00",
+        "equity": 158660.01,
+        "cash": 158660.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-09 00:00:00",
+        "equity": 159600.02,
+        "cash": 159600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-10 00:00:00",
+        "equity": 158480.0,
+        "cash": 158480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-11 00:00:00",
+        "equity": 158520.02,
+        "cash": 158520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-12 00:00:00",
+        "equity": 164480.0,
+        "cash": 164480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-13 00:00:00",
+        "equity": 169510.01,
+        "cash": 169510.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-16 00:00:00",
+        "equity": 166030.0,
+        "cash": 166030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-17 00:00:00",
+        "equity": 165050.02,
+        "cash": 165050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-18 00:00:00",
+        "equity": 165370.02,
+        "cash": 165370.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-20 00:00:00",
+        "equity": 163200.02,
+        "cash": 163200.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-23 00:00:00",
+        "equity": 164160.01,
+        "cash": 164160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-24 00:00:00",
+        "equity": 158130.0,
+        "cash": 158130.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-25 00:00:00",
+        "equity": 159100.02,
+        "cash": 159100.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-26 00:00:00",
+        "equity": 159740.01,
+        "cash": 159740.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-27 00:00:00",
+        "equity": 153760.01,
+        "cash": 153760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-06-30 00:00:00",
+        "equity": 155830.0,
+        "cash": 155830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-01 00:00:00",
+        "equity": 160060.01,
+        "cash": 160060.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-02 00:00:00",
+        "equity": 161190.01,
+        "cash": 161190.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-03 00:00:00",
+        "equity": 159550.02,
+        "cash": 159550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-04 00:00:00",
+        "equity": 159640.01,
+        "cash": 159640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-07 00:00:00",
+        "equity": 159610.01,
+        "cash": 159610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-08 00:00:00",
+        "equity": 157090.01,
+        "cash": 157090.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-09 00:00:00",
+        "equity": 157550.02,
+        "cash": 157550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-10 00:00:00",
+        "equity": 158130.0,
+        "cash": 158130.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-11 00:00:00",
+        "equity": 161990.01,
+        "cash": 161990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-14 00:00:00",
+        "equity": 161540.01,
+        "cash": 161540.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-15 00:00:00",
+        "equity": 159370.02,
+        "cash": 159370.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-16 00:00:00",
+        "equity": 161640.01,
+        "cash": 161640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-17 00:00:00",
+        "equity": 160400.02,
+        "cash": 160400.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-18 00:00:00",
+        "equity": 161690.01,
+        "cash": 161690.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-21 00:00:00",
+        "equity": 166580.0,
+        "cash": 166580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-22 00:00:00",
+        "equity": 170310.01,
+        "cash": 170310.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-23 00:00:00",
+        "equity": 165800.02,
+        "cash": 165800.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-24 00:00:00",
+        "equity": 163490.01,
+        "cash": 163490.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-25 00:00:00",
+        "equity": 159790.01,
+        "cash": 159790.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-28 00:00:00",
+        "equity": 157300.02,
+        "cash": 157300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-29 00:00:00",
+        "equity": 158730.0,
+        "cash": 158730.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-30 00:00:00",
+        "equity": 155970.02,
+        "cash": 155970.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-07-31 00:00:00",
+        "equity": 155710.01,
+        "cash": 155710.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-01 00:00:00",
+        "equity": 161160.01,
+        "cash": 161160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-04 00:00:00",
+        "equity": 163830.0,
+        "cash": 163830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-05 00:00:00",
+        "equity": 164580.0,
+        "cash": 164580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-06 00:00:00",
+        "equity": 164390.01,
+        "cash": 164390.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-07 00:00:00",
+        "equity": 166420.02,
+        "cash": 166420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-08 00:00:00",
+        "equity": 170300.02,
+        "cash": 170300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-11 00:00:00",
+        "equity": 161700.02,
+        "cash": 161700.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-12 00:00:00",
+        "equity": 161280.0,
+        "cash": 161280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-13 00:00:00",
+        "equity": 162260.01,
+        "cash": 162260.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-14 00:00:00",
+        "equity": 159910.01,
+        "cash": 159910.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-15 00:00:00",
+        "equity": 159990.01,
+        "cash": 159990.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-18 00:00:00",
+        "equity": 159560.01,
+        "cash": 159560.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-19 00:00:00",
+        "equity": 157730.0,
+        "cash": 157730.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-20 00:00:00",
+        "equity": 160730.0,
+        "cash": 160730.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-21 00:00:00",
+        "equity": 160080.0,
+        "cash": 160080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-22 00:00:00",
+        "equity": 163830.0,
+        "cash": 163830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-25 00:00:00",
+        "equity": 163770.02,
+        "cash": 163770.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-26 00:00:00",
+        "equity": 165250.02,
+        "cash": 165250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-27 00:00:00",
+        "equity": 166850.02,
+        "cash": 166850.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-28 00:00:00",
+        "equity": 169570.02,
+        "cash": 169570.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-08-29 00:00:00",
+        "equity": 173760.01,
+        "cash": 173760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-02 00:00:00",
+        "equity": 181330.0,
+        "cash": 181330.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-03 00:00:00",
+        "equity": 185710.01,
+        "cash": 185710.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-04 00:00:00",
+        "equity": 182970.02,
+        "cash": 182970.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-05 00:00:00",
+        "equity": 187710.01,
+        "cash": 187710.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-08 00:00:00",
+        "equity": 190200.02,
+        "cash": 190200.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-09 00:00:00",
+        "equity": 190720.02,
+        "cash": 190720.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-10 00:00:00",
+        "equity": 190750.02,
+        "cash": 190750.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-11 00:00:00",
+        "equity": 190080.0,
+        "cash": 190080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-12 00:00:00",
+        "equity": 191330.0,
+        "cash": 191330.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-15 00:00:00",
+        "equity": 194610.01,
+        "cash": 194610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-16 00:00:00",
+        "equity": 195280.0,
+        "cash": 195280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-17 00:00:00",
+        "equity": 194570.02,
+        "cash": 194570.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-18 00:00:00",
+        "equity": 190760.01,
+        "cash": 190760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-19 00:00:00",
+        "equity": 193540.01,
+        "cash": 193540.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-22 00:00:00",
+        "equity": 200460.01,
+        "cash": 200460.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-23 00:00:00",
+        "equity": 204450.02,
+        "cash": 204450.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-24 00:00:00",
+        "equity": 199600.02,
+        "cash": 199600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-25 00:00:00",
+        "equity": 200080.0,
+        "cash": 200080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-26 00:00:00",
+        "equity": 203920.02,
+        "cash": 203920.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-29 00:00:00",
+        "equity": 208480.0,
+        "cash": 208480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-09-30 00:00:00",
+        "equity": 210470.02,
+        "cash": 210470.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-01 00:00:00",
+        "equity": 213140.01,
+        "cash": 213140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-02 00:00:00",
+        "equity": 210360.01,
+        "cash": 210360.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-03 00:00:00",
+        "equity": 214470.02,
+        "cash": 214470.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-06 00:00:00",
+        "equity": 221240.01,
+        "cash": 221240.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-07 00:00:00",
+        "equity": 224050.02,
+        "cash": 224050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-08 00:00:00",
+        "equity": 230720.02,
+        "cash": 230720.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-09 00:00:00",
+        "equity": 221020.02,
+        "cash": 221020.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-10 00:00:00",
+        "equity": 223980.0,
+        "cash": 223980.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-13 00:00:00",
+        "equity": 237250.02,
+        "cash": 237250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-14 00:00:00",
+        "equity": 240260.03,
+        "cash": 240260.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-15 00:00:00",
+        "equity": 244080.0,
+        "cash": 244080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-16 00:00:00",
+        "equity": 254410.03,
+        "cash": 254410.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-17 00:00:00",
+        "equity": 245380.0,
+        "cash": 245380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-20 00:00:00",
+        "equity": 260030.0,
+        "cash": 260030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-21 00:00:00",
+        "equity": 235160.01,
+        "cash": 235160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-22 00:00:00",
+        "equity": 230830.0,
+        "cash": 230830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-23 00:00:00",
+        "equity": 238940.01,
+        "cash": 238940.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-24 00:00:00",
+        "equity": 238230.0,
+        "cash": 238230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-27 00:00:00",
+        "equity": 226580.0,
+        "cash": 226580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-28 00:00:00",
+        "equity": 223010.01,
+        "cash": 223010.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-29 00:00:00",
+        "equity": 224760.01,
+        "cash": 224760.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-30 00:00:00",
+        "equity": 226520.02,
+        "cash": 226520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-10-31 00:00:00",
+        "equity": 224610.01,
+        "cash": 224610.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-03 00:00:00",
+        "equity": 226420.02,
+        "cash": 226420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-04 00:00:00",
+        "equity": 221160.01,
+        "cash": 221160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-05 00:00:00",
+        "equity": 224420.02,
+        "cash": 224420.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-06 00:00:00",
+        "equity": 224380.0,
+        "cash": 224380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-07 00:00:00",
+        "equity": 226330.0,
+        "cash": 226330.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-10 00:00:00",
+        "equity": 237570.0,
+        "cash": 237570.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-11 00:00:00",
+        "equity": 237070.0,
+        "cash": 237070.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-12 00:00:00",
+        "equity": 246830.0,
+        "cash": 246830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-13 00:00:00",
+        "equity": 245080.0,
+        "cash": 245080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-14 00:00:00",
+        "equity": 235150.02,
+        "cash": 235150.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-17 00:00:00",
+        "equity": 233220.02,
+        "cash": 233220.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-18 00:00:00",
+        "equity": 232520.02,
+        "cash": 232520.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-19 00:00:00",
+        "equity": 234160.01,
+        "cash": 234160.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-20 00:00:00",
+        "equity": 232040.01,
+        "cash": 232040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-21 00:00:00",
+        "equity": 234060.01,
+        "cash": 234060.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-24 00:00:00",
+        "equity": 235580.0,
+        "cash": 235580.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-25 00:00:00",
+        "equity": 240310.03,
+        "cash": 240310.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-26 00:00:00",
+        "equity": 242910.03,
+        "cash": 242910.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-11-28 00:00:00",
+        "equity": 248220.0,
+        "cash": 248220.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-01 00:00:00",
+        "equity": 250320.0,
+        "cash": 250320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-02 00:00:00",
+        "equity": 245050.02,
+        "cash": 245050.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-03 00:00:00",
+        "equity": 246320.0,
+        "cash": 246320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-04 00:00:00",
+        "equity": 247570.0,
+        "cash": 247570.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-05 00:00:00",
+        "equity": 247680.0,
+        "cash": 247680.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-08 00:00:00",
+        "equity": 245110.03,
+        "cash": 245110.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-09 00:00:00",
+        "equity": 247060.03,
+        "cash": 247060.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-10 00:00:00",
+        "equity": 246030.0,
+        "cash": 246030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-11 00:00:00",
+        "equity": 254940.01,
+        "cash": 254940.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-12 00:00:00",
+        "equity": 256400.02,
+        "cash": 256400.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-15 00:00:00",
+        "equity": 257060.03,
+        "cash": 257060.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-16 00:00:00",
+        "equity": 256840.01,
+        "cash": 256840.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-17 00:00:00",
+        "equity": 261140.01,
+        "cash": 261140.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-18 00:00:00",
+        "equity": 260340.01,
+        "cash": 260340.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-19 00:00:00",
+        "equity": 262530.0,
+        "cash": 262530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-22 00:00:00",
+        "equity": 270850.02,
+        "cash": 270850.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-23 00:00:00",
+        "equity": 274670.0,
+        "cash": 274670.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-24 00:00:00",
+        "equity": 274450.02,
+        "cash": 274450.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-26 00:00:00",
+        "equity": 279300.02,
+        "cash": 279300.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-29 00:00:00",
+        "equity": 258900.02,
+        "cash": 258900.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-30 00:00:00",
+        "equity": 263400.02,
+        "cash": 263400.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2025-12-31 00:00:00",
+        "equity": 258950.02,
+        "cash": 258950.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-02 00:00:00",
+        "equity": 257830.0,
+        "cash": 257830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-05 00:00:00",
+        "equity": 270080.0,
+        "cash": 270080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-06 00:00:00",
+        "equity": 274610.03,
+        "cash": 274610.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-07 00:00:00",
+        "equity": 271320.0,
+        "cash": 271320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-08 00:00:00",
+        "equity": 271360.03,
+        "cash": 271360.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-09 00:00:00",
+        "equity": 275420.0,
+        "cash": 275420.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-12 00:00:00",
+        "equity": 286820.0,
+        "cash": 286820.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-13 00:00:00",
+        "equity": 285310.03,
+        "cash": 285310.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-14 00:00:00",
+        "equity": 289020.0,
+        "cash": 289020.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-15 00:00:00",
+        "equity": 288020.0,
+        "cash": 288020.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-16 00:00:00",
+        "equity": 285230.0,
+        "cash": 285230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-20 00:00:00",
+        "equity": 302350.02,
+        "cash": 302350.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-21 00:00:00",
+        "equity": 309570.0,
+        "cash": 309570.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-22 00:00:00",
+        "equity": 317270.0,
+        "cash": 317270.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-23 00:00:00",
+        "equity": 324010.03,
+        "cash": 324010.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-26 00:00:00",
+        "equity": 334360.03,
+        "cash": 334360.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-27 00:00:00",
+        "equity": 334380.0,
+        "cash": 334380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-28 00:00:00",
+        "equity": 356550.02,
+        "cash": 356550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-29 00:00:00",
+        "equity": 358230.0,
+        "cash": 358230.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-01-30 00:00:00",
+        "equity": 297780.0,
+        "cash": 297780.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-02 00:00:00",
+        "equity": 288640.01,
+        "cash": 288640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-03 00:00:00",
+        "equity": 316760.03,
+        "cash": 316760.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-04 00:00:00",
+        "equity": 318430.0,
+        "cash": 318430.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-05 00:00:00",
+        "equity": 312530.0,
+        "cash": 312530.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-06 00:00:00",
+        "equity": 321510.03,
+        "cash": 321510.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-09 00:00:00",
+        "equity": 331480.0,
+        "cash": 331480.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-10 00:00:00",
+        "equity": 326770.0,
+        "cash": 326770.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-11 00:00:00",
+        "equity": 333550.02,
+        "cash": 333550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-12 00:00:00",
+        "equity": 318760.03,
+        "cash": 318760.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-13 00:00:00",
+        "equity": 328590.01,
+        "cash": 328590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-17 00:00:00",
+        "equity": 314680.0,
+        "cash": 314680.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-18 00:00:00",
+        "equity": 325040.01,
+        "cash": 325040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-19 00:00:00",
+        "equity": 323980.0,
+        "cash": 323980.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-20 00:00:00",
+        "equity": 332320.0,
+        "cash": 332320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-23 00:00:00",
+        "equity": 346860.03,
+        "cash": 346860.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-24 00:00:00",
+        "equity": 341970.0,
+        "cash": 341970.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-25 00:00:00",
+        "equity": 347030.0,
+        "cash": 347030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-26 00:00:00",
+        "equity": 344040.01,
+        "cash": 344040.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-02-27 00:00:00",
+        "equity": 349440.01,
+        "cash": 349440.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-02 00:00:00",
+        "equity": 355830.0,
+        "cash": 355830.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-03 00:00:00",
+        "equity": 337130.0,
+        "cash": 337130.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-04 00:00:00",
+        "equity": 338410.03,
+        "cash": 338410.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-05 00:00:00",
+        "equity": 332920.0,
+        "cash": 332920.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-06 00:00:00",
+        "equity": 341000.02,
+        "cash": 341000.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-09 00:00:00",
+        "equity": 335540.01,
+        "cash": 335540.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-10 00:00:00",
+        "equity": 349360.03,
+        "cash": 349360.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-11 00:00:00",
+        "equity": 343130.0,
+        "cash": 343130.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-12 00:00:00",
+        "equity": 337970.0,
+        "cash": 337970.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-13 00:00:00",
+        "equity": 331640.01,
+        "cash": 331640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-16 00:00:00",
+        "equity": 325790.01,
+        "cash": 325790.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-17 00:00:00",
+        "equity": 326490.01,
+        "cash": 326490.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-18 00:00:00",
+        "equity": 315380.0,
+        "cash": 315380.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-19 00:00:00",
+        "equity": 286460.03,
+        "cash": 286460.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-20 00:00:00",
+        "equity": 283430.0,
+        "cash": 283430.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-23 00:00:00",
+        "equity": 266800.02,
+        "cash": 266800.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-24 00:00:00",
+        "equity": 266320.0,
+        "cash": 266320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-25 00:00:00",
+        "equity": 281370.0,
+        "cash": 281370.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-26 00:00:00",
+        "equity": 263940.01,
+        "cash": 281370.0,
+        "position_value": -17429.98,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-27 00:00:00",
+        "equity": 275590.01,
+        "cash": 275590.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-30 00:00:00",
+        "equity": 272190.01,
+        "cash": 272190.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-03-31 00:00:00",
+        "equity": 260030.0,
+        "cash": 260030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-01 00:00:00",
+        "equity": 246470.0,
+        "cash": 246470.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-02 00:00:00",
+        "equity": 259640.01,
+        "cash": 259640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-06 00:00:00",
+        "equity": 259110.03,
+        "cash": 259110.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-07 00:00:00",
+        "equity": 259080.0,
+        "cash": 259080.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-08 00:00:00",
+        "equity": 249840.01,
+        "cash": 249840.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-09 00:00:00",
+        "equity": 245570.0,
+        "cash": 245570.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-10 00:00:00",
+        "equity": 248600.02,
+        "cash": 248600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-13 00:00:00",
+        "equity": 250550.02,
+        "cash": 250550.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-14 00:00:00",
+        "equity": 242290.01,
+        "cash": 242290.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-15 00:00:00",
+        "equity": 244790.01,
+        "cash": 244790.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-16 00:00:00",
+        "equity": 246250.02,
+        "cash": 246250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-17 00:00:00",
+        "equity": 239030.0,
+        "cash": 239030.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-20 00:00:00",
+        "equity": 244130.0,
+        "cash": 244130.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-21 00:00:00",
+        "equity": 254950.02,
+        "cash": 254950.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-22 00:00:00",
+        "equity": 251540.01,
+        "cash": 251540.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-23 00:00:00",
+        "equity": 254280.0,
+        "cash": 254280.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-24 00:00:00",
+        "equity": 252560.03,
+        "cash": 252560.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-27 00:00:00",
+        "equity": 257250.02,
+        "cash": 257250.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-28 00:00:00",
+        "equity": 265640.01,
+        "cash": 265640.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-29 00:00:00",
+        "equity": 270270.0,
+        "cash": 270270.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-04-30 00:00:00",
+        "equity": 263320.0,
+        "cash": 263320.0,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-01 00:00:00",
+        "equity": 261800.02,
+        "cash": 261800.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-04 00:00:00",
+        "equity": 272840.01,
+        "cash": 272840.01,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-05 00:00:00",
+        "equity": 269210.03,
+        "cash": 269210.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-06 00:00:00",
+        "equity": 256600.02,
+        "cash": 256600.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-07 00:00:00",
+        "equity": 254810.03,
+        "cash": 254810.03,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-08 00:00:00",
+        "equity": 252750.02,
+        "cash": 252750.02,
+        "position_value": 0.0,
+        "total_units": 1
+      },
+      {
+        "date": "2026-05-10 00:00:00",
+        "equity": 253560.03,
+        "cash": 253560.03,
+        "position_value": 0.0,
+        "total_units": 1
+      }
+    ]
+  },
+  "yearly": {
+    "2024": {
+      "date_range": "2024-05-10 ~ 2024-12-31",
+      "data_points": 162,
+      "price_start": 2367.3,
+      "price_end": 2629.2,
+      "price_change_pct": 11.06,
+      "metrics": {
+        "total_return": 0.0,
+        "total_pnl": 0,
+        "win_rate": 0,
+        "profit_factor": 0,
+        "total_trades": 0,
+        "avg_win": 0,
+        "avg_loss": 0
+      },
+      "trades": []
+    },
+    "2025": {
+      "date_range": "2025-01-02 ~ 2025-12-31",
+      "data_points": 252,
+      "price_start": 2658.9,
+      "price_end": 4325.6,
+      "price_change_pct": 62.68,
+      "metrics": {
+        "total_return": 0.0,
+        "total_pnl": 0,
+        "win_rate": 0,
+        "profit_factor": 0,
+        "total_trades": 0,
+        "avg_win": 0,
+        "avg_loss": 0
+      },
+      "trades": []
+    },
+    "2026": {
+      "date_range": "2026-01-02 ~ 2026-05-10",
+      "data_points": 89,
+      "price_start": 4314.4,
+      "price_end": 4712.3,
+      "price_change_pct": 9.22,
+      "metrics": {
+        "total_return": 0.0,
+        "total_pnl": 0,
+        "win_rate": 0,
+        "profit_factor": 0,
+        "total_trades": 0,
+        "avg_win": 0,
+        "avg_loss": 0
+      },
+      "trades": []
+    }
+  },
+  "events_impact": [
+    {
+      "date": "2024-06-12",
+      "label": "美联储维持利率不变",
+      "category": "fed",
+      "impact_desc": "中性偏鹰，金价短线承压",
+      "price_before": 2346.6,
+      "price_after_start": 2336.0,
+      "price_after_end": 2316.4,
+      "move_1d_pct": -0.45,
+      "move_5d_pct": -1.29,
+      "max_move_pct": 0.32
+    },
+    {
+      "date": "2024-07-15",
+      "label": "特朗普遇刺未遂事件",
+      "category": "geopolitical",
+      "impact_desc": "避险情绪飙升，金价急涨",
+      "price_before": 2388.5,
+      "price_after_start": 2422.9,
+      "price_after_end": 2351.9,
+      "move_1d_pct": 1.44,
+      "move_5d_pct": -1.53,
+      "max_move_pct": 3.54
+    },
+    {
+      "date": "2024-09-18",
+      "label": "美联储降息50bp",
+      "category": "fed",
+      "impact_desc": "大幅降息，金价创历史新高",
+      "price_before": 2501.8,
+      "price_after_start": 2570.7,
+      "price_after_end": 2644.3,
+      "move_1d_pct": 2.75,
+      "move_5d_pct": 5.7,
+      "max_move_pct": 6.81
+    },
+    {
+      "date": "2024-11-05",
+      "label": "美国大选（特朗普胜选）",
+      "category": "political",
+      "impact_desc": "美元走强但通胀预期升温，金价波动加剧",
+      "price_before": 2742.9,
+      "price_after_start": 2740.3,
+      "price_after_end": 2565.7,
+      "move_1d_pct": -0.09,
+      "move_5d_pct": -6.46,
+      "max_move_pct": 0.04
+    },
+    {
+      "date": "2024-12-18",
+      "label": "美联储降息25bp + 点阵图偏鹰",
+      "category": "fed",
+      "impact_desc": "降息但暗示2025年仅两次降息，金价回调",
+      "price_before": 2664.9,
+      "price_after_start": 2636.5,
+      "price_after_end": 2617.2,
+      "move_1d_pct": -1.07,
+      "move_5d_pct": -1.79,
+      "max_move_pct": -0.67
+    },
+    {
+      "date": "2025-01-20",
+      "label": "特朗普就职",
+      "category": "political",
+      "impact_desc": "关税政策预期升温，避险买盘",
+      "price_before": 2708.5,
+      "price_after_start": 2755.0,
+      "price_after_end": 2823.0,
+      "move_1d_pct": 1.72,
+      "move_5d_pct": 4.23,
+      "max_move_pct": 4.47
+    },
+    {
+      "date": "2025-02-01",
+      "label": "对加墨加征关税生效",
+      "category": "trade",
+      "impact_desc": "贸易战升级，金价震荡上行",
+      "price_before": 2767.6,
+      "price_after_start": 2833.9,
+      "price_after_end": 2912.5,
+      "move_1d_pct": 2.4,
+      "move_5d_pct": 5.24,
+      "max_move_pct": 6.42
+    },
+    {
+      "date": "2025-04-02",
+      "label": "全球关税大战（解放日关税）",
+      "category": "trade",
+      "impact_desc": "全球市场暴跌，金价暴涨避险",
+      "price_before": 3013.1,
+      "price_after_start": 3139.9,
+      "price_after_end": 3222.2,
+      "move_1d_pct": 4.21,
+      "move_5d_pct": 6.94,
+      "max_move_pct": 7.36
+    },
+    {
+      "date": "2025-04-09",
+      "label": "对等关税暂停90天",
+      "category": "trade",
+      "impact_desc": "市场反弹，金价短期回落",
+      "price_before": 3122.8,
+      "price_after_start": 3056.5,
+      "price_after_end": 3308.7,
+      "move_1d_pct": -2.12,
+      "move_5d_pct": 5.95,
+      "max_move_pct": 7.12
+    },
+    {
+      "date": "2025-06-18",
+      "label": "美联储维持利率不变",
+      "category": "fed",
+      "impact_desc": "通胀回落缓慢，降息预期推迟",
+      "price_before": 3332.1,
+      "price_after_start": 3389.8,
+      "price_after_end": 3273.7,
+      "move_1d_pct": 1.73,
+      "move_5d_pct": -1.75,
+      "max_move_pct": 1.79
+    },
+    {
+      "date": "2025-09-17",
+      "label": "美联储降息25bp",
+      "category": "fed",
+      "impact_desc": "年内首次降息，金价走强",
+      "price_before": 3638.1,
+      "price_after_start": 3681.8,
+      "price_after_end": 3775.3,
+      "move_1d_pct": 1.2,
+      "move_5d_pct": 3.77,
+      "max_move_pct": 4.07
+    },
+    {
+      "date": "2025-12-10",
+      "label": "美联储降息25bp",
+      "category": "fed",
+      "impact_desc": "持续宽松周期，金价再创新高",
+      "price_before": 4239.3,
+      "price_after_start": 4196.4,
+      "price_after_end": 4361.4,
+      "move_1d_pct": -1.01,
+      "move_5d_pct": 2.88,
+      "max_move_pct": 2.88
+    },
+    {
+      "date": "2025-03-15",
+      "label": "硅谷银行事件余波 / 区域性银行危机",
+      "category": "banking",
+      "impact_desc": "银行业动荡延续，避险支撑金价",
+      "price_before": 2915.3,
+      "price_after_start": 3000.0,
+      "price_after_end": 3023.7,
+      "move_1d_pct": 2.91,
+      "move_5d_pct": 3.72,
+      "max_move_pct": 4.65
+    },
+    {
+      "date": "2025-08-05",
+      "label": "日央行加息 / 日元套息交易平仓",
+      "category": "central_bank",
+      "impact_desc": "全球流动性冲击，金价先跌后涨",
+      "price_before": 3309.1,
+      "price_after_start": 3381.9,
+      "price_after_end": 3336.0,
+      "move_1d_pct": 2.2,
+      "move_5d_pct": 0.81,
+      "max_move_pct": 5.07
+    },
+    {
+      "date": "2026-01-15",
+      "label": "美伊紧张局势升级",
+      "category": "geopolitical",
+      "impact_desc": "中东地缘风险，金价跳涨",
+      "price_before": 4436.9,
+      "price_after_start": 4616.3,
+      "price_after_end": 4976.2,
+      "move_1d_pct": 4.04,
+      "move_5d_pct": 12.15,
+      "max_move_pct": 12.15
+    },
+    {
+      "date": "2026-03-20",
+      "label": "美联储政策转向讨论",
+      "category": "fed",
+      "impact_desc": "加息讨论引发市场震荡",
+      "price_before": 5229.7,
+      "price_after_start": 4570.4,
+      "price_after_end": 4526.0,
+      "move_1d_pct": -12.61,
+      "move_5d_pct": -13.46,
+      "max_move_pct": -10.38
+    }
+  ],
+  "robustness": {
+    "total_return_pct": 153.56,
+    "annual_return_pct": 59.38,
+    "sharpe_ratio": 1.21,
+    "max_drawdown_pct": -38.42,
+    "win_rate_pct": 56.41,
+    "profit_factor": 0.92,
+    "max_consecutive_losses": 6,
+    "total_trades": 468,
+    "half_year_performance": {
+      "2024-H1": {
+        "initial_capital": 100000,
+        "final_equity": 100000.0,
+        "total_return": 0.0,
+        "annual_return": 0.0,
+        "annual_volatility": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0,
+        "total_trades": 0,
+        "n_days": 34
+      },
+      "2024-H2": {
+        "initial_capital": 100000,
+        "final_equity": 84080.0,
+        "total_return": -0.1592,
+        "annual_return": -0.2892,
+        "annual_volatility": 0.31,
+        "sharpe_ratio": -1.03,
+        "max_drawdown": -0.2288,
+        "win_rate": 0.2857,
+        "profit_factor": 0.61,
+        "total_trades": 7,
+        "n_days": 128
+      },
+      "2025-H1": {
+        "initial_capital": 100000,
+        "final_equity": 100000.0,
+        "total_return": 0.0,
+        "annual_return": 0.0,
+        "annual_volatility": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0,
+        "total_trades": 0,
+        "n_days": 123
+      },
+      "2025-H2": {
+        "initial_capital": 100000,
+        "final_equity": 100000.0,
+        "total_return": 0.0,
+        "annual_return": 0.0,
+        "annual_volatility": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0,
+        "total_trades": 0,
+        "n_days": 129
+      },
+      "2026-H1": {
+        "initial_capital": 100000,
+        "final_equity": -20629.98,
+        "total_return": -1.2063,
+        "annual_return": NaN,
+        "annual_volatility": 12.4968,
+        "sharpe_ratio": NaN,
+        "max_drawdown": -1.2063,
+        "win_rate": 0.125,
+        "profit_factor": 0.19,
+        "total_trades": 8,
+        "n_days": 89
+      }
+    },
+    "high_volatility_avg_return": -1.0754,
+    "low_volatility_avg_return": 0.3764,
+    "data_interval": "1d (日线)",
+    "note": "日线级别回测，信号频率低于15m，但能捕捉中长期趋势"
+  },
+  "major_events": [
+    {
+      "date": "2024-06-12",
+      "label": "美联储维持利率不变",
+      "impact": "中性偏鹰，金价短线承压",
+      "category": "fed"
+    },
+    {
+      "date": "2024-07-15",
+      "label": "特朗普遇刺未遂事件",
+      "impact": "避险情绪飙升，金价急涨",
+      "category": "geopolitical"
+    },
+    {
+      "date": "2024-09-18",
+      "label": "美联储降息50bp",
+      "impact": "大幅降息，金价创历史新高",
+      "category": "fed"
+    },
+    {
+      "date": "2024-11-05",
+      "label": "美国大选（特朗普胜选）",
+      "impact": "美元走强但通胀预期升温，金价波动加剧",
+      "category": "political"
+    },
+    {
+      "date": "2024-12-18",
+      "label": "美联储降息25bp + 点阵图偏鹰",
+      "impact": "降息但暗示2025年仅两次降息，金价回调",
+      "category": "fed"
+    },
+    {
+      "date": "2025-01-20",
+      "label": "特朗普就职",
+      "impact": "关税政策预期升温，避险买盘",
+      "category": "political"
+    },
+    {
+      "date": "2025-02-01",
+      "label": "对加墨加征关税生效",
+      "impact": "贸易战升级，金价震荡上行",
+      "category": "trade"
+    },
+    {
+      "date": "2025-04-02",
+      "label": "全球关税大战（解放日关税）",
+      "impact": "全球市场暴跌，金价暴涨避险",
+      "category": "trade"
+    },
+    {
+      "date": "2025-04-09",
+      "label": "对等关税暂停90天",
+      "impact": "市场反弹，金价短期回落",
+      "category": "trade"
+    },
+    {
+      "date": "2025-06-18",
+      "label": "美联储维持利率不变",
+      "impact": "通胀回落缓慢，降息预期推迟",
+      "category": "fed"
+    },
+    {
+      "date": "2025-09-17",
+      "label": "美联储降息25bp",
+      "impact": "年内首次降息，金价走强",
+      "category": "fed"
+    },
+    {
+      "date": "2025-12-10",
+      "label": "美联储降息25bp",
+      "impact": "持续宽松周期，金价再创新高",
+      "category": "fed"
+    },
+    {
+      "date": "2025-03-15",
+      "label": "硅谷银行事件余波 / 区域性银行危机",
+      "impact": "银行业动荡延续，避险支撑金价",
+      "category": "banking"
+    },
+    {
+      "date": "2025-08-05",
+      "label": "日央行加息 / 日元套息交易平仓",
+      "impact": "全球流动性冲击，金价先跌后涨",
+      "category": "central_bank"
+    },
+    {
+      "date": "2026-01-15",
+      "label": "美伊紧张局势升级",
+      "impact": "中东地缘风险，金价跳涨",
+      "category": "geopolitical"
+    },
+    {
+      "date": "2026-03-20",
+      "label": "美联储政策转向讨论",
+      "impact": "加息讨论引发市场震荡",
+      "category": "fed"
+    }
+  ]
+}

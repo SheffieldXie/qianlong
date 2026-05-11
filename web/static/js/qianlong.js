@@ -1062,3 +1062,197 @@ function renderPaperDrawdownChart(equityData) {
         },
     });
 }
+
+// ============================================================
+// Long-Term Backtest Module
+// ============================================================
+
+let longtermEquityChart = null;
+
+async function loadLongtermBacktest() {
+    const loadingEl = document.getElementById('longterm-loading');
+    const resultsEl = document.getElementById('longterm-results');
+
+    loadingEl.style.display = 'block';
+    resultsEl.style.display = 'none';
+
+    try {
+        const res = await fetch('/api/longterm');
+        const data = await res.json();
+
+        if (data.status === 'not_run') {
+            loadingEl.innerHTML = '<p>' + data.message + '</p>';
+            return;
+        }
+
+        renderLongtermAssessment(data.assessment);
+        renderLongtermYears(data.results, data.events);
+        renderLongtermEvents(data.events, data.results);
+        renderLongtermEquityChart(data.results);
+
+        loadingEl.style.display = 'none';
+        resultsEl.style.display = 'block';
+
+    } catch (e) {
+        console.error('Longterm backtest load failed:', e);
+        loadingEl.innerHTML = '<p style="color:var(--red)">加载失败, 请检查服务器日志</p>';
+    }
+}
+
+function renderLongtermAssessment(assessment) {
+    const el = document.getElementById('longterm-assessment');
+    const g = assessment.robustness_grade;
+    const avgReturnColor = assessment.avg_annual_return >= 0 ? 'var(--green)' : 'var(--red)';
+
+    el.innerHTML = '<div class="assessment-grid">' +
+        '<div class="assessment-grade">' +
+        '<span class="grade-badge" style="color:' + g.color + '">' + g.grade + '</span>' +
+        '<div class="grade-label">鲁棒性: ' + g.label + '</div>' +
+        '</div>' +
+        '<div class="assessment-stat"><div class="stat-value">' + assessment.positive_years + '/' + assessment.total_years + '</div><div class="stat-label">正收益年份</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value" style="color:' + avgReturnColor + '">' + (assessment.avg_annual_return * 100).toFixed(1) + '%</div><div class="stat-label">平均年化收益</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value">' + assessment.avg_sharpe.toFixed(2) + '</div><div class="stat-label">平均夏普比率</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value" style="color:var(--red)">' + (assessment.avg_max_drawdown * 100).toFixed(1) + '%</div><div class="stat-label">平均最大回撤</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value">' + (assessment.avg_win_rate * 100).toFixed(1) + '%</div><div class="stat-label">平均胜率</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value">' + assessment.total_trades_all_years + '</div><div class="stat-label">总交易次数</div></div>' +
+        '<div class="assessment-stat"><div class="stat-value">' + assessment.consistency_score + '/100</div><div class="stat-label">一致性评分</div></div>' +
+        '</div>';
+}
+
+function renderLongtermYears(results, allEvents) {
+    const el = document.getElementById('longterm-years');
+    let html = '';
+
+    for (const [yearStr, data] of Object.entries(results).sort()) {
+        const m = data.metrics;
+        const returnClass = m.total_return >= 0 ? 'positive' : 'negative';
+        const returnSign = m.total_return >= 0 ? '+' : '';
+        const finalEq = (m.final_equity || 0).toLocaleString(undefined, {maximumFractionDigits: 0});
+
+        let eventTags = '';
+        for (const ev of data.events) {
+            const typeClass = ev.type || 'fed';
+            eventTags += '<span class="event-tag ' + typeClass + '"><span class="event-dot"></span>' + ev.name + '</span>';
+        }
+
+        const r = data.robustness || {};
+
+        html += '<div class="year-card">' +
+            '<div class="year-card-header">' +
+            '<span class="year">' + yearStr + '</span>' +
+            '<span class="year-return ' + returnClass + '">' + returnSign + (m.total_return * 100).toFixed(1) + '%</span>' +
+            '</div>' +
+            '<div class="year-card-body">' +
+            '<div class="year-metrics">' +
+            '<div class="year-metric"><div class="ym-value">$' + finalEq + '</div><div class="ym-label">最终权益</div></div>' +
+            '<div class="year-metric"><div class="ym-value">' + (m.sharpe_ratio ? m.sharpe_ratio.toFixed(2) : '—') + '</div><div class="ym-label">夏普比率</div></div>' +
+            '<div class="year-metric"><div class="ym-value" style="color:var(--red)">' + (m.max_drawdown * 100).toFixed(1) + '%</div><div class="ym-label">最大回撤</div></div>' +
+            '<div class="year-metric"><div class="ym-value">' + (m.win_rate * 100).toFixed(1) + '%</div><div class="ym-label">胜率</div></div>' +
+            '<div class="year-metric"><div class="ym-value">' + m.total_trades + '</div><div class="ym-label">交易次数</div></div>' +
+            '<div class="year-metric"><div class="ym-value">' + (m.profit_factor ? m.profit_factor.toFixed(2) : '—') + '</div><div class="ym-label">盈亏比</div></div>' +
+            '</div>' +
+            '<div class="year-events">' +
+            '<div class="year-events-title">&#9889; 重大事件 (' + data.events.length + ')</div>' +
+            eventTags +
+            '</div>' +
+            '<div class="robustness-section">' +
+            '<div class="robustness-title">系统鲁棒性</div>' +
+            '<div class="robustness-grid">' +
+            '<div class="robustness-item">最大回撤持续: <strong>' + (r.max_drawdown_duration_days || 0) + ' 天</strong></div>' +
+            '<div class="robustness-item">年交易频率: <strong>' + (r.trade_frequency_per_year || 0) + '/年</strong></div>' +
+            '<div class="robustness-item">最大连胜: <strong>' + (r.max_consecutive_wins || 0) + '</strong></div>' +
+            '<div class="robustness-item">最大连亏: <strong>' + (r.max_consecutive_losses || 0) + '</strong></div>' +
+            '</div></div></div></div>';
+    }
+
+    el.innerHTML = html;
+}
+
+function renderLongtermEvents(events, results) {
+    const el = document.getElementById('longterm-events');
+    let html = '';
+
+    for (const ev of events) {
+        const typeClass = ev.type || 'fed';
+        const typeLabel = ev.type === 'fed' ? '美联储' : ev.type === 'geopolitical' ? '地缘冲突' : ev.type === 'political' ? '政治事件' : '央行';
+
+        let impactHtml = '';
+        for (const [yearStr, data] of Object.entries(results)) {
+            const impacts = data.event_impacts || [];
+            const match = impacts.find(i => i.date === ev.date);
+            if (match) {
+                const impClass = match.change_pct > 0 ? 'positive' : match.change_pct < 0 ? 'negative' : 'neutral';
+                const sign = match.change_pct > 0 ? '+' : '';
+                impactHtml = '<div class="event-card-impact ' + impClass + '">价格影响: ' + sign + match.change_pct + '% (' + match.price_before + ' → ' + match.price_after + ')</div>';
+                break;
+            }
+        }
+
+        html += '<div class="event-card">' +
+            '<div class="event-card-header">' +
+            '<span class="event-tag ' + typeClass + '" style="font-size:10px;padding:2px 8px;"><span class="event-dot"></span>' + typeLabel + '</span>' +
+            '<span class="event-card-date">' + ev.date + '</span>' +
+            '</div>' +
+            '<div class="event-card-name">' + ev.name + '</div>' +
+            '<div class="event-card-desc">' + ev.desc + '</div>' +
+            impactHtml +
+            '</div>';
+    }
+
+    el.innerHTML = html;
+}
+
+function renderLongtermEquityChart(results) {
+    if (longtermEquityChart) longtermEquityChart.destroy();
+
+    const ctx = document.getElementById('longterm-equity-chart').getContext('2d');
+    const colors = { '2024': '#D4A017', '2025': '#00C853', '2026': '#C41E3A' };
+
+    const datasets = [];
+    for (const [yearStr, data] of Object.entries(results).sort()) {
+        const eqPoints = data.equity_points || [];
+        if (eqPoints.length === 0) continue;
+
+        datasets.push({
+            label: yearStr + '年',
+            data: eqPoints.map(p => p.equity),
+            borderColor: colors[yearStr] || '#888',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.1,
+        });
+    }
+
+    longtermEquityChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: datasets.length > 0 ? datasets[0].data.map((_, i) => i) : [],
+            datasets: datasets,
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true, labels: { color: '#999988', boxWidth: 12, font: { size: 12 } } },
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: '交易日', color: '#888' },
+                    ticks: { color: '#555544', maxTicksLimit: 20 },
+                    grid: { color: 'rgba(42, 42, 42, 0.5)' },
+                },
+                y: {
+                    title: { display: true, text: '权益 ($)', color: '#888' },
+                    ticks: { color: '#555544', callback: v => '$' + v.toLocaleString() },
+                    grid: { color: 'rgba(42, 42, 42, 0.5)' },
+                },
+            },
+        },
+    });
+}
+
+// Auto-load longterm data on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadLongtermBacktest();
+});

@@ -443,6 +443,29 @@ def api_killswitch():
     risk_mgr.cooldown_until = datetime.datetime.now() + datetime.timedelta(hours=24)
     return jsonify({'status': 'activated', 'cooldown_until': str(risk_mgr.cooldown_until)})
 
+
+@app.route("/api/longterm")
+def api_longterm():
+    """久期回测结果 — 按年展示 + 事件标记 + 鲁棒性评估"""
+    longterm_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "longterm")
+    results_path = os.path.join(longterm_dir, "backtest_results.json")
+
+    if not os.path.exists(results_path):
+        return jsonify({
+            'status': 'not_run',
+            'message': '久期回测尚未运行, 请执行 scripts/longterm_backtest.py',
+        })
+
+    with open(results_path) as f:
+        data = json.load(f)
+
+    return jsonify({
+        'status': 'ready',
+        'results': data['results'],
+        'assessment': data['assessment'],
+        'events': data['all_events'],
+    })
+
 if __name__ == "__main__":
     print("\n" + "=" * 50)
     print("  乾六爻交易系统 — Qian Liu Yao")

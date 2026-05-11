@@ -934,3 +934,304 @@ body, html {
     .paper-metrics { grid-template-columns: repeat(2, 1fr); }
     .paper-trade-row { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* ============================================================
+   Long-Term Backtest Module
+   ============================================================ */
+.longterm-section {
+    padding: 16px 24px 32px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.longterm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.longterm-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 2px;
+}
+
+.longterm-title .title-icon {
+    font-size: 24px;
+}
+
+/* Overall Assessment */
+.longterm-assessment {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.assessment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    align-items: center;
+}
+
+.assessment-grade {
+    text-align: center;
+    padding: 16px;
+}
+
+.grade-badge {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 900;
+    display: block;
+}
+
+.grade-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.assessment-stat {
+    text-align: center;
+    padding: 12px;
+    background: var(--bg-card);
+    border-radius: 8px;
+}
+
+.assessment-stat .stat-value {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.assessment-stat .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Year Cards */
+.longterm-years {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.year-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.year-card-header {
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.year-card-header .year {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+}
+
+.year-card-header .year-return {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.year-return.positive { color: var(--green); }
+.year-return.negative { color: var(--red); }
+
+.year-card-body {
+    padding: 14px 18px;
+}
+
+.year-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.year-metric {
+    text-align: center;
+    padding: 8px 4px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+}
+
+.year-metric .ym-value {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.year-metric .ym-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.year-events {
+    margin-top: 10px;
+}
+
+.year-events-title {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.event-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    margin: 2px 4px 2px 0;
+    border-radius: 12px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    border: 1px solid;
+}
+
+.event-tag.fed { border-color: #4A90D9; color: #4A90D9; background: rgba(74, 144, 217, 0.1); }
+.event-tag.geopolitical { border-color: #C41E3A; color: #C41E3A; background: rgba(196, 30, 58, 0.1); }
+.event-tag.political { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139, 92, 246, 0.1); }
+.event-tag.central_bank { border-color: #D4A017; color: #D4A017; background: rgba(212, 160, 23, 0.1); }
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.event-tag.fed .event-dot { background: #4A90D9; }
+.event-tag.geopolitical .event-dot { background: #C41E3A; }
+.event-tag.political .event-dot { background: #8B5CF6; }
+.event-tag.central_bank .event-dot { background: #D4A017; }
+
+/* Robustness section in year card */
+.robustness-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.robustness-title {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.robustness-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.robustness-item {
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.robustness-item strong {
+    color: var(--text-primary);
+}
+
+/* Event Timeline */
+.longterm-events-section {
+    margin-bottom: 20px;
+}
+
+.longterm-events {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+
+.event-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+}
+
+.event-card:hover {
+    border-color: var(--border-gold);
+}
+
+.event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.event-card-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.event-card-name {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.event-card-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.event-card-impact {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.event-card-impact.positive { color: var(--green); }
+.event-card-impact.negative { color: var(--red); }
+.event-card-impact.neutral { color: var(--text-muted); }
+
+@media (max-width: 700px) {
+    .longterm-years { grid-template-columns: 1fr; }
+    .year-metrics { grid-template-columns: repeat(2, 1fr); }
+    .assessment-grid { grid-template-columns: repeat(2, 1fr); }
+    .longterm-events { grid-template-columns: 1fr; }
+}
