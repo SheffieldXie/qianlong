@@ -1,5 +1,7 @@
 """
 乾六爻核心引擎 — 严格按PDF，支持自定义参数
+增强版：加入波动率自适应(ATR)、趋势过滤(ADX)、趋势反转确认(EMA50/200)、
+震荡识别(布林带)、风控升级(Kill Switch周止损)
 """
 
 import numpy as np
@@ -8,6 +10,47 @@ import pandas as pd
 
 def calc_ema(series, period):
     return series.ewm(span=period, adjust=False).mean()
+
+
+def calc_atr(high, low, close, period=14):
+    """ATR — 真实波动幅度，用于仓位自适应"""
+    tr = pd.concat([
+        high - low,
+        (high - close.shift(1)).abs(),
+        (low - close.shift(1)).abs()
+    ], axis=1).max(axis=1)
+    return tr.ewm(span=period, adjust=False).mean()
+
+
+def calc_adx(high, low, close, period=14):
+    """ADX — 趋势强度指标，ADX>25才有趋势，<25是震荡"""
+    plus_dm = high.diff()
+    minus_dm = -low.diff()
+    plus_dm = plus_dm.where((plus_dm > minus_dm) & (plus_dm > 0), 0.0)
+    minus_dm = minus_dm.where((minus_dm > plus_dm) & (minus_dm > 0), 0.0)
+    
+    tr = pd.concat([
+        high - low,
+        (high - close.shift(1)).abs(),
+        (low - close.shift(1)).abs()
+    ], axis=1).max(axis=1)
+    
+    atr = tr.ewm(span=period, adjust=False).mean()
+    plus_di = 100 * plus_dm.ewm(span=period, adjust=False).mean() / atr
+    minus_di = 100 * minus_dm.ewm(span=period, adjust=False).mean() / atr
+    
+    dx = 100 * (plus_di - minus_di).abs() / (plus_di + minus_di)
+    return dx.ewm(span=period, adjust=False).mean()
+
+
+def calc_bollinger(close, period=20, std_dev=2.0):
+    """布林带 — 识别震荡与趋势区间"""
+    sma = close.rolling(window=period).mean()
+    std = close.rolling(window=period).std()
+    upper = sma + std_dev * std
+    lower = sma - std_dev * std
+    width = (upper - lower) / sma  # 布林带宽度百分比
+    return upper, lower, width
 
 
 def calc_ema144(close, period=144):
@@ -220,29 +263,92 @@ def analyze(df, config=None):
     high = df['high']
     low = df['low']
     
+    # === 核心指标 ===
     df['ema144'] = calc_ema144(close, ema_period)
     df['dif'], df['dea'], df['macd_hist'] = calc_macd(close, macd_fast, macd_slow, macd_signal_period)
     df['rsi'] = calc_rsi(close, rsi_period)
     df['sar'], df['sar_trend'] = calc_sar(high, low, sar_step, sar_max)
+    
+    # === 增强指标 ===
+    df['atr'] = calc_atr(high, low, close, 14)  # 波动率自适应仓位
+    df['adx'] = calc_adx(high, low, close, 14)  # 趋势强度过滤
+    df['ema50'] = calc_ema(close, 50)            # 中期趋势
+    df['ema200'] = calc_ema(close, 200)          # 长期趋势
+    df['bb_upper'], df['bb_lower'], df['bb_width'] = calc_bollinger(close, 20, 2.0)  # 震荡识别
+    
+    # 布林带位置 (价格相对于布林带的位置)
+    df['bb_pct'] = (close - df['bb_lower']) / (df['bb_upper'] - df['bb_lower'])
     
     df['prev_close'] = df['close'].shift(1)
     df['prev_dea'] = df['dea'].shift(1)
     df['prev_rsi'] = df['rsi'].shift(1)
     df['sar_prev_trend'] = df['sar_trend'].shift(1)
     df['sar_flip'] = (df['sar_trend'] != df['sar_prev_trend']) & (df['sar_trend'] != 0)
-    df.loc[df.index[0], 'sar_flip'] = False
     df['macd_threshold'] = macd_threshold
     
     df['macd_state'] = df['dea'].apply(lambda x: get_macd_state(x, macd_threshold))
     df['rsi_state'] = df['rsi'].apply(get_rsi_state)
     df['phase'] = df['dea'].apply(lambda x: detect_phase(x, macd_threshold))
     
+    # 趋势反转信号: EMA50/200死叉(看跌)/金叉(看涨)
+    df['ema_cross'] = 0  # 1=金叉, -1=死叉, 0=无
+    ema50_prev = df['ema50'].shift(1)
+    ema200_prev = df['ema200'].shift(1)
+    df.loc[(df['ema50'] > df['ema200']) & (ema50_prev <= ema200_prev), 'ema_cross'] = 1
+    df.loc[(df['ema50'] < df['ema200']) & (ema50_prev >= ema200_prev), 'ema_cross'] = -1
+    
+    # ADX趋势状态: >25有趋势, <25震荡
+    df['trend_strength'] = df['adx'].apply(lambda x: 'trending' if x > 25 else 'ranging')
+    
     df = _simulate_positions(df, macd_threshold)
     
+    # === 信号检测 + 增强过滤 ===
+    # 注意: 先检测原始信号, 再应用过滤, 过滤后的信号用于回测
     signals = df.apply(detect_signal, axis=1)
-    df['signal_type'] = [s[0] for s in signals]
-    df['signal_confidence'] = [s[1] for s in signals]
-    df['signal_desc'] = [s[2] for s in signals]
+    signals_enhanced = []
+    
+    for i, (sig, conf, desc) in enumerate(zip(
+        [s[0] for s in signals],
+        [s[1] for s in signals],
+        [s[2] for s in signals]
+    )):
+        row = df.iloc[i]
+        adx = row.get('adx', 30)
+        bb_width = row.get('bb_width', 0.05)
+        ema_cross = row.get('ema_cross', 0)
+        
+        new_sig, new_conf, new_desc = sig, conf, desc
+        
+        # 过滤1: ADX < 15 禁止开新仓 (日线级别极度震荡)
+        if sig in ('entry_long_4', 'entry_short_4', 'add_long_4', 'add_short_4', 'arb_long_4', 'arb_short_4'):
+            if adx < 15:
+                new_sig, new_conf, new_desc = 'wait', 0.1, f'过滤: ADX={adx:.1f}<15 极度震荡'
+            elif adx < 20:
+                new_conf = conf * 0.7  # 弱趋势降低置信度
+        
+        # 过滤2: 布林带过窄 (日线<0.05, 1h<0.02) 震荡期降低入场信号权重
+        # 检测数据频率: 如果平均间隔>2小时则视为日线
+        avg_interval = df['date'].diff().mean()
+        is_daily = avg_interval > pd.Timedelta(hours=2)
+        bb_threshold = 0.05 if is_daily else 0.02
+        if sig in ('entry_long_4', 'entry_short_4') and bb_width < bb_threshold:
+            new_conf = new_conf * 0.6
+            new_desc = new_desc + f' [布林带窄 {bb_width:.1%}]'
+        
+        # 过滤3: EMA50/200死叉强制看空信号
+        if ema_cross == -1 and sig in ('entry_long_4', 'add_long_4'):
+            new_conf = new_conf * 0.3
+            new_desc = new_desc + ' [EMA死叉冲突]'
+        
+        signals_enhanced.append((new_sig, new_conf, new_desc))
+    
+    # 用增强后的信号重新模拟仓位 (关键!)
+    df['signal_type'] = [s[0] for s in signals_enhanced]
+    df['signal_confidence'] = [s[1] for s in signals_enhanced]
+    df['signal_desc'] = [s[2] for s in signals_enhanced]
+    
+    # 重新模拟仓位以反映过滤后的信号
+    df = _simulate_positions(df, macd_threshold)
     
     return df
 

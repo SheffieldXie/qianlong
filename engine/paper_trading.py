@@ -15,14 +15,19 @@ import numpy as np
 class PaperTradingEngine:
     """模拟盘引擎 — 严格遵循乾六爻交易规则"""
     
-    def __init__(self, initial_capital=100000, contract_size=100):
+    def __init__(self, initial_capital=100000, contract_size=100, max_daily_loss=0.03, max_weekly_loss=0.08):
         """
         参数:
         - initial_capital: 初始资金 (美元)
         - contract_size: 每份合约大小 (XAU/USD 通常1手=100盎司)
+        - max_daily_loss: 日亏损上限 (default 3% → 增强版 2%)
+        - max_weekly_loss: 周亏损上限 (default 8%)
         """
         self.initial_capital = initial_capital
         self.contract_size = contract_size
+        self.max_daily_loss = max_daily_loss
+        self.max_weekly_loss = max_weekly_loss
+        self._atr_series = None  # ATR数据用于仓位自适应
         
         self.reset()
     
@@ -42,6 +47,15 @@ class PaperTradingEngine:
         """
         self.reset()
         
+        # ATR系列用于仓位自适应
+        if 'atr' in df.columns:
+            self._atr_series = df['atr']
+        
+        # 日/周亏损追踪
+        daily_pnl = 0.0
+        weekly_pnl = 0.0
+        last_week = None
+        
         for i, row in df.iterrows():
             signal = row.get('signal_type', 'wait')
             price = row['close']
@@ -49,14 +63,41 @@ class PaperTradingEngine:
             low = row.get('low', price)
             date = str(row.get('date', ''))
             
+            # 周亏损重置 (每周一或7天后)
+            try:
+                current_date = pd.to_datetime(date)
+                current_week = current_date.isocalendar()[1]
+                if last_week is not None and current_week != last_week:
+                    weekly_pnl = 0.0  # 新周重置
+                last_week = current_week
+            except:
+                pass
+            
+            # 周亏损检查 — 如果本周累计亏损超过上限，强制清仓
+            if weekly_pnl <= -self.max_weekly_loss:
+                if self.positions:
+                    self._close_all_positions(price, date, 'WEEKLY_LOSS_LIMIT')
+                continue  # 本周不再开新仓
+            
             # 先检查持仓止损 (SAR翻转已经在信号中处理)
             # 执行信号
             if signal != 'wait':
                 self._execute_signal(signal, price, high, low, date, row)
             
+            # 日亏损检查
+            current_equity = self.cash + self._calc_position_value(price)
+            daily_pnl = (current_equity - self.initial_capital) / self.initial_capital
+            
+            if daily_pnl <= -self.max_daily_loss:
+                if self.positions:
+                    self._close_all_positions(price, date, 'DAILY_LOSS_LIMIT')
+                continue  # 当日不再开新仓
+            
+            # 更新周亏损
+            weekly_pnl = (current_equity - self.initial_capital) / self.initial_capital
+            
             # 计算当前权益
             pos_value = self._calc_position_value(price)
-            current_equity = self.cash + pos_value
             
             self.equity_curve.append({
                 'date': date,
@@ -125,13 +166,24 @@ class PaperTradingEngine:
                 self._open_positions(4, -1, price, date, 'addon')
     
     def _open_positions(self, count, direction, price, date, ptype):
-        """开仓"""
-        margin = count * self.contract_size * price
+        """开仓 — 加入ATR波动率自适应仓位"""
+        # ATR-based position sizing: 波动率高时减少手数，低时增加
+        # 基准: ATR = 1.5% of price → 标准手数
+        current_atr = self._atr_series.iloc[-1] if self._atr_series is not None and len(self._atr_series) > 0 else price * 0.015
+        atr_pct = current_atr / price if price > 0 else 0.015
+        
+        # ATR调整因子: ATR越小(低波动)手数越多, ATR越大(高波动)手数越少
+        # 范围: 0.5x ~ 1.5x
+        base_atr_pct = 0.015  # 基准1.5%
+        atr_multiplier = max(0.5, min(1.5, base_atr_pct / max(atr_pct, 0.005)))
+        adjusted_count = max(1, int(count * atr_multiplier))
+        
+        margin = adjusted_count * self.contract_size * price
         if margin > self.cash * 0.9:  # 最多用90%资金
             available_units = int(self.cash * 0.9 / (self.contract_size * price))
-            count = max(1, available_units)
+            adjusted_count = max(1, available_units)
         
-        for _ in range(count):
+        for _ in range(adjusted_count):
             self.positions.append({
                 'direction': direction,
                 'entry_price': price,
@@ -144,10 +196,10 @@ class PaperTradingEngine:
             'date': date,
             'action': 'OPEN' if direction == 1 else 'OPEN_SHORT',
             'price': price,
-            'count': count,
+            'count': adjusted_count,
             'direction': direction,
             'type': ptype,
-            'value': count * self.contract_size * price,
+            'value': adjusted_count * self.contract_size * price,
         })
     
     def _close_one_position(self, price, date, reason):
