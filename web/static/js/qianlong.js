@@ -1252,9 +1252,25 @@ function renderLongtermEquityChart(results) {
     });
 }
 
-// Auto-load longterm data on page load
+// Auto-load longterm data on page load — use pre-cached data if available
 document.addEventListener('DOMContentLoaded', () => {
-    loadLongtermBacktest();
+    const cacheEl = document.getElementById('longterm-cache');
+    if (cacheEl) {
+        try {
+            const data = JSON.parse(cacheEl.textContent);
+            // Show cached results immediately
+            renderLongtermAssessment(data.assessment);
+            renderLongtermYears(data.results, data.events);
+            renderLongtermEvents(data.events, data.results);
+            renderLongtermEquityChart(data.results);
+
+            document.getElementById('longterm-loading').style.display = 'none';
+            document.getElementById('longterm-results').style.display = 'block';
+        } catch (e) {
+            console.error('Cache parse error:', e);
+            loadLongtermBacktest(); // fallback to API
+        }
+    }
 });
 
 // ============================================================

@@ -169,11 +169,13 @@
                         </div>
                     </div>
 
-                    <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);">
+                    <!-- Loading State (only shown when no cached data) -->
+                    <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);{% if longterm_cache %}display:none{% endif %}">
                         <p>加载久期回测数据中...</p>
                     </div>
 
-                    <div id="longterm-results" style="display:none;">
+                    <!-- Results Container -->
+                    <div id="longterm-results" {% if not longterm_cache %}style="display:none"{% endif %}>
                         <div class="longterm-assessment" id="longterm-assessment"></div>
                         <div class="longterm-years" id="longterm-years"></div>
                         <div class="longterm-events-section">
@@ -185,6 +187,11 @@
                             <canvas id="longterm-equity-chart" style="height:350px !important;"></canvas>
                         </div>
                     </div>
+
+                    <!-- Pre-loaded cache data -->
+                    {% if longterm_cache %}
+                    <script id="longterm-cache" type="application/json">{{ longterm_cache | tojson | safe }}</script>
+                    {% endif %}
                 </section>
             </div>
         </main>
