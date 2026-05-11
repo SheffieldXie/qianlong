@@ -1297,3 +1297,112 @@ function renderLongtermEquityChart(results) {
 document.addEventListener('DOMContentLoaded', () => {
     initLongtermBacktest();
 });
+
+// ============================================================
+// Long-term Backtest Configuration
+// ============================================================
+
+let longtermConfig = null;
+
+function openLongtermConfig() {
+    document.getElementById('longterm-config-modal').classList.add('active');
+    
+    // Load current config from server
+    fetch('/api/longterm/config')
+        .then(r => r.json())
+        .then(cfg => {
+            longtermConfig = cfg;
+            document.getElementById('lt-macd-fast').value = cfg.macd_fast || 20;
+            document.getElementById('lt-macd-slow').value = cfg.macd_slow || 52;
+            document.getElementById('lt-macd-signal').value = cfg.macd_signal || 2;
+            document.getElementById('lt-macd-threshold').value = cfg.macd_threshold || 6.5;
+            document.getElementById('lt-ema-period').value = cfg.ema_period || 144;
+            document.getElementById('lt-rsi-period').value = cfg.rsi_period || 14;
+            document.getElementById('lt-bb-trend').value = cfg.bb_mult_trend || 1.5;
+            document.getElementById('lt-bb-extreme').value = cfg.bb_mult_extreme || 3.0;
+            document.getElementById('lt-sar-step').value = cfg.sar_step || 0.02;
+            document.getElementById('lt-sar-max').value = cfg.sar_max || 0.2;
+            document.getElementById('lt-atr-period').value = cfg.atr_period || 14;
+        })
+        .catch(e => console.error('Failed to load longterm config:', e));
+}
+
+function closeLongtermConfig() {
+    document.getElementById('longterm-config-modal').classList.remove('active');
+}
+
+function resetLongtermConfig() {
+    document.getElementById('lt-macd-fast').value = 20;
+    document.getElementById('lt-macd-slow').value = 52;
+    document.getElementById('lt-macd-signal').value = 2;
+    document.getElementById('lt-macd-threshold').value = 6.5;
+    document.getElementById('lt-ema-period').value = 144;
+    document.getElementById('lt-rsi-period').value = 14;
+    document.getElementById('lt-bb-trend').value = 1.5;
+    document.getElementById('lt-bb-extreme').value = 3.0;
+    document.getElementById('lt-sar-step').value = 0.02;
+    document.getElementById('lt-sar-max').value = 0.2;
+    document.getElementById('lt-atr-period').value = 14;
+}
+
+async function runLongtermBacktest() {
+    const btn = document.getElementById('lt-run-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ 保存中...';
+    
+    // Save config to server
+    const config = {
+        macd_fast: parseInt(document.getElementById('lt-macd-fast').value),
+        macd_slow: parseInt(document.getElementById('lt-macd-slow').value),
+        macd_signal: parseInt(document.getElementById('lt-macd-signal').value),
+        macd_threshold: parseFloat(document.getElementById('lt-macd-threshold').value),
+        ema_period: parseInt(document.getElementById('lt-ema-period').value),
+        rsi_period: parseInt(document.getElementById('lt-rsi-period').value),
+        bb_mult_trend: parseFloat(document.getElementById('lt-bb-trend').value),
+        bb_mult_extreme: parseFloat(document.getElementById('lt-bb-extreme').value),
+        sar_step: parseFloat(document.getElementById('lt-sar-step').value),
+        sar_max: parseFloat(document.getElementById('lt-sar-max').value),
+        atr_period: parseInt(document.getElementById('lt-atr-period').value),
+    };
+    
+    try {
+        await fetch('/api/longterm/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config),
+        });
+        
+        btn.textContent = '⏳ 运行回测中...';
+        
+        // Run backtest
+        const res = await fetch('/api/longterm/run', { method: 'POST' });
+        const data = await res.json();
+        
+        if (data.status === 'ready') {
+            closeLongtermConfig();
+            // Reload the long-term backtest display
+            const loadingEl = document.getElementById('longterm-loading');
+            const resultsEl = document.getElementById('longterm-results');
+            loadingEl.style.display = 'none';
+            resultsEl.style.display = 'block';
+            localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
+            renderLongtermAssessment(data.assessment);
+            renderLongtermYears(data.results, data.events);
+            renderLongtermEvents(data.events, data.results);
+            renderLongtermEquityChart(data.results);
+        } else {
+            alert('回测失败: ' + (data.message || '未知错误'));
+        }
+    } catch (e) {
+        console.error('Run longterm backtest failed:', e);
+        alert('运行失败，请检查服务器日志');
+    }
+    
+    btn.disabled = false;
+    btn.textContent = '▶ 保存并运行久期回测';
+}
+
+// Click overlay to close longterm config modal
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'longterm-config-modal') closeLongtermConfig();
+});
