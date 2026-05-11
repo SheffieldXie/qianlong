@@ -2721,11 +2721,11 @@
       "trading_days": 89,
       "metrics": {
         "initial_capital": 100000,
-        "final_equity": 56139.99,
-        "total_return": -0.4386,
-        "annual_return": -0.805,
-        "annual_volatility": 1.6122,
-        "sharpe_ratio": -0.52,
+        "final_equity": 58529.98,
+        "total_return": -0.4147,
+        "annual_return": -0.7805,
+        "annual_volatility": 1.6158,
+        "sharpe_ratio": -0.5,
         "max_drawdown": -0.7761,
         "win_rate": 0.4824,
         "profit_factor": 0.94,
@@ -2757,8 +2757,8 @@
         "trade_frequency_per_year": 240.7,
         "max_consecutive_wins": 8,
         "max_consecutive_losses": 10,
-        "avg_trade_pnl": -516.0,
-        "std_trade_pnl": 11189.27
+        "avg_trade_pnl": -487.88,
+        "std_trade_pnl": 11196.8
       },
       "event_impacts": [
         {
@@ -3137,8 +3137,8 @@
           "equity": 54839.99
         },
         {
-          "date": "2026-05-10 00:00:00",
-          "equity": 56139.99
+          "date": "2026-05-11 00:00:00",
+          "equity": 58529.98
         }
       ],
       "trade_dates": [
@@ -3226,13 +3226,13 @@
         "2026-05-06 00:00:00-04:00",
         "2026-05-07 00:00:00-04:00",
         "2026-05-08 00:00:00-04:00",
-        "2026-05-10 00:00:00-04:00"
+        "2026-05-11 00:00:00-04:00"
       ]
     }
   },
   "assessment": {
     "years_covered": 3,
-    "avg_annual_return": 0.4861,
+    "avg_annual_return": 0.4941,
     "avg_sharpe": 1.38,
     "avg_max_drawdown": -0.371,
     "avg_win_rate": 0.5485,
