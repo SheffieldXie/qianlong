@@ -104,16 +104,7 @@ def run_analysis():
 
 @app.route("/")
 def index():
-    """渲染首页，预加载久期回测缓存"""
-    # 预加载久期回测缓存
-    longterm_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "longterm")
-    results_path = os.path.join(longterm_dir, "backtest_results.json")
-    longterm_cache = None
-    if os.path.exists(results_path):
-        with open(results_path) as f:
-            longterm_cache = json.load(f)
-
-    return render_template("qianlong.html", longterm_cache=longterm_cache)
+    return render_template("qianlong.html")
 
 
 @app.route("/api/status")

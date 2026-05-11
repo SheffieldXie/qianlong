@@ -1069,12 +1069,35 @@ function renderPaperDrawdownChart(equityData) {
 
 let longtermEquityChart = null;
 
+function initLongtermBacktest() {
+    // Try to load from localStorage immediately
+    const cached = localStorage.getItem('qianlong_backtest_v1');
+    if (cached) {
+        try {
+            const data = JSON.parse(cached);
+            renderLongtermAssessment(data.assessment);
+            renderLongtermYears(data.results, data.events);
+            renderLongtermEvents(data.events, data.results);
+            renderLongtermEquityChart(data.results);
+            document.getElementById('longterm-loading').style.display = 'none';
+            document.getElementById('longterm-results').style.display = 'block';
+        } catch (e) {
+            console.warn('Cache parse error, will fetch fresh:', e);
+        }
+    }
+    // Fetch fresh data in background
+    loadLongtermBacktest();
+}
+
 async function loadLongtermBacktest() {
     const loadingEl = document.getElementById('longterm-loading');
     const resultsEl = document.getElementById('longterm-results');
 
-    loadingEl.style.display = 'block';
-    resultsEl.style.display = 'none';
+    // If we already have cached data, don't show loading, just fetch in background
+    if (!localStorage.getItem('qianlong_backtest_v1')) {
+        loadingEl.style.display = 'block';
+        resultsEl.style.display = 'none';
+    }
 
     try {
         const res = await fetch('/api/longterm');
@@ -1084,6 +1107,9 @@ async function loadLongtermBacktest() {
             loadingEl.innerHTML = '<p>' + data.message + '</p>';
             return;
         }
+
+        // Cache in localStorage
+        localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
 
         renderLongtermAssessment(data.assessment);
         renderLongtermYears(data.results, data.events);
@@ -1095,7 +1121,10 @@ async function loadLongtermBacktest() {
 
     } catch (e) {
         console.error('Longterm backtest load failed:', e);
-        loadingEl.innerHTML = '<p style="color:var(--red)">加载失败, 请检查服务器日志</p>';
+        // If no cache, show error
+        if (!localStorage.getItem('qianlong_backtest_v1')) {
+            loadingEl.innerHTML = '<p style="color:var(--red)">加载失败, 请检查服务器日志</p>';
+        }
     }
 }
 
@@ -1252,25 +1281,9 @@ function renderLongtermEquityChart(results) {
     });
 }
 
-// Auto-load longterm data on page load — use pre-cached data if available
+// Auto-load longterm data on page load — use localStorage cache first
 document.addEventListener('DOMContentLoaded', () => {
-    const cacheEl = document.getElementById('longterm-cache');
-    if (cacheEl) {
-        try {
-            const data = JSON.parse(cacheEl.textContent);
-            // Show cached results immediately
-            renderLongtermAssessment(data.assessment);
-            renderLongtermYears(data.results, data.events);
-            renderLongtermEvents(data.events, data.results);
-            renderLongtermEquityChart(data.results);
-
-            document.getElementById('longterm-loading').style.display = 'none';
-            document.getElementById('longterm-results').style.display = 'block';
-        } catch (e) {
-            console.error('Cache parse error:', e);
-            loadLongtermBacktest(); // fallback to API
-        }
-    }
+    initLongtermBacktest();
 });
 
 // ============================================================
