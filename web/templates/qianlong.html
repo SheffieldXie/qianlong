@@ -165,7 +165,8 @@
                             久期回测 (2024-2026)
                         </div>
                         <div class="longterm-controls">
-                            <button class="gold-btn" onclick="loadLongtermBacktest()">&#8635; 刷新回测数据</button>
+                            <button class="gold-btn" onclick="openLongtermConfig()">&#9881; 参数配置</button>
+                            <button class="gold-btn" onclick="initLongtermBacktest()">&#8635; 刷新回测数据</button>
                         </div>
                     </div>
 
@@ -185,9 +186,6 @@
                         <div class="chart-container" style="margin-top:16px;">
                             <div class="chart-header">两年权益曲线对比 (按年)</div>
                             <canvas id="longterm-equity-chart" style="height:350px !important;"></canvas>
-                        <div class="longterm-controls">
-                            <button class="gold-btn" onclick="openLongtermConfig()">&#9881; 参数配置</button>
-                            <button class="gold-btn" onclick="initLongtermBacktest()">&#8635; 刷新回测数据</button>
                         </div>
                     </div>
                 </section>
@@ -204,20 +202,36 @@
             </div>
             <div class="modal-body">
                 <div class="paper-config-grid">
+                    <!-- MACD 参数 -->
                     <div class="config-section">
-                        <h3>&#128176; 资金设置</h3>
-                        <div class="config-item">
-                            <label>初始资金 (USD)</label>
-                            <input type="number" id="lt-capital" min="1000" step="1000" value="100000">
-                        </div>
-                        <div class="config-item">
-                            <label>合约大小 (盎司/手)</label>
-                            <input type="number" id="lt-contract" min="1" step="10" value="100">
-                        </div>
+                        <h3>MACD 势能核心</h3>
+                        <div class="config-item"><label>快线</label><input type="number" id="lt-macd-fast" value="20"></div>
+                        <div class="config-item"><label>慢线</label><input type="number" id="lt-macd-slow" value="52"></div>
+                        <div class="config-item"><label>信号线</label><input type="number" id="lt-macd-signal" value="2"></div>
+                        <div class="config-item"><label>能量阈值</label><input type="number" id="lt-macd-threshold" value="6.5" step="0.5"></div>
+                    </div>
+                    <!-- EMA & RSI -->
+                    <div class="config-section">
+                        <h3>EMA 趋势 & RSI 动能</h3>
+                        <div class="config-item"><label>EMA 周期</label><input type="number" id="lt-ema-period" value="144"></div>
+                        <div class="config-item"><label>RSI 周期</label><input type="number" id="lt-rsi-period" value="14"></div>
+                    </div>
+                    <!-- 布林带 -->
+                    <div class="config-section">
+                        <h3>布林带 (BB)</h3>
+                        <div class="config-item"><label>1.5σ 趋势带</label><input type="number" id="lt-bb-trend" value="1.5" step="0.1"></div>
+                        <div class="config-item"><label>3.0σ 极端带</label><input type="number" id="lt-bb-extreme" value="3.0" step="0.1"></div>
+                    </div>
+                    <!-- SAR & ATR -->
+                    <div class="config-section">
+                        <h3>SAR & ATR</h3>
+                        <div class="config-item"><label>ATR 周期</label><input type="number" id="lt-atr-period" value="14"></div>
+                        <div class="config-item"><label>SAR 步长</label><input type="number" id="lt-sar-step" value="0.02" step="0.005"></div>
+                        <div class="config-item"><label>SAR 最大步长</label><input type="number" id="lt-sar-max" value="0.2"></div>
                     </div>
                 </div>
                 <div style="text-align:center;margin-top:20px;">
-                    <button class="btn-primary" onclick="runLongtermBacktest()" id="lt-run-btn">开始回测</button>
+                    <button class="btn-primary" onclick="saveLongtermConfigAndRun()" id="lt-run-btn">▶ 保存并运行久期回测</button>
                 </div>
             </div>
         </div>

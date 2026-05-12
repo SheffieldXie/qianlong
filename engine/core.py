@@ -10,6 +10,34 @@ def calc_ema(series, period):
     return series.ewm(span=period, adjust=False).mean()
 
 
+def calc_atr(high, low, close, period=14):
+    """ATR — 真实波动幅度"""
+    tr = pd.concat([
+        high - low,
+        (high - close.shift(1)).abs(),
+        (low - close.shift(1)).abs()
+    ], axis=1).max(axis=1)
+    return tr.ewm(span=period, adjust=False).mean()
+
+
+def calc_bollinger(close, ema_series, mult_trend=1.5, mult_extreme=3.0):
+    """布林带 — 基于 EMA144 中轨"""
+    # 计算标准差
+    # 这里我们近似计算滚动标准差，为了性能可以用 rolling std
+    # 但为了匹配 EMA 的特性，通常 BB 是基于 SMA 的。
+    # 这里按照需求：中轨=EMA144
+    # 标准差通常基于滚动窗口计算，这里默认 20 周期
+    std = close.rolling(window=20).std()
+    
+    upper_trend = ema_series + mult_trend * std
+    lower_trend = ema_series - mult_trend * std
+    
+    upper_extreme = ema_series + mult_extreme * std
+    lower_extreme = ema_series - mult_extreme * std
+    
+    return upper_trend, lower_trend, upper_extreme, lower_extreme
+
+
 def calc_ema144(close, period=144):
     return calc_ema(close, period)
 
@@ -119,6 +147,37 @@ def detect_signal(row):
     
     phase = detect_phase(dea, macd_threshold)
     
+    # 新增：布林带 3σ 极端区逻辑
+    bb_extreme_upper = row.get('bb_extreme_upper', 0)
+    bb_extreme_lower = row.get('bb_extreme_lower', 0)
+    bb_upper = row.get('bb_upper', 0)
+    bb_lower = row.get('bb_lower', 0)
+    
+    # 3σ 上轨 + RSI>=70 -> 做空 (抄顶)
+    if price >= bb_extreme_upper and rsi >= 70 and total_short == 0:
+        if has_long_base or has_long_addon:
+            return ('clear_all', 1.0, '③极端区: 触及3σ上轨+RSI≥70, 反手做空(止盈多单)')
+        return ('entry_short_4', 0.95, '③极端区: 触及3σ上轨+RSI≥70, 做空(抄顶)')
+    
+    # 3σ 下轨 + RSI<=30 -> 做多 (抄底)
+    if price <= bb_extreme_lower and rsi <= 30 and total_long == 0:
+        if has_short_base or has_short_addon:
+            return ('clear_all', 1.0, '③极端区: 触及3σ下轨+RSI≤30, 反手做多(止盈空单)')
+        return ('entry_long_4', 0.95, '③极端区: 触及3σ下轨+RSI≤30, 做多(抄底)')
+    
+    # 趋势带止盈 (1.5σ)
+    # 持有多单, 价格突破上轨 -> 清仓/止盈
+    if (has_long_addon or has_arb_long) and price >= bb_upper:
+         return ('clear_addons', 0.85, '③趋势带: 触及1.5σ上轨, 止盈加仓/套利')
+    if has_long_base and price >= bb_upper and dea <= 0:
+         return ('cut_half', 0.8, '③趋势带: 触及1.5σ上轨+MACD弱, 止盈底仓')
+    
+    # 持有空单, 价格突破下轨 -> 清仓/止盈
+    if (has_short_addon or has_arb_short) and price <= bb_lower:
+         return ('clear_addons', 0.85, '③趋势带: 触及1.5σ下轨, 止盈加仓/套利')
+    if has_short_base and price <= bb_lower and dea >= 0:
+         return ('cut_half', 0.8, '③趋势带: 触及1.5σ下轨+MACD弱, 止盈底仓')
+
     if sar_flip:
         if sar_trend == -1 and (has_long_base or has_long_addon or has_arb_long):
             return ('clear_all', 1.0, 'SAR翻空: 无条件清空全部多单')
@@ -224,6 +283,16 @@ def analyze(df, config=None):
     df['dif'], df['dea'], df['macd_hist'] = calc_macd(close, macd_fast, macd_slow, macd_signal_period)
     df['rsi'] = calc_rsi(close, rsi_period)
     df['sar'], df['sar_trend'] = calc_sar(high, low, sar_step, sar_max)
+    
+    # 新增：ATR 和 布林带计算
+    atr_period = config.get('atr_period', 14)
+    df['atr'] = calc_atr(high, low, close, atr_period)
+    
+    bb_mult_trend = config.get('bb_mult_trend', 1.5)
+    bb_mult_extreme = config.get('bb_mult_extreme', 3.0)
+    # 中轨使用 EMA144
+    df['bb_upper'], df['bb_lower'], df['bb_extreme_upper'], df['bb_extreme_lower'] = \
+        calc_bollinger(close, df['ema144'], bb_mult_trend, bb_mult_extreme)
     
     df['prev_close'] = df['close'].shift(1)
     df['prev_dea'] = df['dea'].shift(1)

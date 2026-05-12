@@ -31,6 +31,9 @@ INDICATOR_CONFIG = {
     'sar_step': 0.02,
     'sar_max': 0.2,
     'macd_threshold': 6.5,
+    'atr_period': 14,
+    'bb_mult_trend': 1.5,
+    'bb_mult_extreme': 3.0,
 }
 
 # Paper trading cache

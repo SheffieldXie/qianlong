@@ -1077,28 +1077,16 @@ function initLongtermBacktest() {
     loadingEl.style.display = 'block';
     resultsEl.style.display = 'none';
 
-    // 2. 尝试加载缓存
-    const cached = localStorage.getItem('qianlong_backtest_v1');
-    let hasRenderedCache = false;
-
-    if (cached) {
-        try {
-            const data = JSON.parse(cached);
-            renderLongtermData(data);
-            loadingEl.style.display = 'none';
-            resultsEl.style.display = 'block';
-            hasRenderedCache = true;
-        } catch (e) {
-            console.error('[LongTerm] Cache parse error:', e);
-            localStorage.removeItem('qianlong_backtest_v1'); // 清除损坏缓存
-        }
-    }
-
-    // 3. 后台请求新数据更新
-    loadLongtermBacktest(hasRenderedCache);
+    // 2. 尝试加载缓存 (这里不再用缓存来显示 UI, 而是直接请求后端最新的数据)
+    // 但为了秒开, 我们先用缓存渲染, 然后在后台请求更新?
+    // 既然有了后端参数配置, 缓存可能不准确.
+    // 我们先尝试请求 /api/longterm/config 获取配置, 然后运行?
+    // 或者只是简单的 fetch('/api/longterm')
+    
+    loadLongtermBacktest();
 }
 
-async function loadLongtermBacktest(wasCached) {
+async function loadLongtermBacktest() {
     const loadingEl = document.getElementById('longterm-loading');
     const resultsEl = document.getElementById('longterm-results');
 
@@ -1109,13 +1097,9 @@ async function loadLongtermBacktest(wasCached) {
         const data = await res.json();
         if (data.status === 'not_run') {
             loadingEl.innerHTML = `<p>${data.message}</p>`;
-            loadingEl.style.display = 'block';
-            resultsEl.style.display = 'none';
             return;
         }
 
-        // 缓存并渲染新数据
-        localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
         renderLongtermData(data);
         
         loadingEl.style.display = 'none';
@@ -1123,71 +1107,84 @@ async function loadLongtermBacktest(wasCached) {
 
     } catch (e) {
         console.error('[LongTerm] Fetch error:', e);
-        // 如果没缓存，显示错误
-        if (!wasCached) {
-            loadingEl.innerHTML = `<p style="color:var(--red)">加载失败: ${e.message}<br><button class="gold-btn" onclick="initLongtermBacktest()" style="margin-top:10px;">重试</button></p>`;
-            loadingEl.style.display = 'block';
-            resultsEl.style.display = 'none';
-        }
-    }
-}
-
-function renderLongtermData(data) {
-    try {
-        const assessment = data.assessment || {};
-        const results = data.results || {};
-        const events = data.events || [];
-        
-        renderLongtermAssessment(assessment);
-        renderLongtermYears(results, events);
-        renderLongtermEvents(events, results);
-        renderLongtermEquityChart(results);
-    } catch (e) {
-        console.error('[LongTerm] Render error:', e);
+        loadingEl.innerHTML = `<p style="color:var(--red)">加载失败: ${e.message}<br><button class="gold-btn" onclick="initLongtermBacktest()" style="margin-top:10px;">重试</button></p>`;
     }
 }
 
 function openLongtermConfig() {
-    document.getElementById('longterm-config-modal').classList.add('active');
+    // 先加载当前配置
+    fetch('/api/config')
+        .then(r => r.json())
+        .then(cfg => {
+            // Fill inputs
+            document.getElementById('lt-macd-fast').value = cfg.macd_fast || 20;
+            document.getElementById('lt-macd-slow').value = cfg.macd_slow || 52;
+            document.getElementById('lt-macd-signal').value = cfg.macd_signal || 2;
+            document.getElementById('lt-macd-threshold').value = cfg.macd_threshold || 6.5;
+            document.getElementById('lt-ema-period').value = cfg.ema_period || 144;
+            document.getElementById('lt-rsi-period').value = cfg.rsi_period || 14;
+            document.getElementById('lt-bb-trend').value = cfg.bb_mult_trend || 1.5;
+            document.getElementById('lt-bb-extreme').value = cfg.bb_mult_extreme || 3.0;
+            document.getElementById('lt-atr-period').value = cfg.atr_period || 14;
+            document.getElementById('lt-sar-step').value = cfg.sar_step || 0.02;
+            document.getElementById('lt-sar-max').value = cfg.sar_max || 0.2;
+            
+            document.getElementById('longterm-config-modal').classList.add('active');
+        });
 }
 
 function closeLongtermConfig() {
     document.getElementById('longterm-config-modal').classList.remove('active');
 }
 
-async function runLongtermBacktest() {
+async function saveLongtermConfigAndRun() {
     const btn = document.getElementById('lt-run-btn');
     btn.disabled = true;
-    btn.textContent = '计算中...';
+    btn.textContent = '保存中...';
 
-    const initialCapital = parseFloat(document.getElementById('lt-capital').value) || 100000;
-    const contractSize = parseFloat(document.getElementById('lt-contract').value) || 100;
+    // Collect config
+    const config = {
+        macd_fast: parseFloat(document.getElementById('lt-macd-fast').value),
+        macd_slow: parseFloat(document.getElementById('lt-macd-slow').value),
+        macd_signal: parseFloat(document.getElementById('lt-macd-signal').value),
+        macd_threshold: parseFloat(document.getElementById('lt-macd-threshold').value),
+        ema_period: parseFloat(document.getElementById('lt-ema-period').value),
+        rsi_period: parseFloat(document.getElementById('lt-rsi-period').value),
+        bb_mult_trend: parseFloat(document.getElementById('lt-bb-trend').value),
+        bb_mult_extreme: parseFloat(document.getElementById('lt-bb-extreme').value),
+        atr_period: parseFloat(document.getElementById('lt-atr-period').value),
+        sar_step: parseFloat(document.getElementById('lt-sar-step').value),
+        sar_max: parseFloat(document.getElementById('lt-sar-max').value),
+    };
 
     try {
-        const res = await fetch('/api/longterm/run', {
+        // 1. Save config
+        const saveRes = await fetch('/api/config', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                initial_capital: initialCapital,
-                contract_size: contractSize,
-            }),
+            body: JSON.stringify(config),
         });
+        if (!saveRes.ok) throw new Error('保存配置失败');
 
-        const data = await res.json();
-        if (data.error) {
-            alert(data.error);
-        } else {
-            localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
-            renderLongtermData(data);
-            document.getElementById('longterm-loading').style.display = 'none';
-            document.getElementById('longterm-results').style.display = 'block';
-            closeLongtermConfig();
-        }
+        // 2. Trigger reload analysis
+        const reloadRes = await fetch('/api/reload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ period: '30d' }), // Trigger reload
+        });
+        
+        // 3. Wait a bit and then fetch results
+        btn.textContent = '重新分析中...';
+        await new Promise(r => setTimeout(r, 2000)); // Give server time
+        
+        // 4. Refresh UI
+        closeLongtermConfig();
+        initLongtermBacktest();
+        
     } catch (e) {
-        alert('计算失败: ' + e.message);
-    } finally {
+        alert('操作失败: ' + e.message);
         btn.disabled = false;
-        btn.textContent = '开始回测';
+        btn.textContent = '▶ 保存并运行久期回测';
     }
 }
 
