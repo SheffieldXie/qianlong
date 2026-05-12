@@ -685,6 +685,26 @@ let paperEquityChart = null;
 let paperReturnsChart = null;
 let paperDrawdownChart = null;
 
+function setCapital(amount) {
+    document.getElementById('bt-capital').value = amount;
+    document.querySelectorAll('.preset-btn:not(.contract-preset)').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent === '$' + (amount >= 1000000 ? (amount/1000000) + 'M' : (amount >= 1000 ? (amount/1000) + 'K' : amount))) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+function setContract(amount) {
+    document.getElementById('bt-contract').value = amount;
+    document.querySelectorAll('.contract-preset').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent === amount + 'oz') {
+            btn.classList.add('active');
+        }
+    });
+}
+
 function runPaperTrading() {
     document.getElementById('paper-modal').classList.add('active');
     
@@ -694,6 +714,7 @@ function runPaperTrading() {
     const startDate = new Date(today - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     document.getElementById('bt-end-date').value = endDate;
     document.getElementById('bt-start-date').value = startDate;
+    updateDateHint();
     
     showPaperConfig();
 }
@@ -707,7 +728,28 @@ function closePaperTrading() {
     document.getElementById('paper-modal').classList.remove('active');
 }
 
-// Toggle custom date inputs
+function updateDateHint() {
+    const hint = document.getElementById('bt-date-hint');
+    if (!hint) return;
+    const start = document.getElementById('bt-start-date').value;
+    const end = document.getElementById('bt-end-date').value;
+    if (!start || !end) {
+        hint.textContent = '';
+        return;
+    }
+    const days = Math.round((new Date(end) - new Date(start)) / (24*60*60*1000));
+    if (days <= 0) {
+        hint.innerHTML = '<span style="color:var(--red)">结束日期必须晚于开始日期</span>';
+    } else if (days <= 60) {
+        hint.textContent = `跨度 ${days} 天 — 将使用 15分钟 K线`;
+    } else if (days <= 730) {
+        hint.textContent = `跨度 ${days} 天 — 将使用 1小时 K线`;
+    } else {
+        hint.textContent = `跨度 ${days} 天 — 将使用 日线 K线`;
+    }
+}
+
+// Toggle custom date inputs + hint
 document.addEventListener('DOMContentLoaded', () => {
     const periodSelect = document.getElementById('bt-period-select');
     if (periodSelect) {
@@ -716,6 +758,11 @@ document.addEventListener('DOMContentLoaded', () => {
             customDiv.style.display = periodSelect.value === 'custom' ? 'block' : 'none';
         });
     }
+    // Update hint when custom dates change
+    const startDate = document.getElementById('bt-start-date');
+    const endDate = document.getElementById('bt-end-date');
+    if (startDate) startDate.addEventListener('change', updateDateHint);
+    if (endDate) endDate.addEventListener('change', updateDateHint);
 });
 
 async function executePaperRun() {
@@ -728,6 +775,19 @@ async function executePaperRun() {
     const initialCapital = parseFloat(document.getElementById('bt-capital').value) || 100000;
     const contractSize = parseFloat(document.getElementById('bt-contract').value) || 100;
     
+    if (initialCapital < 1000) {
+        alert('初始资金至少 $1,000');
+        btn.disabled = false;
+        btn.textContent = '▶ 开始回测';
+        return;
+    }
+    if (contractSize < 1) {
+        alert('合约大小至少 1 盎司');
+        btn.disabled = false;
+        btn.textContent = '▶ 开始回测';
+        return;
+    }
+    
     let startDate = null;
     let endDate = null;
     if (period === 'custom') {
@@ -735,6 +795,18 @@ async function executePaperRun() {
         endDate = document.getElementById('bt-end-date').value;
         if (!startDate || !endDate) {
             alert('请选择开始和结束日期');
+            btn.disabled = false;
+            btn.textContent = '▶ 开始回测';
+            return;
+        }
+        if (new Date(startDate) >= new Date(endDate)) {
+            alert('结束日期必须晚于开始日期');
+            btn.disabled = false;
+            btn.textContent = '▶ 开始回测';
+            return;
+        }
+        if (new Date(endDate) > new Date()) {
+            alert('结束日期不能晚于今天');
             btn.disabled = false;
             btn.textContent = '▶ 开始回测';
             return;
@@ -824,6 +896,9 @@ function showPaperResults(data) {
             <div class="metric-sub">盈亏比: ${m.profit_factor?.toFixed(2) || '—'}</div>
         </div>
     `;
+    
+    // Monthly Breakdown
+    const monthlyHtml = renderMonthlyBreakdown(data.monthly_breakdown || []);
     
     // Equity Chart
     renderPaperEquityChart(data.equity_curve || []);
@@ -937,6 +1012,75 @@ function renderPaperTrades(trades) {
     }
     
     container.innerHTML = html;
+}
+
+function renderMonthlyBreakdown(monthly) {
+    const container = document.getElementById('paper-results');
+    if (!container) return;
+    
+    if (!monthly || monthly.length === 0) {
+        return;
+    }
+    
+    // Find if there's already a monthly section, if so update it
+    let monthlySection = document.getElementById('paper-monthly');
+    if (!monthlySection) {
+        // Create section after metrics
+        const metricsEl = document.getElementById('paper-metrics');
+        if (!metricsEl) return;
+        
+        monthlySection = document.createElement('div');
+        monthlySection.id = 'paper-monthly';
+        monthlySection.style.marginTop = '16px';
+        metricsEl.parentNode.insertBefore(monthlySection, metricsEl.nextSibling);
+    }
+    
+    // Summary stats
+    const positiveMonths = monthly.filter(m => m.return > 0).length;
+    const negativeMonths = monthly.filter(m => m.return < 0).length;
+    const bestMonth = monthly.reduce((a, b) => a.return > b.return ? a : b, monthly[0]);
+    const worstMonth = monthly.reduce((a, b) => a.return < b.return ? a : b, monthly[0]);
+    const avgReturn = monthly.reduce((sum, m) => sum + m.return, 0) / monthly.length;
+    
+    let html = `
+        <div class="chart-header">月度盈亏</div>
+        <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+            <span class="summary-item" style="font-size:12px;color:var(--text-secondary)">
+                盈利月: <span style="color:var(--green)">${positiveMonths}</span>
+            </span>
+            <span class="summary-item" style="font-size:12px;color:var(--text-secondary)">
+                亏损月: <span style="color:var(--red)">${negativeMonths}</span>
+            </span>
+            <span class="summary-item" style="font-size:12px;color:var(--text-secondary)">
+                月均收益: <span style="color:${avgReturn >= 0 ? 'var(--green)' : 'var(--red)'}">${(avgReturn * 100).toFixed(2)}%</span>
+            </span>
+            <span class="summary-item" style="font-size:12px;color:var(--text-secondary)">
+                最佳单月: <span style="color:var(--green)">${(bestMonth.return * 100).toFixed(2)}%</span>
+            </span>
+            <span class="summary-item" style="font-size:12px;color:var(--text-secondary)">
+                最差单月: <span style="color:var(--red)">${(worstMonth.return * 100).toFixed(2)}%</span>
+            </span>
+        </div>
+        <div class="monthly-grid">
+    `;
+    
+    for (const m of monthly) {
+        const color = m.return >= 0 ? 'var(--green)' : 'var(--red)';
+        const bg = m.return >= 0 ? 'rgba(0,200,83,0.1)' : 'rgba(196,30,58,0.1)';
+        html += `
+            <div class="monthly-cell" style="background:${bg};border:1px solid ${m.return >= 0 ? 'rgba(0,200,83,0.3)' : 'rgba(196,30,58,0.3)'}">
+                <div class="monthly-month">${m.month}</div>
+                <div class="monthly-return" style="color:${color}">
+                    ${m.return >= 0 ? '+' : ''}${(m.return * 100).toFixed(2)}%
+                </div>
+                <div class="monthly-equity">$${m.equity?.toLocaleString() || '—'}</div>
+                <div class="monthly-trades">${m.trades || 0} 笔</div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    monthlySection.innerHTML = html;
 }
 
 function renderPaperReturnsChart(dailyReturns, equityData) {

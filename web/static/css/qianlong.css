@@ -901,6 +901,76 @@ body, html {
     box-shadow: 0 0 4px var(--gold-glow);
 }
 
+/* Capital / Contract Preset Buttons */
+.capital-presets {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    padding: 6px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.preset-btn:hover {
+    border-color: var(--gold-dark);
+    color: var(--gold);
+}
+
+.preset-btn.active {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Monthly Breakdown Grid */
+.monthly-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.monthly-cell {
+    padding: 10px 8px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.monthly-month {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 4px;
+}
+
+.monthly-return {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    margin-bottom: 2px;
+}
+
+.monthly-equity {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.monthly-trades {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
 /* Config Summary Bar */
 .paper-config-summary {
     margin-bottom: 12px;

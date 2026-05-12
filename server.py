@@ -339,6 +339,23 @@ def api_paper_run():
     start_date = data.get('start_date', None)
     end_date = data.get('end_date', None)
 
+    # When custom dates are provided, use a period that covers the full span
+    if start_date and end_date:
+        try:
+            days_span = (pd.to_datetime(end_date) - pd.to_datetime(start_date)).days
+            if days_span > 730:
+                period = f"{days_span}d"
+            elif days_span > 365:
+                period = "730d"
+            elif days_span > 180:
+                period = "365d"
+            elif days_span > 60:
+                period = "180d"
+            else:
+                period = "60d"
+        except:
+            period = "60d"
+
     # Fetch data for the specified period (auto-selects interval)
     if start_date and end_date:
         df, interval_label = fetch_xauusd(period="60d", start_date=start_date, end_date=end_date)
@@ -360,6 +377,10 @@ def api_paper_run():
 
     result = engine.run(df)
 
+    # Add monthly breakdown
+    monthly = _calc_monthly_breakdown(df, initial_capital, contract_size)
+    result['monthly_breakdown'] = monthly
+
     # Add config info to result
     result['config'] = {
         'initial_capital': initial_capital,
@@ -377,6 +398,67 @@ def api_paper_run():
     paper_cache = result
 
     return jsonify(result)
+
+
+def _calc_monthly_breakdown(df, initial_capital, contract_size):
+    """计算按月维度的回测结果"""
+    if df.empty or 'date' not in df.columns:
+        return []
+
+    engine = PaperTradingEngine(
+        initial_capital=initial_capital,
+        contract_size=contract_size,
+    )
+    engine.reset()
+
+    monthly_results = []
+    current_month = None
+    month_start_equity = initial_capital
+
+    for i, row in df.iterrows():
+        row_date = row['date']
+        if hasattr(row_date, 'month'):
+            month_key = row_date.strftime('%Y-%m')
+        else:
+            month_key = str(row_date)[:7]
+
+        if current_month != month_key:
+            # Close previous month
+            if current_month is not None:
+                current_equity = engine.cash + engine._calc_position_value(row['close'])
+                monthly_return = (current_equity - month_start_equity) / month_start_equity
+                monthly_results.append({
+                    'month': current_month,
+                    'return': round(monthly_return, 4),
+                    'equity': round(current_equity, 2),
+                    'trades': len([t for t in engine.trades if 'pnl' in t]),
+                })
+                month_start_equity = current_equity
+            current_month = month_key
+
+        # Execute signal
+        signal = row.get('signal_type', 'wait')
+        price = row['close']
+        high = row.get('high', price)
+        low = row.get('low', price)
+        date = str(row.get('date', ''))
+
+        if signal != 'wait':
+            engine._execute_signal(signal, price, high, low, date, row)
+
+    # Close last month
+    if current_month is not None and not df.empty:
+        last_price = df.iloc[-1]['close']
+        current_equity = engine.cash + engine._calc_position_value(last_price)
+        monthly_return = (current_equity - month_start_equity) / month_start_equity
+        monthly_results.append({
+            'month': current_month,
+            'return': round(monthly_return, 4),
+            'equity': round(current_equity, 2),
+            'trades': len([t for t in engine.trades if 'pnl' in t]),
+        })
+
+    return monthly_results
 
 
 @app.route("/api/config", methods=["GET", "POST"])
