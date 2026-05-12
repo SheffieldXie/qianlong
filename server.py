@@ -475,66 +475,6 @@ def api_longterm():
     return api_long_backtest()
 
 
-LONGTERM_CONFIG = {
-    'ema_period': 144, 'macd_fast': 20, 'macd_slow': 52, 'macd_signal': 2,
-    'rsi_period': 14, 'sar_step': 0.02, 'sar_max': 0.2,
-    'macd_threshold': 6.5, 'bb_mult_trend': 1.5, 'bb_mult_extreme': 3.0,
-    'atr_period': 14, 'initial_capital': 100000, 'contract_size': 100,
-}
-
-
-@app.route("/api/longterm/config", methods=["GET", "POST"])
-def api_longterm_config():
-    """获取/设置久期回测配置"""
-    global LONGTERM_CONFIG
-    if request.method == "POST":
-        data = request.get_json() or {}
-        for k, v in data.items():
-            if k in LONGTERM_CONFIG:
-                LONGTERM_CONFIG[k] = type(LONGTERM_CONFIG[k])(v)
-        return jsonify({"status": "ok", "config": dict(LONGTERM_CONFIG)})
-    return jsonify(LONGTERM_CONFIG)
-
-
-@app.route("/api/longterm/run", methods=["POST"])
-def api_longterm_run():
-    """运行久期回测并返回结果"""
-    import subprocess
-    config = dict(LONGTERM_CONFIG)
-    
-    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "longterm")
-    os.makedirs(data_dir, exist_ok=True)
-    
-    # 用子进程运行回测脚本
-    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts", "longterm_backtest.py")
-    config_path = os.path.join(data_dir, "run_config.json")
-    
-    # 写入配置供脚本读取
-    with open(config_path, 'w') as f:
-        json.dump(config, f)
-    
-    result = subprocess.run(
-        ["python3", script_path, config_path],
-        capture_output=True, text=True, timeout=300,
-        cwd=os.path.dirname(os.path.abspath(__file__)),
-    )
-    
-    # 读取结果
-    results_path = os.path.join(data_dir, "backtest_results.json")
-    if os.path.exists(results_path):
-        with open(results_path) as f:
-            backtest_data = json.load(f)
-        return jsonify({
-            'status': 'ready',
-            'results': backtest_data['results'],
-            'assessment': backtest_data['assessment'],
-            'events': backtest_data.get('all_events', []),
-            'stdout': result.stdout[-500:] if result.stdout else '',
-        })
-    
-    return jsonify({'status': 'error', 'message': f'回测失败: {result.stderr[-500:]}'})
-
-
 if __name__ == "__main__":
     print("\n" + "=" * 50)
     print("  乾六爻交易系统 — Qian Liu Yao")

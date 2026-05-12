@@ -118,7 +118,7 @@ def fetch_long_term_data():
     return df
 
 
-def run_yearly_backtest(df, initial_capital=100000, contract_size=100, config=None):
+def run_yearly_backtest(df, initial_capital=100000, contract_size=100):
     """按年切割数据，分别回测"""
     df['year'] = df['date'].dt.year
 
@@ -126,18 +126,13 @@ def run_yearly_backtest(df, initial_capital=100000, contract_size=100, config=No
     results = {}
 
     for year in years:
-        # 前一年12月数据作为预热期 (用于EMA/MACD计算)
         year_df = df[df['year'] == year].copy().reset_index(drop=True)
-        prev_month = df[df['date'] < pd.Timestamp(f"{year}-01-01")].tail(21)
-        if len(prev_month) > 0:
-            year_df = pd.concat([prev_month, year_df]).reset_index(drop=True)
-
         print(f"\n{'='*60}")
-        print(f"[LongTerm] {year}年回测 ({len(year_df)} 个交易日, 含21天预热)")
+        print(f"[LongTerm] {year}年回测 ({len(year_df)} 个交易日)")
         print(f"{'='*60}")
 
-        # Run analysis with custom config
-        analyzed = analyze(year_df, config=config)
+        # Run analysis with daily-appropriate indicators
+        analyzed = analyze(year_df)
 
         # Run paper trading
         engine = PaperTradingEngine(
@@ -347,24 +342,9 @@ def _grade_robustness(df_m):
 
 
 def main():
-    import sys as _sys
-    
     print("=" * 60)
     print("  乾六爻交易系统 - 久期回测 (2024-2026)")
     print("=" * 60)
-
-    # 可选: 读取自定义配置
-    config = None
-    if len(_sys.argv) > 1:
-        config_path = _sys.argv[1]
-        if os.path.exists(config_path):
-            with open(config_path) as f:
-                config = json.load(f)
-            print(f"\n[LongTerm] 使用自定义配置: {config_path}")
-            print(f"  布林带: {config.get('bb_mult_trend',1.5)}σ趋势 / {config.get('bb_mult_extreme',3.0)}σ极端")
-            print(f"  MACD阈值: {config.get('macd_threshold',6.5)}")
-        else:
-            print(f"[LongTerm] 配置文件不存在: {config_path}")
 
     # 1. Fetch data
     df = fetch_long_term_data()
@@ -383,8 +363,8 @@ def main():
         json.dump(data_json, f, indent=2)
     print(f"[LongTerm] 数据已保存到 data/longterm/xauusd_2yr.json")
 
-    # 3. Run yearly backtest with custom config
-    results = run_yearly_backtest(df, config=config)
+    # 3. Run yearly backtest
+    results = run_yearly_backtest(df)
 
     # 4. Generate robustness report
     assessment = generate_robustness_report(results)
