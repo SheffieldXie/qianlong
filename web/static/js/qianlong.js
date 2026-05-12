@@ -1188,6 +1188,22 @@ async function saveLongtermConfigAndRun() {
     }
 }
 
+function renderLongtermData(data) {
+    try {
+        const assessment = data.assessment || {};
+        const results = data.results || {};
+        const events = data.events || [];
+
+        renderLongtermAssessment(assessment);
+        renderLongtermYears(results, events);
+        renderLongtermEvents(events, results);
+        renderLongtermEquityChart(results);
+    } catch (e) {
+        console.error('[LongTerm] Render error:', e);
+        alert('渲染回测数据出错: ' + e.message);
+    }
+}
+
 function renderLongtermAssessment(assessment) {
     const el = document.getElementById('longterm-assessment');
     const g = assessment.robustness_grade;
