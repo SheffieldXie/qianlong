@@ -169,8 +169,8 @@
                         </div>
                     </div>
 
-                    <!-- Loading State (only shown when no cached data) -->
-                    <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);{% if longterm_cache %}display:none{% endif %}">
+                    <!-- Loading State (默认显示) -->
+                    <div id="longterm-loading" style="text-align:center;padding:40px;color:var(--text-muted);">
                         <p>加载久期回测数据中...</p>
                     </div>
 
@@ -185,13 +185,42 @@
                         <div class="chart-container" style="margin-top:16px;">
                             <div class="chart-header">两年权益曲线对比 (按年)</div>
                             <canvas id="longterm-equity-chart" style="height:350px !important;"></canvas>
+                        <div class="longterm-controls">
+                            <button class="gold-btn" onclick="openLongtermConfig()">&#9881; 参数配置</button>
+                            <button class="gold-btn" onclick="initLongtermBacktest()">&#8635; 刷新回测数据</button>
                         </div>
-                    </div>
-
                     </div>
                 </section>
             </div>
         </main>
+    </div>
+
+    <!-- Longterm Config Modal -->
+    <div class="modal-overlay" id="longterm-config-modal">
+        <div class="modal-content paper-modal-content">
+            <div class="modal-header">
+                <h2>&#9881; 久期回测参数配置</h2>
+                <button class="modal-close" onclick="closeLongtermConfig()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="paper-config-grid">
+                    <div class="config-section">
+                        <h3>&#128176; 资金设置</h3>
+                        <div class="config-item">
+                            <label>初始资金 (USD)</label>
+                            <input type="number" id="lt-capital" min="1000" step="1000" value="100000">
+                        </div>
+                        <div class="config-item">
+                            <label>合约大小 (盎司/手)</label>
+                            <input type="number" id="lt-contract" min="1" step="10" value="100">
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="btn-primary" onclick="runLongtermBacktest()" id="lt-run-btn">开始回测</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Indicator Configuration Modal -->

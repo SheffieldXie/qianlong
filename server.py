@@ -36,6 +36,14 @@ INDICATOR_CONFIG = {
 # Paper trading cache
 paper_cache = None
 
+# Major Events for annotation
+MAJOR_EVENTS = [
+    {"date": "2024-03-20", "name": "FOMC 维持利率", "type": "fed", "desc": "美联储3月议息会议"},
+    {"date": "2024-09-18", "name": "美联储降息", "type": "fed", "desc": "降息50bp"},
+    {"date": "2025-03-19", "name": "关税冲击", "type": "geopolitical", "desc": "全球贸易战升级"},
+    {"date": "2026-01-28", "name": "经济衰退担忧", "type": "fed", "desc": "紧急降息预期"},
+]
+
 web_dir = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__,
     template_folder=os.path.join(web_dir, "web", "templates"),
@@ -473,6 +481,66 @@ def api_long_backtest():
 def api_longterm():
     """久期回测结果 — 按年展示 + 事件标记 + 鲁棒性评估 (与 long_backtest 相同)"""
     return api_long_backtest()
+
+
+@app.route("/api/longterm/run", methods=["POST"])
+def api_longterm_run():
+    """运行久期回测计算"""
+    import pandas as pd
+    from engine.paper_trading import PaperTradingEngine
+    
+    params = request.get_json() or {}
+    initial_capital = params.get('initial_capital', 100000)
+    contract_size = params.get('contract_size', 100)
+    
+    # Load cached data
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cache", "xauusd_2y_1d.pkl")
+    if not os.path.exists(cache_path):
+        return jsonify({'error': '历史数据未缓存，请先刷新行情数据'})
+        
+    try:
+        df = pd.read_pickle(cache_path)
+        df = analyze(df)
+        df['year'] = df['date'].dt.year
+        
+        results = {}
+        for year in sorted(df['year'].unique()):
+            year_df = df[df['year'] == year].copy().reset_index(drop=True)
+            if len(year_df) < 50: continue
+            
+            engine = PaperTradingEngine(
+                initial_capital=initial_capital,
+                contract_size=contract_size,
+            )
+            report = engine.run(year_df)
+            
+            # Find events
+            year_events = [e for e in MAJOR_EVENTS if e['date'].startswith(str(year))]
+            
+            results[str(year)] = {
+                'year': year,
+                'trading_days': len(year_df),
+                'metrics': report['metrics'],
+                'events': year_events,
+                'robustness': report.get('robustness', {}),
+                'event_impacts': report.get('event_impacts', []),
+                'equity_points': report.get('equity_points', []),
+                'trade_dates': report.get('trade_dates', []),
+            }
+        
+        # Assessment logic (simplified)
+        # ... (reuse existing logic or compute simple stats)
+        # For now, return the results
+        return jsonify({
+            'status': 'ready',
+            'results': results,
+            'assessment': {
+                'note': '计算完成'
+            },
+            'all_events': MAJOR_EVENTS,
+        })
+    except Exception as e:
+        return jsonify({'error': f'计算出错: {str(e)}'})
 
 
 if __name__ == "__main__":

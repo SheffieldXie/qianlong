@@ -1070,73 +1070,124 @@ function renderPaperDrawdownChart(equityData) {
 let longtermEquityChart = null;
 
 function initLongtermBacktest() {
-    console.log('[LongTerm] initLongtermBacktest called');
+    const loadingEl = document.getElementById('longterm-loading');
+    const resultsEl = document.getElementById('longterm-results');
+    
+    // 1. 始终先显示 Loading
+    loadingEl.style.display = 'block';
+    resultsEl.style.display = 'none';
+
+    // 2. 尝试加载缓存
     const cached = localStorage.getItem('qianlong_backtest_v1');
+    let hasRenderedCache = false;
+
     if (cached) {
-        console.log('[LongTerm] Found cached data, rendering immediately');
         try {
             const data = JSON.parse(cached);
-            renderLongtermAssessment(data.assessment);
-            renderLongtermYears(data.results, data.events);
-            renderLongtermEvents(data.events, data.results);
-            renderLongtermEquityChart(data.results);
-            document.getElementById('longterm-loading').style.display = 'none';
-            document.getElementById('longterm-results').style.display = 'block';
-            console.log('[LongTerm] Cached data rendered successfully');
+            renderLongtermData(data);
+            loadingEl.style.display = 'none';
+            resultsEl.style.display = 'block';
+            hasRenderedCache = true;
         } catch (e) {
             console.error('[LongTerm] Cache parse error:', e);
+            localStorage.removeItem('qianlong_backtest_v1'); // 清除损坏缓存
         }
-    } else {
-        console.log('[LongTerm] No cached data, fetching...');
     }
-    loadLongtermBacktest();
+
+    // 3. 后台请求新数据更新
+    loadLongtermBacktest(hasRenderedCache);
 }
 
-async function loadLongtermBacktest() {
+async function loadLongtermBacktest(wasCached) {
     const loadingEl = document.getElementById('longterm-loading');
     const resultsEl = document.getElementById('longterm-results');
 
-    console.log('[LongTerm] loadLongtermBacktest called');
-    
-    if (!localStorage.getItem('qianlong_backtest_v1')) {
-        loadingEl.style.display = 'block';
-        resultsEl.style.display = 'none';
-    }
-
     try {
-        console.log('[LongTerm] Fetching /api/longterm...');
         const res = await fetch('/api/longterm');
-        console.log('[LongTerm] Response status:', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        
         const data = await res.json();
-        console.log('[LongTerm] Data received, status:', data.status);
-
         if (data.status === 'not_run') {
-            loadingEl.innerHTML = '<p>' + data.message + '</p>';
+            loadingEl.innerHTML = `<p>${data.message}</p>`;
+            loadingEl.style.display = 'block';
+            resultsEl.style.display = 'none';
             return;
         }
 
-        console.log('[LongTerm] Saving to localStorage...');
+        // 缓存并渲染新数据
         localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
-
-        console.log('[LongTerm] Rendering assessment...');
-        renderLongtermAssessment(data.assessment);
-        console.log('[LongTerm] Rendering years...');
-        renderLongtermYears(data.results, data.events);
-        console.log('[LongTerm] Rendering events...');
-        renderLongtermEvents(data.events, data.results);
-        console.log('[LongTerm] Rendering equity chart...');
-        renderLongtermEquityChart(data.results);
-
-        console.log('[LongTerm] Showing results...');
+        renderLongtermData(data);
+        
         loadingEl.style.display = 'none';
         resultsEl.style.display = 'block';
-        console.log('[LongTerm] Done!');
 
     } catch (e) {
-        console.error('[LongTerm] Load failed:', e);
-        if (!localStorage.getItem('qianlong_backtest_v1')) {
-            loadingEl.innerHTML = '<p style="color:var(--red)">加载失败, 请检查服务器日志</p>';
+        console.error('[LongTerm] Fetch error:', e);
+        // 如果没缓存，显示错误
+        if (!wasCached) {
+            loadingEl.innerHTML = `<p style="color:var(--red)">加载失败: ${e.message}<br><button class="gold-btn" onclick="initLongtermBacktest()" style="margin-top:10px;">重试</button></p>`;
+            loadingEl.style.display = 'block';
+            resultsEl.style.display = 'none';
         }
+    }
+}
+
+function renderLongtermData(data) {
+    try {
+        const assessment = data.assessment || {};
+        const results = data.results || {};
+        const events = data.events || [];
+        
+        renderLongtermAssessment(assessment);
+        renderLongtermYears(results, events);
+        renderLongtermEvents(events, results);
+        renderLongtermEquityChart(results);
+    } catch (e) {
+        console.error('[LongTerm] Render error:', e);
+    }
+}
+
+function openLongtermConfig() {
+    document.getElementById('longterm-config-modal').classList.add('active');
+}
+
+function closeLongtermConfig() {
+    document.getElementById('longterm-config-modal').classList.remove('active');
+}
+
+async function runLongtermBacktest() {
+    const btn = document.getElementById('lt-run-btn');
+    btn.disabled = true;
+    btn.textContent = '计算中...';
+
+    const initialCapital = parseFloat(document.getElementById('lt-capital').value) || 100000;
+    const contractSize = parseFloat(document.getElementById('lt-contract').value) || 100;
+
+    try {
+        const res = await fetch('/api/longterm/run', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                initial_capital: initialCapital,
+                contract_size: contractSize,
+            }),
+        });
+
+        const data = await res.json();
+        if (data.error) {
+            alert(data.error);
+        } else {
+            localStorage.setItem('qianlong_backtest_v1', JSON.stringify(data));
+            renderLongtermData(data);
+            document.getElementById('longterm-loading').style.display = 'none';
+            document.getElementById('longterm-results').style.display = 'block';
+            closeLongtermConfig();
+        }
+    } catch (e) {
+        alert('计算失败: ' + e.message);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '开始回测';
     }
 }
 
